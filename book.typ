@@ -12,10 +12,7 @@
   "TABLE DES MATIÈRES",
 )
 
-#let book(
-    dict,
-    body
-  ) = {
+#let book( dict, body) = {
   let title=dict.title;
   let authors=dict.authors
   let encaders=dict.encaders
