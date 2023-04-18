@@ -1,9 +1,9 @@
 
 compile:
-	typst compile pfe.typ
+	typst compile main.typ
 
 watch:
-	typst watch pfe.typ
+	typst watch main.typ
 
 image:
 	convert -density 300 pfe.pdf -quality 100 pfe.jpg
