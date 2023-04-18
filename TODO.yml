@@ -1,0 +1,23 @@
+# TODO
+
+PDF:
+  title: AI in MEDICINE
+  date: 2023
+  todo:
+    template: book template
+      cover: as Lisence PFE
+      outline: PLAN
+      bibleothique:
+        ref: refrence books, artickle, scripts
+        page: page refrence style
+      headlines: style of heading
+      equation: style of equation
+      figure: style of figure
+    outline: write outline into typst book
+  errors:
+    zathura: font/color segmentation fault
+
+
+PowerPoint:
+  title: AI in MEDICINE
+  date: 2023
