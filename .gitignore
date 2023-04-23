@@ -6,3 +6,5 @@ cover.pdf
 final.pdf
 main.pdf
 pfe.pdf
+*.pdf
+.err.log
