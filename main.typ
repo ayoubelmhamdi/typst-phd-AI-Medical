@@ -1,6 +1,6 @@
 #import "book.typ": book
 #import "cover.typ": cover
-#import "functions.typ": heading_center
+#import "functions.typ": heading_center, heading_without_numbering
 
 #let book_info = (
   // title: "SEGMENTATION DES IMAGE MEDICAL PAR IA",
@@ -58,14 +58,8 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 
 #pagebreak(weak:true)
 
+#heading_without_numbering("RÉSUMÉ.")
 
-
-
-
-
-#pagebreak
-
-= RÉSUMÉ.
 Le but du présent Projet de Fin d’Études est une étude extensive des
 propriétés vibrationnelles des réseaux matériels de nature fractale et du
 comportement de leur chaleur spécifique en température.
@@ -96,26 +90,22 @@ dans ces réseaux fractals sont fortement localisées.
 
 Mots-clés : Réseaux fractals, Dimension spectrale, Modes de vibrations,
 Méthode de décimation, Loi de dispersion, Chaleur spécifique. ■
-= NTRODUCTION GÉNÉRALE.
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
-== Introduction.
-== Définition
-- test
+
+#heading_without_numbering("INTRODUCTION GÉNÉRALE.")
+#heading_without_numbering("RÉFÉRENCES BIBLIOGRAPHIQUES.")
 
 = Chapitre I: APERÇU SUR LES SYSTÈMES FRACTALS.
 
 == Introduction.
 == Définition.
 == Historique.
-== Objets fractals dans la nature.
-== Domaines d’application.
-== Dimension fractale.
-== Exemples de calculs de la dimension fractale.
 == Conclusion.
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 = Chapitre II: PROPRIÉTÉS VIBRATIONNELLES DES FRACTALES ET CHALEUR SPÉCIFIQUE.
-== Introduction.
+== Introduction
+== conclusion
+#heading_without_numbering("RÉFÉRENCES BIBLIOGRAPHIQUES.")
+#heading_without_numbering("Conclusion")
 
 
 
