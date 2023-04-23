@@ -1,20 +1,4 @@
-// #let books(
-//     title: "",
-//     authors: (),
-//     encaders: (),
-//     body
-//   ) = {[as]}
-//
-//
 
-#import "cover.typ": cover
-
-// #let books(
-//     title: "",
-//     authors: (),
-//     encaders: (),
-//     body
-//   ) = {
 #let book(
     dict,
     body
@@ -32,8 +16,12 @@
           )
   // set text(font: ("Cascadia Code", "CMU Sans Serif" ,"Latin Modern Sans", "Inria Serif", "Noto Sans Arabic"), lang: "en")
   set document(author: authors, title: title)
-  set heading(numbering: "I.1.1.")
+  //
+  set heading(
+    numbering: "I.1.1.",
+  )
   show heading: it => pad(bottom: 0.5em, it)
+  //
   set par(justify: true)
   show raw.where(block: true): it => pad(left: 4em, it)
 
