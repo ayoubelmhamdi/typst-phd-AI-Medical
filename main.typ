@@ -1,6 +1,7 @@
-#import "cover.typ": *
+#import "book.typ": book
+#import "cover.typ": cover
 
-#show: pfe.with(
+#let book_info = (
   // title: "SEGMENTATION DES IMAGE MEDICAL PAR IA",
   title: "ÉTUDE ÉTENDUE DES PROPRIÉTÉS
           VIBRATIONNELLES DES MATÉRIAUX
@@ -20,6 +21,14 @@
   )
   // url: "https://github.com/ayoubelmhamdi/typst-test"
 )
+#show: book.with(book_info)
+#cover(book_info)
+#pagebreak(weak:true)
+#outline()
+#pagebreak(weak:true)
+
+
+#v(2em)
 
 #lorem(2)
 

@@ -1,9 +1,10 @@
 
 compile:
-	typst compile main.typ
-
+	typst  --font-path ~/home/.fonts compile main.typ
 watch:
-	typst watch main.typ
+	typst --font-path ~/home/.fonts watch main.typ
+test:
+	typst --font-path ~/home/.fonts watch test.typ
 
 image:
 	convert -density 300 pfe.pdf -quality 100 pfe.jpg

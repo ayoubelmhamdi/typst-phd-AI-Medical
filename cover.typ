@@ -1,26 +1,12 @@
-// #let linkb = (..it) => underline(text(fill: blue, link(..it)))
 #let divider() = {
   line(length: 100%, stroke: 5pt + rgb("#C55A11"))
 }
-// blue2: rgb("#1E045B")
-#let pfe(title: "", authors: (), encaders: (), body) = {
-  set text(font: "Cascadia Code", lang: "en")
-  set page(
-            paper: "a4",
-            // height :21cm ,
-            // width:14cm,
-            numbering: "1",
-            number-align: center
-          )
-  // set text(font: ("Cascadia Code", "CMU Sans Serif" ,"Latin Modern Sans", "Inria Serif", "Noto Sans Arabic"), lang: "en")
-  set document(author: authors, title: title)
-  set heading(numbering: "I.1.1.")
-  show heading: it => pad(bottom: 0.5em, it)
-  set par(justify: true)
-  show raw.where(block: true): it => pad(left: 4em, it)
 
-
-
+#let cover(book_info) = {
+  let title=book_info.title
+  let authors=book_info.authors
+  let encaders=book_info.encaders
+// #let cover(title: "", authors: (), encaders: ()) = {
   align(center,
     box(
       stroke:0pt,
@@ -120,13 +106,5 @@
       )
     )
   )
-
-  pagebreak(weak:true)
-  outline()
-  pagebreak(weak:true)
-
-
-  v(2em)
-
-  body
 }
+
