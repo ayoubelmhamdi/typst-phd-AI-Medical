@@ -62,10 +62,37 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 
 Le but du présent Projet de Fin d’Études est une étude extensive des
 propriétés vibrationnelles des réseaux matériels de nature fractale et du
-comportement de leurtals, Dimension spectrale, Modes de vibrations,
-Méthode de décimation, Loi de dispersion, Chaleur spécifique. ■
+comportement de leur chaleur spécifique en température.
 
-= INTRODUCTION GÉNÉRALE.
+Pour l’étude, nous partons de la notion importante de fractons qui
+remplacent les phonons dans les solides usuels. L’existence des fractons,
+démontré expérimentalement, est intimement liée à la forte localisation
+des vibrations au sein de ces structures fractales.
+
+D’entrée de jeu, nous esquissons quantitativement les modes de
+vibrations des réseaux fractals, en considérant, comme exemple, le tamis
+de Sierpenski, sur lequel nous appliquons la méthode de décimation.
+Mais la même technique peut s’appliquer à d’autres réseaux fractals.
+Cette même technique nous permet également d’extraire la valeur de la
+dimension spectrale et de déterminer la loi de dispersion associée.
+
+La dernière partie de ce mémoire est dédiée au calcul de la chaleur
+spécifique. Dans un premier temps, nous déterminons la densité d’états,
+comme fonction de la fréquence de vibration. C’est une loi de puissances
+où figure explicitement la dimension spectrale. Puis, nous étendons le
+modèle de Debye pour calculer la chaleur spécifique, comme fonction de
+la température. A basse température, c’est-à-dire en dessous d’une
+température de Debye généralisée, nous démontrons que la chaleur
+spécifique obéit à une loi de puissances de la température, où l’exposant
+de cette loi est simplement la dimension spectrale. A haute température,
+nous démontrons que la chaleur spécifique tend vers une valeur finie (loi
+de Dulong et Petit généralisée). Enfin, il s’avère que la chaleur spécifique
+relative aux réseaux fractals reste en dessous de celle concernant les
+solides usuels. En effet, ce résultat est attendu, puisque les vibrations
+dans ces réseaux fractals sont fortement localisées.
+
+Mots-clés : Réseaux fractals, Dimension spectrale, Modes de vibrations,
+Méthode de décimation, Loi de dispersion, Chaleur spécifique. ■ = INTRODUCTION GÉNÉRALE.
 
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
