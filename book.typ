@@ -9,8 +9,6 @@
     dict,
     body
   ) = {
-
-
   let title=dict.title;
   let authors=dict.authors
   let encaders=dict.encaders
