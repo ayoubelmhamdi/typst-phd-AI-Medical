@@ -1,6 +1,6 @@
 #import "book.typ": book
 #import "cover.typ": cover
-#import "functions.typ": heading_center, heading_without_numbering, chapter
+#import "functions.typ": heading_center
 
 #let book_info = (
   // title: "SEGMENTATION DES IMAGE MEDICAL PAR IA",
