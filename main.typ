@@ -66,13 +66,13 @@ comportement de leurtals, Dimension spectrale, Modes de vibrations,
 Méthode de décimation, Loi de dispersion, Chaleur spécifique. ■
 
 = INTRODUCTION GÉNÉRALE.
-dd
+
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 = APERÇU SUR LES SYSTÈMES FRACTALS.
 
 == Introduction.
-== Définition.
+=== Définition.
 == Historique.
 == Conclusion.
 
@@ -99,7 +99,7 @@ silver })[A][B][C][D]
 
 
 #table(columns: (1fr,2fr,1fr,auto),
-align: (col, row) => if col==0 {center} else if col==2 {left} else{right},
+align: (row,col) => if row==0 {center} else if row==2 {left} else{right},
 fill: (col, row) => if calc.odd(col + row) {
 silver })[A][B][C][D]
 #lorem(4)
