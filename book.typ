@@ -9,10 +9,11 @@
     dict,
     body
   ) = {
+
+
   let title=dict.title;
   let authors=dict.authors
   let encaders=dict.encaders
-  set text(font: "Cascadia Code", lang: "en")
   set page(
             paper: "a4",
             // height :21cm ,
@@ -20,6 +21,8 @@
             numbering: "1",
             number-align: center
           )
+
+  set text(size: 14pt)
   // set text(font: ("Cascadia Code", "CMU Sans Serif" ,"Latin Modern Sans", "Inria Serif", "Noto Sans Arabic"), lang: "en")
   set document(author: authors, title: title)
 
@@ -30,46 +33,62 @@
   )
 
   show heading: it => pad(bottom: 0.5em, it)
-  show heading.where(level: 1): set text(22pt)
-  show heading.where(level: 2): set text(12pt)
+  show heading.where(level: 1): set text(size:22pt)
+  show heading.where(level: 2): set text(size:18pt)
+  show heading.where(level: 3): set text(size:14pt)
 
   show heading.where(level: 1): it => {
     set par(justify: true)
+    pagebreak(weak:true)
     if not it.body.text in execption_chapter {
-      pagebreak()
-      block(
       align(
         center,
-        text(
-          weight: "bold",
-          1em,
-          fill: rgb("#FF0000"),
-          [Chapitre ]
-          + counter(heading).display()
+        block(
+          align(
+            center,
+            text(
+              weight: "bold",
+              size:18pt,
+              fill: rgb("#FF0000"),
+              [Chapitre ]
+              + counter(heading).display()
+            ) +
+            linebreak() +
+            v(1em) +
+            text(
+              weight: "bold",
+              size:20pt,
+              fill: rgb("#1e045b"),
+              it.body
+            )
+            + v(5em)
+          )
         )
-
-        + linebreak()
-        + v(1em)
-        + text(
-          weight: "bold",
-          1.5em,
-          fill: rgb("#1e045b"),
-          it.body
-        )
-        + v(5em)
-      )
       )
     }
     else {
-      counter(heading).update(())
-      linebreak()
-      text(fill: rgb("#1e045b"),it.body)
-      linebreak()
+      align(
+        center,
+        counter(heading).update(())
+        + linebreak()
+        + v(-2em)
+        + text(
+            weight: "bold",
+            size:22pt,
+            fill: rgb("#1e045b"),
+            it.body
+          )
+        + linebreak()
+        + v(3em)
+      )
     }
   }
 
   set par(justify: true)
+
+
   show raw.where(block: true): it => pad(left: 4em, it)
+
 
 
 
