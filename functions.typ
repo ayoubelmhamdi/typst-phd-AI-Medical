@@ -9,8 +9,3 @@
   )
   v(5em)
 }
-
-
-#let heading_without_numbering(title) = {
-  heading(numbering:none,title)
-}
