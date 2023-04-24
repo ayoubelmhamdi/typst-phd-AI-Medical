@@ -12,7 +12,7 @@
     // box(
     //   stroke:0pt,
       figure(
-        image("images/fsm02.jpg", width: 40%, height:15%,fit: "contain"),
+        image("images/fsm01.jpg", width: 40%, height:15%,fit: "contain"),
       )
     // )
   )
@@ -66,19 +66,21 @@
       )
     )
 // fin autor
+  v(1.0em)
   divider()
-  // v(1.0em)
-  block(
+  v(1.0em)
     align(
       center,
+      block(
       text(
         fill: rgb("#1E045B"),
         weight: "bold",
-        size:20pt,
-        h(40pt) + title
+        size:24pt,
+        title
       )
     )
   )
+  v(1.0em)
   // v(1.0em)
   divider()
 
@@ -90,7 +92,7 @@
       text(
         weight: "bold",
         size:16pt,
-        [Soutenu le 17/07/2020 devant la Commission d’Examen : ]
+        [Soutenu le 17/07/2023 devant la Commission d’Examen : ]
       )
     )
   )
