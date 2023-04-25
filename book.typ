@@ -45,9 +45,11 @@
   show heading.where(level: 1): it => {
     set par(justify: true)
     pagebreak(weak:true)
-    v(3.5em)
+    // v(0.5em)
     if it.body.text in execption_outline {
       // like REMERCIEMENTS
+      counter(heading).update(())
+      // set heading(outlined: false) -- not work
       align(
           center,
           text(
@@ -63,7 +65,7 @@
       align(
         center,
         counter(heading).update(())
-        + linebreak()
+        // + linebreak()
         // + v(-4em)
         + text(
             weight: "bold",
@@ -102,7 +104,7 @@
       )
     }
 
-    v(13em)
+    v(3em)
   }
 
   // ===========================================
