@@ -20,7 +20,6 @@
 )
 #show: book.with(book_info)
 #cover(book_info)
-#pagebreak(weak:true)
 
 = REMERCIEMENTS
 
