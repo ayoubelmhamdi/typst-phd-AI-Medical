@@ -48,6 +48,9 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 #outline()
 
 = RÉSUMÉ.
+
+
+
 = INTRODUCTION GÉNÉRALE.
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 = APERÇU SUR LES SYSTÈMES FRACTALS.
