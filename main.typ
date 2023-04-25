@@ -45,33 +45,34 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 #pagebreak(weak:true)
 
 = TABLE DES MATIÈRES
+
 #outline(
   title: none,
   depth:3,
   fill: none,
 )
+// #lorem(29)
 
-#pagebreak(weak:true)
+// #pagebreak(weak:true)
 
 = RÉSUMÉ.
-
-
-
-Mots-clés : . ■ = INTRODUCTION GÉNÉRALE.
-
+= INTRODUCTION GÉNÉRALE.
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
-
 = APERÇU SUR LES SYSTÈMES FRACTALS.
-
 == Introduction.
-=== Définition.
+== Définition.
 == Historique.
+== Objets fractals dans la nature.
+== Domaines d’application.
+== Dimension fractale.
+== Exemples de calculs de la dimension fractale.
 == Conclusion.
-
-= PROPRIÉTÉS VIBRATIONNELLES DES FRACTALES ET CHALEUR SPÉCIFIQUE.
-== Introduction
-== conclusion
-
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
-= CONCLUSION
-
+= PROPRIÉTÉS VIBRATIONNELLES DES FRACTALES ET CHALEUR SPÉCIFIQUE.
+== Introduction.
+== Phonons et fractons.
+== Observation des phonons et fractons dans les systèmes réels.
+== Chaleur spécifique des réseaux fractals.
+== Conclusion.
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+= CONCLUSION GÉNÉRALE.

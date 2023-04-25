@@ -4,6 +4,7 @@
   "INTRODUCTION GÉNÉRALE.",
   "RÉFÉRENCES BIBLIOGRAPHIQUES.",
   "CONCLUSION",
+  "CONCLUSION GÉNÉRALE."
 )
 
 #let execption_outline=(
@@ -19,12 +20,12 @@
   let authors=dict.authors
   let encaders=dict.encaders
   set page(
-            paper: "a4",
-            // height :21cm ,
-            // width:14cm,
-            numbering: "1",
-            number-align: center
-          )
+    paper: "a4",
+    // height :21cm ,
+    // width:14cm,
+    numbering: "1",
+    number-align: center
+  )
 
   set text(size: 14pt)
   set document(author: authors, title: title)
@@ -44,7 +45,8 @@
   // ===========================================
   show heading.where(level: 1): it => {
     set par(justify: true)
-    pagebreak(weak:true)
+    pagebreak()
+    // pagebreak(weak:true)
     // v(0.5em)
     if it.body.text in execption_outline {
       // like REMERCIEMENTS
@@ -110,10 +112,80 @@
   // ===========================================
   // ===========================================
 
+  // Outline redefinition for bold level 1 items
+  show outline: it => locate(loc => {
+      set text(weight: "bold", fill: rgb("#1e045b"))
+      let depth=2
+      let indent= false
+      let elements = query(heading, after: loc)
+
+      for el in elements {
+        if el.outlined == false { continue }
+        if depth != none and el.level > depth { continue }
+
+        let maybe_number = if el.numbering != none {
+          numbering(el.numbering, ..counter(heading).at(el.location()))
+          " "
+        }
+        let line = {
+          // if indent {
+          //   h(1em * (el.level - 1 ))
+          // }
+
+          if el.level == 1 {
+      // ++++++++++++++++++++++++++++++++++
+            if el.body.text in execption_chapter {
+            // like RÉFÉRENCES BIBLIOGRAPHIQUES.
+              text(
+                weight: "bold",
+                size:14pt,
+                fill: rgb("#1e045b"),
+                el.body
+              )
+            }
+            else  {
+              // any other I.
+              block(
+                text(
+                  weight: "bold",
+                  size:16pt,
+                  fill: rgb("#FF0000"),
+                  [Chapitre ] +
+                  maybe_number
+                ) +
+                text(
+                  weight: "bold",
+                  size:16pt,
+                  fill: rgb("#1e045b"),
+                  el.body
+                ) +
+                v(-1.5em)
+              )
+            }
+      // ++++++++++++++++++++++++++++++++++
+          } else {
+            maybe_number
+            el.body
+          }
+
+          box(width: 1fr)
+          text(fill:black, str(counter(page).at(el.location()).first()))
+
+          linebreak()
+        }
+
+        link(el.location(), line)
+      }
+
+      pagebreak()
+    })
+  // ===========================================
+  // ===========================================
+  show outline: set block(spacing: 1.25em)
   set par(justify: true)
 
 
-  show raw.where(block: true): it => pad(left: 4em, it)
+  // show raw.where(block: true): it => pad(left: 4em, it)
 
 
 
