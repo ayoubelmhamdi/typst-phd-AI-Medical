@@ -5,6 +5,12 @@
   "RÉFÉRENCES BIBLIOGRAPHIQUES.",
   "CONCLUSION",
 )
+
+#let execption_outline=(
+  "REMERCIEMENTS",
+  "TABLE DES MATIÈRES",
+)
+
 #let book(
     dict,
     body
@@ -21,7 +27,6 @@
           )
 
   set text(size: 14pt)
-  // set text(font: ("Cascadia Code", "CMU Sans Serif" ,"Latin Modern Sans", "Inria Serif", "Noto Sans Arabic"), lang: "en")
   set document(author: authors, title: title)
 
 
@@ -35,10 +40,43 @@
   show heading.where(level: 2): set text(size:18pt)
   show heading.where(level: 3): set text(size:14pt)
 
+  // ===========================================
+  // ===========================================
   show heading.where(level: 1): it => {
     set par(justify: true)
     pagebreak(weak:true)
-    if not it.body.text in execption_chapter {
+    v(3.5em)
+    if it.body.text in execption_outline {
+      // like REMERCIEMENTS
+      align(
+          center,
+          text(
+            fill: rgb("#1e045b"),
+            weight: "bold",
+            size:22pt,
+            it.body
+        )
+      )
+    }
+    else if it.body.text in execption_chapter {
+    // like RÉFÉRENCES BIBLIOGRAPHIQUES.
+      align(
+        center,
+        counter(heading).update(())
+        + linebreak()
+        // + v(-4em)
+        + text(
+            weight: "bold",
+            size:22pt,
+            fill: rgb("#1e045b"),
+            it.body
+          )
+        + linebreak()
+        // + v(3em)
+      )
+    }
+    else  {
+      // any other I.
       align(
         center,
         block(
@@ -59,28 +97,16 @@
               fill: rgb("#1e045b"),
               it.body
             )
-            + v(5em)
           )
         )
       )
     }
-    else {
-      align(
-        center,
-        counter(heading).update(())
-        + linebreak()
-        + v(-2em)
-        + text(
-            weight: "bold",
-            size:22pt,
-            fill: rgb("#1e045b"),
-            it.body
-          )
-        + linebreak()
-        + v(3em)
-      )
-    }
+
+    v(13em)
   }
+
+  // ===========================================
+  // ===========================================
 
   set par(justify: true)
 

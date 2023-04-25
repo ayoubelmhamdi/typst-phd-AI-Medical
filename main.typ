@@ -22,7 +22,7 @@
 #cover(book_info)
 #pagebreak(weak:true)
 
-#heading_center("REMERCIEMENTS")
+= REMERCIEMENTS
 
 Nous tenons à remercier d’abord toutes les équipes pédagogiques de la Filière
 Science de la Matière Physique de la Faculté des Sciences à Meknès, ainsi que les
@@ -45,7 +45,7 @@ Enfin, nos vifs remerciements sont adressés à toutes ces personnes qui nous
 ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 #pagebreak(weak:true)
 
-#heading_center("TABLE DES MATIÈRES")
+= TABLE DES MATIÈRES
 #outline(
   title: none,
   depth:3,
