@@ -110,9 +110,8 @@
   }
 
   // ===========================================
+  //                 Outline
   // ===========================================
-
-  // Outline redefinition for bold level 1 items
   show outline: it => locate(loc => {
       set text(weight: "bold", fill: rgb("#1e045b"))
       let depth=2
@@ -176,21 +175,11 @@
 
         link(el.location(), line)
       }
-
-      pagebreak()
     })
   // ===========================================
   // ===========================================
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
 
-
-  // show raw.where(block: true): it => pad(left: 4em, it)
-
-
-
-
   body
 }
-
-// #let linkb = (..it) => underline(text(fill: blue, link(..it)))

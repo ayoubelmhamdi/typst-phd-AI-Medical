@@ -23,12 +23,12 @@
 
 = REMERCIEMENTS
 
-Nous tenons à remercier d’abord toutes les équipes pédagogiques de la Filière
-Science de la Matière Physique de la Faculté des Sciences à Meknès, ainsi que les
+Nous tenons à remercier d’abord toutes les équipes pédagogiques de *la Filière
+Science de la Matière Physique* de la Faculté des Sciences à Meknès, ainsi que les
 professeurs ayant contribué activement à notre formation.
 
 Nous profitons de cette occasion pour remercier vivement notre Professeur
-Mabrouk BENHAMOU qui n’a pas cessé de nous encourager tout au long de
+*RAJAE SEBIHI* qui n’a pas cessé de nous encourager tout au long de
 l’exécution de notre Projet de Fin d’Études, ainsi que pour sa générosité et ses
 compétences en matière de formation et d’encadrement. Nous lui sommes
 reconnaissants pour ses aides et conseils précieux qui nous ont permis de mener à
@@ -42,18 +42,10 @@ parents qui nous ont toujours encouragés durant notre cursus de formation.
 
 Enfin, nos vifs remerciements sont adressés à toutes ces personnes qui nous
 ont apporté leur aide précieuse et leur soutien inconditionnel. ■
-#pagebreak(weak:true)
 
 = TABLE DES MATIÈRES
 
-#outline(
-  title: none,
-  depth:3,
-  fill: none,
-)
-// #lorem(29)
-
-// #pagebreak(weak:true)
+#outline()
 
 = RÉSUMÉ.
 = INTRODUCTION GÉNÉRALE.
