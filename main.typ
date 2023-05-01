@@ -56,7 +56,7 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 #lorem(50)
 = APERÇU SUR LES SYSTÈMES FRACTALS
 #lorem(120)
-= Detect lung cancer using PyTorch
+= Detecting lung cancer using PyTorch
 
 == introduction
 The project is to create a detector for lung cancer using ct scans.
@@ -100,17 +100,14 @@ The goal of this project is to create an end-to-end solution for detecting cance
 
 == Manipulation the Data
 
-=== Data processing
+=== Data Conversions
 
-To process the data, it is necessary to convert raw data files into a format that is usable by PyTorch, that means convert the row data from `numpy` tables to `Tensors`. The data is represented as a 3D array of intensity data, with around 32 million voxels, which is much larger than the nodules\[...why...\]. To make the task more manageable, the model will focus on a relevant crop of the CT scan. There are various steps involved in processing the data, including understanding the data, mapping location information to array indexes, and converting the CT scan intensity into mass density. Identifying the key concepts of the project, such as nodules, is crucial.
+To process the data, it is necessary to convert raw data files into a format that is usable by PyTorch, which means converting the row data from 3D array of intensity data to `Tensors` pyTorch format. This data is around 32 million voxels, which is much larger than the nodules. To make the task more manageable, the model will focus on a relevant crop of the CT scan. There are various steps involved in processing the data, including understanding the data, mapping location information to array indexes, and converting the CT scan intensity into mass density. Identifying the key concepts of the project, such as nodules, is crucial.
 
-\[...repeted title...\]
+=== Data loading
+In this chapter, we will discuss the first step in creating a neural network for detecting lung cancer using PyTorch: handling the dataset. The goal is to produce a training sample from raw CT scan data and a list of annotations. The process is described as transmuting the raw data into the stuff that the neural network will spin into gold.
 
-==== Approach of Data loading
-
-The chapter focuses on the first step of the approach, which is data loading. The goal is to produce a training sample from raw CT scan data and a list of annotations. The process is described as transmuting the raw data into the stuff that the neural network will spin into gold.
-
-The chapter covers the following topics:
+This heading covers the following topics:
 
 - Loading and processing raw data files
 - Implementing a Python class to represent the data
@@ -119,34 +116,27 @@ The chapter covers the following topics:
 
 Overall, the quality of the data used to train the model has a significant impact on the project's success.
 
-===== Raw CT Data Files
+=== Raw CT Data Files
 
-CT data comes in two files: a *.mhd* file of metadata header information and a *.raw* file of raw bytes. Each file name begins with the series `UID`. The `CT` class loads these files, processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array. Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded, which are used to crop a small 3D slice of the CT data. The CT data, nodule status flag, series UID, and index of the sample are included in a sample tuple.
+CT data comes in two files: a *.mhd* file of metadata header information and a *.raw* file of raw bytes. Each file name begins with the series `UID`. The `CT` class loads these files, processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array. Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded, which are used to crop a small 3D slice of the CT data. The CT data, nodule status flag, series UID,
 
-==== Parsing LUNA's Annotation Data
+=== Parsing LUNA's Annotation Data
 
 The `candidates.csv` file contains information about all lumps that look like nodules, whether they are malignant, benign, or something else. We'll use this to build a list of candidates that can be split into training and validation datasets. The annotations.csv file contains information about some of the candidates that have been flagged as nodules, including the diameter. This information is useful for ensuring a representative range of nodule sizes in the training and validation data.
 
-==== Training and validation sets
+=== Training and validation sets
 
 For supervised learning tasks like classification, we need to split our data into training and validation sets. We want to ensure that both sets represent the real-world input data that we expect to see and handle normally. If either set is significantly different from our actual use cases, it's highly likely that our model will behave differently than we expect. This split helps us evaluate and improve the model's performance before we deploy it on production data.
 
-In this context, we'll split our nodules' dataset by size and take every Nth one for our validation set. However, the location information provided in annotations.csv may not precisely line up with the coordinates in candidates.csv. So, we need to match them using the coordinates' respective measurements.
-
-==== Loading individual CT scans
-
-We will take our CT data from a pile of bits on disk and turn it into a Python object from which we can extract 3D nodule density data. Our nodule annotation information acts like a map to the relevant parts of our raw data. Before we can follow that map to our data of interest, we need to get the data into an addressable form.
+=== Loading individual CT scans
 
 We need to understand how to load and understand CT scan data, which is usually stored in a DICOM file format. The MetaIO format is suggested for easier use, and the Python SimpleITK library can be used to convert it to a NumPy array. Each CT scan is uniquely identified by a series instance UID. The Hounsfield Unit (HU) scale is used to measure CT scan voxel density, with air at -1000 HU, water at 0 HU, and bone at least 1000 HU.
 
-It's important to clean the data by removing outlier values to prevent difficulties in modeling.
-
 === Data Ranges and Model Inputs
 
-\[...\] We add channels of information to our samples. To prevent overshadowing of the new channels by raw HU values, we must be aware that our data ranges from $-1,000$ to $+1,000$. We won't add more channels of data for the classification step, so our data handling will remain the same.
+Starting with adding channels of information to our samples. To prevent the overshadowing of the new channels by raw HU values, we must be aware that our data ranges from -1,000 to +1,000. We won't add more channels of data for the classification step, so our data handling will remain the same.
 
-\[modified\]
-For deep learning models, fixed-size inputs are necessary due to a fixed number of input neurons. Therefore, we need to produce a fixed-size array containing the candidate in order to use it as input to our classifier. We want to train our model using a crop of the CT scan that accurately centers the candidate, making identification easier for the model by decreasing the variation in expected inputs.
+Fixed-size inputs are necessary due to a fixed number of input neurons. We want to train our model using a crop of the CT scan that accurately centers the candidate, making identification easier for the model by decreasing the variation in expected inputs.
 
 === The Patient Coordinate System
 
@@ -154,31 +144,22 @@ The candidate center data expressed in millimeters, not voxels. We need to conve
 
 === CT Scan Shape and Voxel Sizes
 
-\[???\]
-The size of the voxels varies between CT scans and typically are not cubes. The row and column dimensions usually have voxel sizes that are equal, and the index dimension has a larger value, but other ratios can exist. Understanding these details can help in interpreting the results visually.
+The size of the voxels varies between CT scans and typically are not cubes. The row and column dimensions usually have voxel sizes that are equal, and the index dimension has a larger value, but other ratios can exist.
 
 === Converting Between Millimeters and Voxel Addresses
 
-Converting between patient coordinates in millimeters and (I,R,C) array coordinates, we define some utility code to assist with the conversion. Flipping the axes is encoded in a $3 times 3$ matrix returned as a tuple from the ct_mhd. The metadata we need to convert from patient coordinates to array coordinates is contained in the MetaIO file alongside the CT data itself.
+Converting between patient coordinates in millimeters and (I,R,C) array coordinates, we define some utility code to assist with the conversion. Flipping the axes is encoded in a $3 times 3$ matrix. The metadata we need to convert from patient coordinates to array coordinates is contained in the MetaIO file alongside the CT data itself.
 
 In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
 
-The implementation involves building a dataset by subclassing PyTorch Dataset. The LunaDataset class flattens a CT's nodules into a single collection. The implementation of this class requires two methods: firdt method returns the number of samples in the dataset, whereas the second returns a sample data needed to train (or validate).
+The implementation involves building a dataset by subclassing PyTorch Dataset. The LunaDataset class flattens a CT's nodules into a single collection. The implementation of this class requires two methods: the first method returns the number of samples in the dataset, whereas the second returns a sample data needed to train (or validate).
 
 === Constructing our dataset
-
 ==== Training/validation split
 
 We are going to divide the samples into a training set and a validation set.
 
-We can create two `Dataset` instances to ensure there is strict segregation between our training data and our validation data, depending on the task at hand. We should ensures a consistent sorted order, which helps with the segregation.
-
-The training set should not provide unfair hints about the validation set that wouldn't be true for real-world data.
-
-=== Rendering the data
-
-To render the data pertaining to CT and nodule slices. The data rendering process helps in getting an intuitive sense of what the data inputs look like. It also facilitates issue investigation by quickly identifying unusual samples or those that have problems. Effective data rendering is helpful in gaining familiarity with the data and in modifying it to tackle complex projects.
-
+We can create two `Dataset` instances to ensure there is strict segregation between our training data and our validation data,
 === Conclusion
 
 This chapter helped us transform raw data into tensors using PyTorch. These design decisions including input size, caching structure and partitioning of training and validation sets have a significant impact on the success or failure of our overall project. Therefore, revisiting these decisions later on while working on our projects is advised. We are now set to implement a model and a training loop in the next chapter.
