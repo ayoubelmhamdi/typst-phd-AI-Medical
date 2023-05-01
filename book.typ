@@ -111,7 +111,7 @@
   // ===========================================
   show outline: it => locate(loc => {
       set text(weight: "bold", fill: rgb("#1e045b"))
-      let depth=2
+      let depth=3
       let indent= false
       let elements = query(heading, after: loc)
 
@@ -159,6 +159,15 @@
               )
             }
       // ++++++++++++++++++++++++++++++++++
+          } else if el.level == 3 {
+            text(
+              h(22pt) +
+              str(counter(heading).at(el.location()).at(-1)) +
+              // [--] + maybe_number +
+              ". "
+            )
+            el.body
+
           } else {
             maybe_number
             el.body
