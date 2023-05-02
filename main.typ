@@ -207,18 +207,10 @@ Semantic segmentation identifies different objects and where they are in a given
 
 Semantic segmentation requires combining raw pixels to develop specific detectors for items like color and then building on this to create more informative feature detectors to finally identify specific things like a cat or a dog. Nonetheless, the segmentation model will not give us a single classification-like list of binary flags like classification models since the output should be a heatmap or mask.
 
-The U-Net architecture is a design for a neural network that can produce pixelwise output and was invented for segmentation. The design of this architecture is complicated, as it is a lot different compared to the mostly sequential structure of the classifiers. The U-Net architecture is good for image segmentation. The model has a U-shape, and it operates at different resolutions. It first goes from top left to bottom center through a series of convolutions and downscaling, then uses upscaling convolutions to get back to the full resolution. The U-Net author added the skip connections in the model to address the previous design problems, which skip connections are short-circuited inputs along the downsampling path into the corresponding layers in the upsampling path. The key innovation behind U-Net is having the final detail layers operating with the best of both worlds.
+The U-Net architecture is a design for a neural network that can produce pixelwise output and was invented for segmentation. The design of this architecture is complicated, as it is a lot different compared to the mostly sequential structure of the classifiers.
 
-To perform segmentation, we need a model that is capable of outputting a probability for every pixel. Instead of implementing a custom U-Net segmentation model from scratch, we are going to update an existing implementation from an open source repository on GitHub.
-It is important to understand the license terms of open source software used in a project, even if it is for personal use. The MIT license, although flexible, still has requirements. The author still has copyright to their work even if they publish it on platforms like GitHub. It is not in the public domain unless explicitly stated.
+The U-Net architecture is good for image segmentation. The model has a U-shape, and it operates at different resolutions. It first goes from top left to bottom center through a series of convolutions and downscaling, then uses upscaling convolutions to get back to the full resolution. The key innovation behind U-Net is having the final detail layers operating with the best of both worlds.
 
-To understand a model's architecture, it is suggested to inspect the code and identify the building blocks. This exercise can aid in recognizing skip connections and creating a diagram for the model layout.
-
-When searching for a suitable model implementation, it is recommended to keep an eye out for models that can be adapted to fit the project's needs. It is essential to familiarize oneself with models that exist and their implementations and training processes. Also, knowledge of what parts can be scavenged and applied to current projects can be helpful. Building this knowledge toolkit is important, even for beginners.
-
-==== Adapting an off-the-shelf model to our project
-
-We're going to make changes to the classic U-Net model, to better suit our project's needs. We'll pass the input through batch normalization to get normalization statistics and restrict output values in the range $\[0,1\]$ with a sigmoid layer. We will also reduce the model's depth and number of filters. Our output will be in a single channel. We can wrap U-Net by implementing a model with three attributes.
 
 ==== Updating the dataset for segmentation
 
