@@ -159,38 +159,29 @@ The implementation involves building a dataset by subclassing PyTorch Dataset. T
 === XXX 1
 ==== steps to training
 
-\[...\]
 The design of a convolutional neural network for detecting tumors. They state that although the design space for such a network is vast, there have been effective models for image recognition that can be used as a starting point. A pre-existing network design will be modified for the project, with some adjustments made due to the input data being 3D.
 
 This image shows the structure of the network and mentions that the four repeated blocks that make up most of the network will be examined in more detail.
 
-Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form. One block consists of two `3x3` convolutions followed by max-pooling. Stacking convolutional layers allows the final output to be influenced by input beyond the size of the convolutional kernel. A fully connected layer followed by `nn.Softmax` makes up the tail. Softmax is used for single-label classification tasks and expresses the degree of certainty in an answer.
+Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
 
-Our implementation of a deep learning model is called `Luna`, used for computer-aided detection of lung nodules in medical images. The model uses convolutional neural networks and `softmax` layers to classify the images. The text also covers techniques for initializing the model parameters and the training process for the model. Different from previous training loop examples, the author uses a tensor to collect per-class metrics while iterating over the train data loader, and the actual loss computation is done in the computeBatchLoss method. The purpose of the `trnmetrics_g` tensor is to store information about the model's behavior on a per-sample basis from the `computeBatchLoss` function to the `logMetrics` function.
+Our implementation of a deep learning model is called `Luna`, used for computer-aided detection of lung nodules in medical images. The model uses convolutional neural networks and `softmax` layers to classify the images. The text also covers techniques for initializing the model parameters and the training process for the model.
 
-The `computeBatchLoss` function calculates the loss over a batch of samples which is used by both the training and validation loops. The core functionality of the function is feeding the batch into the model and computing the per-batch loss. By recording the label, prediction, and loss for each sample, we can have a wealth of detailed information we can use to investigate the behavior of our model. The validation loop is similar to the training loop, but without updating network weights. Per epoch, the performance metrics are logged and the progress is tracked. This logging is important because it helps us to notice when training is going off track and to keep an eye on how our model behaves.
 
-==== `logMetrics` Function
+==== Metrics
 
-The `logMetrics` function displays the results of the `computeBatchLoss` function with details about the training or validation samples. The `mode_str` argument indicates whether the metrics are for training or validation.
 
-Two input tensors `trnmetrics_t` and `valMetrics_t` are used to log the results. Both tensors have floating-point values filled with the data during `computeBatchLoss`.
+Two input tensors are used to log the results. applies tensor masking and Boolean indexing while constructing masks. The purpose is to limit the metrics to only the nodule or non-nodule samples and count the total samples per class, as well as the number of samples that are classified correctly.
 
-The function applies tensor masking and Boolean indexing while constructing masks. The purpose is to limit the metrics to only the nodule or non-nodule samples and count the total samples per class, as well as the number of samples that are classified correctly.
-
-The function then computes some per-label statistics and stores them in a dictionary, `metrics_dict`. It determines the fraction of samples that are correctly classified, as well as the fraction that is correct from each label.
-
-Finally, the results are displayed as percentages using the `log.info` function.
+The metric computes some per-label statistics and stores them in a dictionary, It determines the fraction of samples that are correctly classified, as well as the fraction that is correct from each label. Finally, the results are displayed as percentages.
 
 ==== Epoch Training
 
-The text talks about the first epoch of a deep learning model's training process. The first epoch is divided into 20,193 steps called batches, each containing 256 data points. The training progress is represented in a log format, showing the number of batches that have been completed and the current status of the training process.
+The first epoch is divided into 20193 steps called batches, each containing 256 data points. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
 
-The text also highlights the importance of preparing the data cache for training, which can take a significant amount of time to process. The exercises in Chapter 10 provide tools and scripts to make the caching process more efficient. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
+displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
 
-The text also discusses the need to maximize the use of available computing resources during the training process to minimize the training time. The authors recommend checking the CPU and GPU load to identify the root of performance bottlenecks that may arise during the training process. It is suggested that these bottlenecks can be addressed by optimizing the caching process and using more efficient waiting strategies during the training process.
-The text discusses data requirements for deep learning training and the need for sanity checks to ensure all data is accounted for. The `enumerateWithEstimate` function is introduced as a tool for estimating completion times during training. The output of the model training script is analyzed, showing the need to consider consequences of misclassification. The text also introduces TensorBoard as a tool for graphing training metrics and mentions its official support in PyTorch.
-To use TensorBoard, we need to install tensorflow. We can install the default CPU-only package. We also need to segregate our data into separate folders for each project to make it easier to manage as TensorBoard can get quite complex. Once installed, we can start TensorBoard by invoking it from any directory and pointing it to the directory where our data is stored. After starting TensorBoard, we should be able to access the main dashboard by pointing our browser to http://localhost:6006. The main part of the screen displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy. We can also select which runs to display and delete runs that are no longer of interest. To add our data to TensorBoard, we use the `torch.utils.tensorboard` module to write metrics data in a format that TensorBoard can understand. We create `SummaryWriter` objects for the training and validation runs and write the data for each epoch using the `add_scalar` method. We can also add comments to our training script to make the data more informative. Finally, we can use TensorBoard to visualize our data and make it easier to analyze.
+To add our data to TensorBoard, we use the module to write metrics data in a format that TensorBoard can understand. We create `SummaryWriter` objects for the training and validation runs and write the data for each epoch using the `add_scalar` method. We can also add comments to our training script to make the data more informative. Finally, we can use TensorBoard to visualize our data and make it easier to analyze.
 To keep your `runs/` directory clean, it's important to delete the runs that didn't yield useful results. Writing scalars is easy. We can use the `metrics_dict` we've constructed and pass each key/value pair to the `writer.add_scalar` method. This method is found in the `torch.utils.tensorboard.SummaryWriter` class with the signature `add_scalar(tag, scalar_value, global_step=None, walltime=None)`.
 
 ==== Summary
