@@ -62,9 +62,9 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 The project is to create a detector for lung cancer using ct scans.
 Automating this process will provide an experience in dealing with difficult scenarios where solving problems is challenging (exemple …).
 
-On breaking down complex problems into smaller ones, exploring the constraints of an intricate deep learning problem, and downloading the training data. The reader will learn about data formats, data sources, and how to explore the constraints that a problem domain places on the project.
 
 On choose to use the detection of malignant tumors in the lungs using only a CT scan of a patient's chest as input to illustrate how to overcome technical issues. Automatic detection of lung cancer is challenging, and even professional specialists face difficulty in identifying malignant tumors. Automating the process with deep learning will be more demanding and require a structured approach to succeeding.
+
 
 Detecting lung cancer early is essential for increasing the patient's survival rate, but it's tough to do manually, especially on a large scale.
 
@@ -75,15 +75,6 @@ In large-scale project, it will be working with 3D data and require data manipul
 
 Instead of analyzing the entire CT scan, it will break down the problem into simpler tasks. CT scans are 3D X-rays consisting of a three-dimensional array of single-channel data, with each voxel having a numeric value that approximately corresponds to the average mass density of the matter contained inside.
 
-There are multiple approaches to handle large images when training a CNN:
-
-1. **Downsampling**: This involves scaling down the input before passing it into the CNN. You can also downsample the image within the network by picking a large stride, which saves resources for the next layers. However, this method may result in the loss of important data [Source 3](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
-
-2. **PCA (Principal Component Analysis)**: This technique helps in selecting an important feature subset, reducing the feature set size [Source 3](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
-
-3. **Stochastic Gradient Descent**: Instead of using conventional Gradient Descent, this approach reduces the size of the dataset required for training in each iteration, thus reducing the time required to train the network [Source 3](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
-
-4. **Restricting the CNN**: In addition to downsampling in early layers, you can remove the FC (fully connected) layer in favor of a convolutional layer. This will help reduce the number of parameters, but training will still be slow due to the heavy computational load in the early layers [Source 3](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
 
 As for choosing the batch size, it depends on your specific situation. For example, with an image size of 2400x2400x3x4, a single image takes ~70 MB, so a batch size of 5 might be more realistic. However, this depends on the available GPU memory, and using 16-bit values instead of 32-bit can help double the batch size [Source 3](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
 
@@ -95,8 +86,6 @@ The goal of this project is to create an end-to-end solution for detecting cance
 3. Grouping interesting voxels to form candidates.
 4. Classifying the nodules using a classification model.
 5. Diagnosing the patient based on the malignancy of the identified nodules, combining segmentation and classification models for a final diagnosis.
-
-\[...each approach has goal after starting discussion...\]
 
 == Manipulation the Data
 
@@ -118,9 +107,8 @@ Overall, the quality of the data used to train the model has a significant impac
 
 === Raw CT Data Files
 
-CT data comes in two files: a *.mhd* file of metadata header information and a *.raw* file of raw bytes. Each file name begins with the series `UID`. The `CT` class loads these files, processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array. Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded, which are used to crop a small 3D slice of the CT data. The CT data, nodule status flag, series UID,
+CT data comes in two files: a *.mhd* file of metadata header information and a *.raw* file of raw bytes. The `CT` class loads these files, processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array. Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded.
 
-=== Parsing LUNA's Annotation Data
 
 The `candidates.csv` file contains information about all lumps that look like nodules, whether they are malignant, benign, or something else. We'll use this to build a list of candidates that can be split into training and validation datasets. The annotations.csv file contains information about some of the candidates that have been flagged as nodules, including the diameter. This information is useful for ensuring a representative range of nodule sizes in the training and validation data.
 
@@ -130,7 +118,7 @@ For supervised learning tasks like classification, we need to split our data int
 
 === Loading individual CT scans
 
-We need to understand how to load and understand CT scan data, which is usually stored in a DICOM file format. The MetaIO format is suggested for easier use, and the Python SimpleITK library can be used to convert it to a NumPy array. Each CT scan is uniquely identified by a series instance UID. The Hounsfield Unit (HU) scale is used to measure CT scan voxel density, with air at -1000 HU, water at 0 HU, and bone at least 1000 HU.
+We need to understand how to load and understand CT scan data, which is usually stored in a DICOM file format. The MetaIO format is suggested for easier use, and the Python SimpleITK library can be used to convert it to a NumPy array. The Hounsfield Unit (HU) scale is used to measure CT scan voxel density, with air at -1000 HU, water at 0 HU, and bone at least 1000 HU.
 
 === Data Ranges and Model Inputs
 
@@ -152,16 +140,14 @@ Converting between patient coordinates in millimeters and (I,R,C) array coordina
 
 In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
 
-The implementation involves building a dataset by subclassing PyTorch Dataset. The LunaDataset class flattens a CT's nodules into a single collection. The implementation of this class requires two methods: the first method returns the number of samples in the dataset, whereas the second returns a sample data needed to train (or validate).
-
 == Training
 
 === XXX 1
 ==== steps to training
 
-The design of a convolutional neural network for detecting tumors. They state that although the design space for such a network is vast, there have been effective models for image recognition that can be used as a starting point. A pre-existing network design will be modified for the project, with some adjustments made due to the input data being 3D.
+\[...\]
+The design of a convolutional neural network for detecting tumors are based on alternative image recognition that can be used as a starting point. A pre-existing network design will be modified for the project, with some adjustments made due to the input data being 3D.
 
-This image shows the structure of the network and mentions that the four repeated blocks that make up most of the network will be examined in more detail.
 
 Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
 
@@ -181,95 +167,45 @@ The first epoch is divided into 20193 steps called batches, each containing 256 
 
 displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
 
-To add our data to TensorBoard, we use the module to write metrics data in a format that TensorBoard can understand. We create `SummaryWriter` objects for the training and validation runs and write the data for each epoch using the `add_scalar` method. We can also add comments to our training script to make the data more informative. Finally, we can use TensorBoard to visualize our data and make it easier to analyze.
-To keep your `runs/` directory clean, it's important to delete the runs that didn't yield useful results. Writing scalars is easy. We can use the `metrics_dict` we've constructed and pass each key/value pair to the `writer.add_scalar` method. This method is found in the `torch.utils.tensorboard.SummaryWriter` class with the signature `add_scalar(tag, scalar_value, global_step=None, walltime=None)`.
 
-==== Summary
+==== Conclusion (but)
 
-In the given code snippet for adding values to TensorBoard graphs, the `tag` parameter gives the name of the graph, the `scalar_value` represents the Y-axis value, and the `global_step` parameter indicates the X-axis value. In the `doTraining` function, `totalTrainingSamples_count` is used as X-axis by providing it as input to the `global_step` parameter.
-
-The key names separated by slashes create groups of charts with the substring before the '/'. Although the documentation advises using the epoch number as the `global_step` parameter, using the count of training samples that were presented to the network could be more beneficial, particularly when fewer samples are present or the number of samples is subject to change.
-
-The loss trend lines highlight that the model is learning something. However, the model struggles to learn correctly about the desired output, particularly because the vast majority of cancer-detection answer set (around 99.7%) is false. The model typically decides that the answer to every question is false, which is similar to a student merely marking all the answers false in a test. However, the grades do not only reflect real knowledge, such as obtaining a comprehensive understanding of the topic by getting more questions right. Hence, to enhance the output, the author suggests introducing meaningful terms and a better way of grading.
-
-==== Conclusion
-
-The chapter has provided a model and a training loop, and now we are able to use the data produced in the previous chapter. The metrics are being displayed in the console and graphed visually, but the results are not fully usable yet. However, the upcoming chapter will focus on improving the metrics and using them to make necessary changes in order to achieve better results.
+The chapter has provided a model and a training loop.
 
 ==== XXX
 
-Data loaders can be used to load data from various sets by utilizing various processors. This enables unused CPU resources to be utilized for preparing data to be fed to the GPU.
+Each dataset may contain several samples.
 
-Each dataset may contain several samples which can be loaded by data loaders in batches. PyTorch model processing is designed to operate on batches of data and not individual samples.
+Data loaders can be used to modify data by adjusting the frequency of specific samples. This can be done to enhance or modify the dataset.
 
-Data loaders can be used to modify data by adjusting the frequency of specific samples. This can be done to enhance or modify the dataset, although it may be more rational to directly modify the dataset.
 
-In part 2, PyTorch's torch.optim.SGD optimizer will be utilized with a learning rate of 0.001 and a momentum of 0.99, which are the default values for most deep learning projects.
+Recall is the ability to identify all relevant things, while precision is the ability to identify only relevant things.
 
-The initial model employed for classification will be quite similar to the model used in chapter 8 in order to start with a model that is believed to be effective. If it hinders the project's performance, it can be revisited.
 
-For the majority of the deep learning projects, it's critical to choose appropriate metrics while monitoring the training sessions. By using misleading metrics, it is possible that the overall accuracy may not be as expected. Chapter 12 will explain how appropriate metrics can be chosen while evaluating.
+The logging output are include the precision by including the count of correctly identified and the total number of samples for both negative and positive samples.
 
-TensorBoard can be utilized to represent numerous metrics visually, making it easier to consume such data as it varies per epoch of training.
-
-This chapter focuses on how to quantify, express, and then enhance the performance of our model. We will adopt a metaphor derived from the "Guard Dogs and Birds and Burglars" approach to make the chapter's concepts more relatable. We will then create a visual language to represent some of the principal concepts needed to formally discuss the shortcomings of the implementation discussed in the previous chapter. Ratios such as Recall and Precision will be dealt with, and we will devise a way to score our model's performance, encapsulated in a single number as a New Metric, F1 Score. Finally, we'll introduce changes to LunaDataset to improve our training results, which include Balancing and Augmentation.
-
-Our goal is to improve the performance of our trained model. By the end of the chapter, the model will perform much better and be capable of generating results that are clearly superior to chance. False positives and false negatives will be more explicitly discussed as well.
-
-Roxie and Preston are two well-intentioned guard dogs from obedience school. While both dogs bark at burglars, Roxie barks at almost anything, while Preston only barks occasionally. Roxie makes too many false positive alerts, such as to thunderstorms and fire engines, so we will focus on the topic of false positives and false negatives in the chapter.
-The text discusses the issues with using guard dogs to protect a house, as they can have a high number of false negatives, meaning they may ignore a real threat. The author uses a visual representation to explain true and false positives/negatives, in which burglars and rodents are considered threats, while birds are not. The X-axis shows the bark-worthiness of each event as determined by the guard dogs, while the Y-axis shows properties that humans perceive but dogs cannot. The model used to protect against cancer, which is much more complex than guarding a house, maps events and properties to a two-dimensional space so positive and negative events can be separated. The quadrant areas can be used to evaluate how well the model performs.
-
-==== Recall and Precision in Guard Dogs
-
-Recall is the ability to identify all relevant things, while precision is the ability to identify only relevant things. In guard dog terms, recall means never missing any potential robbers, while precision means only barking at burglars.
-
-To improve recall, minimize false negatives by barking at anything that could potentially be a robber. This means pushing the classification threshold all the way to the left to encompass nearly all positive events. Roxie the dog has an incredibly high recall due to her barking at everything, but this leads to a large number of false positives.
-
-To improve precision, minimize false positives by only barking at certain things. This means pushing the classification threshold all the way to the right to exclude a large number of negative events. Preston the dog has an incredibly high precision due to his only barking at burglar behavior, but this leads to a large number of false negatives.
-
-While neither precision nor recall can be the single metric used to grade a dog's performance, they are both useful numbers to have on hand during training. It is important to balance both recall and precision when training a guard dog to identify potential robbers.
-Implementing Precision and Recall in logMetrics
-
-The metrics precision and recall are important during training because they reveal how well models are performing. If either of these metrics drops to zero, it could mean the model is behaving poorly. We would like to update the logmetrics function to include precision and recall in its output, so we can monitor them alongside the loss and correctness metrics. We have already calculated some of the values we need, but we have to include false positive and false negative values for the rest. With these values, we can compute precision and recall and store them in metrics-dict.
-
-The ultimate performance metric is the F1 score, which combines the values of precision and recall. The F1 score is better than averaging since averaging assigns the same score of 0.5 to values of 1.0 and 0.0, which is not meaningful. The F1 score implies a balance between precision and recall. We can use other metrics like $\\text{min}(p, r)$, but they penalize the imbalance between precision and recall and do not capture the nuance between the values. Finally, we could multiply precision and recall's values, but this is not beneficial when the results are close to perfect.
-The text discusses the importance of having a metric that's sensitive to changes in the early stages of model design, and therefore, the author opted to use the F1 score to evaluate classification model performance. The author updates the logging output to include precision, recall, and F1 score by including the exact values for the count of correctly identified and the total number of samples for both negative and positive samples. The new metrics result in drastically poorer performance results for the model. The author mentions that having an ideal dataset entails balancing positive and negative samples to better train the model. Currently, the dataset is imbalanced, with a 400:1 ratio of positive samples to negative ones, which is making "actually nodule" samples get lost in the crowd. As there are too few positive samples among the training data, the author proposes changing the class balance of the training data to look more like an "ideal" dataset.
-The article discusses the importance of balancing training data for building and training machine learning models. The imbalanced data can lead to the degenerate behavior of the model scoring well by answering only one label, which is not useful in the real-world scenario. To achieve discrimination, the dataset needs to be updated to alternate between positive and negative samples in a balanced manner. One way to accomplish this is by using samplers that reshape, limit, or reemphasize the underlying data. However, in this article, the implementation of class balancing within the dataset is discussed where the positive and negative training samples are kept separate and alternated to prevent the degenerate behavior of the model. The article also raises concerns regarding the real-world discriminatory bias being present in the models trained from the internet-at-large data sources.
-The text discusses the importance of using a balanced dataset for training a neural network model to improve its performance in predicting positive samples. It outlines a method of creating a dataset with a 2:1 ratio of negative to positive samples and shows how to implement it in the code. The article also describes the process of training the model using TensorBoard and highlights the problem of overfitting, which occurs when the training loss improves while the validation loss deteriorates. The article ends by emphasizing the need to stop the training process if overfitting occurs to prevent the model from getting worse in real-world scenarios.
 
 ==== Revisiting the problem of overfitting
 
-Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance, a model can memorize quirks of a small set of positive training samples and consider everything else negative, which decreases its generalization ability.
+Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance.
 
-To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details. We need to make our training set and validation set both trend in the right direction to achieve better results. Figure 12.19 shows that our negative loss looks great since we have more negative samples (400 times) and, thus, it's harder for the model to memorize individual details.
+To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details.
 
-Although some generalization is still going on, since we are classifying about 70% of the positive validation set correctly, we must change our training approach to improve our model's ability to recognize the general properties of the classes we are interested in. Overfitting is a common situation in machine learning that requires our attention to ensure the model's accuracy and reliability.
-The article discusses the concept of overfitting and how it can affect a model that predicts the age of human faces. An overfit model remembers specific individuals' identifying details instead of developing a general model based on age signifiers. This leads to inaccuracies in predicting the age of a new picture. To prevent overfitting, the article suggests data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image. The article also provides code snippets to help readers understand how to implement these techniques.
 
-=== Data Augmentation Techniques for Medical Imaging
+To prevent overfitting, we use data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image.
 
-This text discusses various data augmentation techniques that can be used to improve the accuracy of machine learning models when applied to medical image data. The techniques are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise. The article provides code examples to demonstrate the implementation of each augmentation technique that can be integrated into a machine learning pipeline. In addition, the article discusses how these techniques can be examined and compared to select the best augmentation strategy.
-
-==== Summary:
-
-This chapter discusses how to evaluate a model's performance and the importance of understanding the factors that contribute to it. It also covers dealing with insufficiently populated data sources and synthesizing representative training samples. The focus then shifts to finding candidate nodules and classifying them as malignant or benign in the upcoming chapters.
+This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
 
 === Segmentation 1
 
-The focus of the chapter is the process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a U-Net and involves updating the model, dataset, and training loop. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels. The chapter explains the steps involved in creating a model for segmentation, including per-pixel labeling and training with masks. Finally, the results of the new model are evaluated through quantitative segmentation.
+The process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a U-Net. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels.
 
-==== Various types of segmentation
-
-This article talks about different types of segmentation, specifically about semantic segmentation. Semantic segmentation classifies pixels in an image into labels such as "cat", "dog", etc. resulting in distinct regions identifying things like "all of these pixels are part of a cat". The article also briefly discussed instance segmentation and object detection, which are more complicated approaches. However, for this project, they are not the best approaches to find nodule candidates.
 
 ==== Semantic segmentation: Per-pixel classification
 
 Semantic segmentation identifies different objects and where they are in a given image. If there are multiple cats in an image, semantic segmentation can identify each cat's position. The existing classification models can't pinpoint where the cat is; they can only predict whether or not a cat is present in the image.
 
 Semantic segmentation requires combining raw pixels to develop specific detectors for items like color and then building on this to create more informative feature detectors to finally identify specific things like a cat or a dog. Nonetheless, the segmentation model will not give us a single classification-like list of binary flags like classification models since the output should be a heatmap or mask.
-
-If we use only convolutional "layers" without downsampling, we can get an output the same size as the input, but our receptive field will be very limited. Meaning that each segmented pixel will only consider a very localized area.
-Assuming $3 \\times 3$ convolutions, the size of the receptive field for a simple model of stacked convolutions is $2 * L+1$, with L being the number of convolutional layers. For instance, four layers of $3 \\times 3$ convolutions will have a receptive field size of $9 \\times 9$ per output pixel. By inserting a $2 \\times 2$ max pool between the second and third convolutions, and another at the end, we increase the receptive field to $16 \\times 16$. However, this happens after the first max pool, which makes the final effective receptive field $12 \\times 12$ in the original input resolution. One common way to improve the receptive field of an output pixel while maintaining a 1:1 ratio of input pixels to output pixels is to use a technique called upsampling.
 
 The U-Net architecture is a design for a neural network that can produce pixelwise output and was invented for segmentation. The design of this architecture is complicated, as it is a lot different compared to the mostly sequential structure of the classifiers. The U-Net architecture is good for image segmentation. The model has a U-shape, and it operates at different resolutions. It first goes from top left to bottom center through a series of convolutions and downscaling, then uses upscaling convolutions to get back to the full resolution. The U-Net author added the skip connections in the model to address the previous design problems, which skip connections are short-circuited inputs along the downsampling path into the corresponding layers in the upsampling path. The key innovation behind U-Net is having the final detail layers operating with the best of both worlds.
 
