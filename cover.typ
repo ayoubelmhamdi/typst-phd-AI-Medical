@@ -69,13 +69,14 @@
   v(1.0em)
   divider()
   v(1.0em)
+    // set par(justify: false)
     align(
       center,
       block(
       text(
         fill: rgb("#1E045B"),
         weight: "bold",
-        size:24pt,
+        size:22pt,
         title
       )
     )
@@ -92,7 +93,7 @@
       text(
         weight: "bold",
         size:16pt,
-        [Soutenu le 17/07/2023 devant la Commission d’Examen : ]
+        [Soutenu le \*\*/07/2023 devant la Commission d’Examen : ]
       )
     )
   )
