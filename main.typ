@@ -3,7 +3,11 @@
 #import "functions.typ": heading_center
 
 #let book_info = (
-  title: "SEGMENTATION DES IMAGE MEDICAL PAR INTELLIGENT ARTIFICIAL",
+  title: "UTILISATION DU DEEP LEARNING POUR IDENTIFIER LES NODULES PULMONAIRES CANCÉREUX SUR LES IMAGES DE TDM",
+  // title: "DÉTECTION DES NODULES PULMONAIRES CANCÉREUX PAR DES RÉSEAUX DE NEURONES PROFONDS À PARTIR D'IMAGES DE TOMODENSITOMÉTRIE.",
+  // title: "VISION PAR ORDINATEUR POUR LE DÉPISTAGE DES NODULES PULMONAIRES CANCÉREUX À L'AIDE D'IMAGES DE TOMODENSITOMÉTRIE.",
+  // title: "DÉPISTAGE AUTOMATISÉ DES NODULES PULMONAIRES CANCÉREUX PAR ANALYSE D'IMAGES DE TOMODENSITOMÉTRIE.",
+  // title: "SEGMENTATION DES IMAGE MEDICAL PAR INTELLIGENT ARTIFICIAL",
   authors: (
     "Ayoub EL MHAMDI",
     "youssef MADANE",
@@ -20,6 +24,17 @@
 #show: book.with(book_info)
 #cover(book_info)
 
+/*
+ *   Lung Cancer Nodule Detection using Deep Learning
+ *   Applying Deep Neural Networks for Lung Cancer Nodule Segmentation and Classification
+ *   Automated Lung Nodule Cancer Detection System Using Deep Learning
+ *   Automated System for Lung Cancer Nodule using CT Scan Images
+ *
+ *   title: "Utilisation du Deep Learning pour identifier les nodules pulmonaires cancéreux sur les images de tomodensitométrie.",
+ *   title: "Détection des nodules pulmonaires cancéreux par des réseaux de neurones profonds à partir d'images de tomodensitométrie.",
+ *   title: "Vision par ordinateur pour le dépistage des nodules pulmonaires cancéreux à l'aide d'images de tomodensitométrie.",
+ *   title: "Dépistage automatisé des nodules pulmonaires cancéreux par analyse d'images de tomodensitométrie.",
+ */
 = REMERCIEMENTS
 
 Nous tenons à remercier d’abord toutes les équipes pédagogiques de *la Filière
@@ -70,7 +85,6 @@ Detecting lung cancer early is essential for increasing the patient's survival r
 
 The problem space of lung tumor detection is important because it is an active research area with promising results. However, it is also unsolved, which satisfies the authors' objective of using PyTorch to tackle state-of-the-art projects.
 
-=== Preparing for a Large-Scale Project
 In large-scale project, it will be working with 3D data and require data manipulation, as no pre-built library is available for suitable training samples. The project will involve using convolutional layers followed by a resolution-reducing downsampling layer. To handle the computational requirements, you will need access to a GPU with at least `8 GB` of RAM or `220 GB` of free disk space for raw training data, cached data, and trained models.
 
 Instead of analyzing the entire CT scan, it will break down the problem into simpler tasks. CT scans are 3D X-rays consisting of a three-dimensional array of single-channel data, with each voxel having a numeric value that approximately corresponds to the average mass density of the matter contained inside.
@@ -141,65 +155,28 @@ Converting between patient coordinates in millimeters and (I,R,C) array coordina
 In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
 
 == Training
+=== Overview
 
-=== XXX 1
-==== steps to training
+- *CNN*: The design of a convolutional neural network for detecting tumors are based on alternative image recognition that can be used as a starting point. This Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
 
-\[...\]
-The design of a convolutional neural network for detecting tumors are based on alternative image recognition that can be used as a starting point. A pre-existing network design will be modified for the project, with some adjustments made due to the input data being 3D.
+- *Epoch Training*: The epoch is divided into 20193 steps called batches, each containing 256 data points. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
 
+- *Metrics*: displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
 
-Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
-
-Our implementation of a deep learning model is called `Luna`, used for computer-aided detection of lung nodules in medical images. The model uses convolutional neural networks and `softmax` layers to classify the images. The text also covers techniques for initializing the model parameters and the training process for the model.
-
-
-==== Metrics
-
-
-Two input tensors are used to log the results. applies tensor masking and Boolean indexing while constructing masks. The purpose is to limit the metrics to only the nodule or non-nodule samples and count the total samples per class, as well as the number of samples that are classified correctly.
-
-The metric computes some per-label statistics and stores them in a dictionary, It determines the fraction of samples that are correctly classified, as well as the fraction that is correct from each label. Finally, the results are displayed as percentages.
-
-==== Epoch Training
-
-The first epoch is divided into 20193 steps called batches, each containing 256 data points. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
-
-displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
-
-
-==== Conclusion (but)
-
-The chapter has provided a model and a training loop.
-
-==== XXX
-
-Each dataset may contain several samples.
-
-Data loaders can be used to modify data by adjusting the frequency of specific samples. This can be done to enhance or modify the dataset.
-
-
-Recall is the ability to identify all relevant things, while precision is the ability to identify only relevant things.
+  - Recall is the ability to identify all relevant things.
+  - while precision is the ability to identify only relevant things.
 
 
 The logging output are include the precision by including the count of correctly identified and the total number of samples for both negative and positive samples.
 
 
-==== Revisiting the problem of overfitting
+- *Overfitting*: Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance. To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details. To prevent overfitting, we use data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image.
 
-Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance.
+- *Data Automating*: This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
 
-To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details.
-
-
-To prevent overfitting, we use data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image.
-
-This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
-
-=== Segmentation 1
+=== Segmentation
 
 The process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a U-Net. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels.
-
 
 ==== Semantic segmentation: Per-pixel classification
 
@@ -255,11 +232,11 @@ To save only the parameters of the model, this approach allows us to load those 
 
 ![figure 14.3](https://cdn.mathpix.com/cropped/2023_04_27_14ff7830b8aaf17904d3g-177.jpg?height=972&width=1430&top_left_y=189&top_left_x=223)
 
-=== Segmentation 2
+=== Classification
 
 This step involves dividing the CT scan into individual slices. The output of the segmentation step is an array of per-pixel probabilities, indicating whether the pixel is part of a nodule. These slice-wise predictions are collected in a mask array with the same shape as the CT scan input, and a threshold is applied to the predictions to obtain a binary array. A cleanup step which shortens the flagged area and removes small components.
 
-=== Conclusion
+== Conclusion
 The identifying nodule candidates in CT scans for possible cancer detection. A connected-components algorithm is used for grouping the suspected nodule voxels. The labeled chunks are passed on to a classification module to reduce false positives. Finally, the identified regions in the CT scan are cropped and passed onto the classification module using DataLoader.
 
 We use a data loader to loop over a candidate list to threshold the output probabilities to get a list of things our model thinks are actual nodules, which would be output for a radiologist to inspect while adjusting the threshold to err a bit on the safe side. A single CT scan from the validation set is run and 16 nodule candidates are found.
