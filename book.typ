@@ -186,7 +186,6 @@
   // ===========================================
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
-  show link: underline
 
   body
 }
