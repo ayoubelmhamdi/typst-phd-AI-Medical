@@ -11,3 +11,8 @@
   )
   v(3em)
 }
+
+#let linkb(the_link,text) = {
+  show link: underline
+  link(the_link)[#text]
+}
