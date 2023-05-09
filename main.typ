@@ -200,14 +200,13 @@ We use the same source data as before: CT scans and annotation data. Our goal is
 
 We have seven input channels for UNet: three context slices before and after the focus slice, and one focus slice that we segment. We have one output class indicating whether a voxel is part of a nodule.
 
-=== Creating an Empty Image for Flagging Errors
-
-Create an empty image with 512x512 pixels and three color channels.
-
-The image is used for flagging false positives and false negatives in a prediction. False positives are marked in red and overlaid on the image, while false negatives are marked in green. Pixels that are both false negatives and false positives are marked in orange. The final image is clipped between 0 and 1.
-
 === Visualizing CT Image with Predicted Nodules
-The goal is to have a grayscale CT image with predicted-nodule pixels in various colors. Red is used for incorrect pixels (false positives and false negatives), green is used for correctly predicted pixels inside the nodule, and half-strength mask added green is used for false negatives, which appear as orange.
+
+The U-Net model has an encoder that captures the context of the image and a decoder that produces the segmentation map. To evaluate the performance of the model, we create an empty image with 512x512 pixels and three color channels.
+
+We overlay the predicted segmentation map on the original CT image and use different colors to indicate the errors. We use red for false positives (pixels that are predicted as nodules but are not), green for true positives (pixels that are predicted as nodules and are), and orange for false negatives (pixels that are not predicted as nodules but are).
+
+The pixel values are normalized between 0 and 1. The goal is to have a clear visualization of the nodules and the errors in the prediction.
 
 === Save segmentation Model
 To save only the parameters of the model, this approach allows us to load those parameters into any model that expects parameters of the same shape, even if the class doesn't match the saved model.
