@@ -61,7 +61,7 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 
 #outline()
 
-= RÉSUMÉ.
+= RÉSUMÉ.LLLL 7
 #lorem(120)
 
 
@@ -91,7 +91,7 @@ Instead of analyzing the entire CT scan, it will break down the problem into sim
 As for choosing the batch size, it depends on your specific situation. For example, with an image size of 2400x2400x3x4, a single image takes ~70 MB, so a batch size of 5 might be more realistic. However, this depends on the available GPU memory, and using 16-bit values instead of 32-bit can help double the batch size
 //[](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
 
-== Approach
+=== Approach for Training our Model
 The goal of this project is to create an end-to-end solution for detecting cancerous nodules in lung CT scans using PyTorch. The approach involves five main steps:
 
 1. Loading the CT data and converting it into a PyTorch dataset.
@@ -100,6 +100,25 @@ The goal of this project is to create an end-to-end solution for detecting cance
 4. Classifying the nodules using a classification model.
 5. Diagnosing the patient based on the malignancy of the identified nodules, combining segmentation and classification models for a final diagnosis.
 
+=== Definitions.
+
+- *CNN*: The design of a convolutional neural network for detecting tumors are based on alternative image recognition that can be used as a starting point. This Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
+
+- *Epoch Training*: The epoch is divided into 20193 steps called batches, each containing 256 data points. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
+
+- *Metrics*: displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
+
+  - Recall is the ability to identify all relevant things.
+  - while precision is the ability to identify only relevant things.
+
+
+The logging output are include the precision by including the count of correctly identified and the total number of samples for both negative and positive samples.
+
+
+- *Overfitting*: Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance. To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details. To prevent overfitting, we use data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image.
+
+- *Data Automating*: This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
+
 == Manipulation the Data
 
 === Data Conversions
@@ -107,9 +126,7 @@ The goal of this project is to create an end-to-end solution for detecting cance
 To process the data, it is necessary to convert raw data files into a format that is usable by PyTorch, which means converting the row data from 3D array of intensity data to `Tensors` pyTorch format. This data is around 32 million voxels, which is much larger than the nodules. To make the task more manageable, the model will focus on a relevant crop of the CT scan. There are various steps involved in processing the data, including understanding the data, mapping location information to array indexes, and converting the CT scan intensity into mass density. Identifying the key concepts of the project, such as nodules, is crucial.
 
 === Data loading
-In this chapter, we will discuss the first step in creating a neural network for detecting lung cancer using PyTorch: handling the dataset. The goal is to produce a training sample from raw CT scan data and a list of annotations. The process is described as transmuting the raw data into the stuff that the neural network will spin into gold.
-
-This heading covers the following topics:
+The first step in creating a neural network for detecting lung cancer using PyTorch is handling the dataset. The goal is to produce a training sample from raw CT scan data and a list of annotations, by following thsi topics:
 
 - Loading and processing raw data files
 - Implementing a Python class to represent the data
@@ -120,10 +137,9 @@ Overall, the quality of the data used to train the model has a significant impac
 
 === Raw CT Data Files
 
-loading CT data and processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array. Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded.
+Loading CT data and processes the information to produce a 3D array, and transforms the patient coordinate system to the index, row, and column coordinates of each voxel in the array.
 
-
-it's contains information about all lumps that look like nodules, whether they are malignant, benign, or something else. We'll use this to build a list of candidates that can be split into training and validation datasets. The annotations.csv file contains information about some of the candidates that have been flagged as nodules, including the diameter. This information is useful for ensuring a representative range of nodule sizes in the training and validation data.
+Annotation data from LUNA with nodule coordinates and malignancy flags are also loaded. It contains information about all lumps that look like nodules, whether they are malignant, benign, or something else. We'll use this to build a list of candidates that can be split into training and validation datasets. This Dataset contains information about some of the candidates that have been flagged as nodules, including the diameter. This information is useful for ensuring a representative range of nodule sizes in the training and validation data.
 
 === Training and validation sets
 Splitting a dataset into training, validation, and test sets is a crucial step in building a machine learning model. It allows for the model to be trained on one set, tuned on another, and evaluated on a final set. This helps prevent overfitting and gives an accurate measure of the model's performance.
@@ -146,82 +162,73 @@ The candidate center data expressed in millimeters, not voxels. We need to conve
 
 === CT Scan Shape and Voxel Sizes
 
-The size of the voxels varies between CT scans and typically are not cubes. The row and column dimensions usually have voxel sizes that are equal, and the index dimension has a larger value, but other ratios can exist.
+The size of the voxels varies between CT scans and typically are not cubes. The row and column dimensions usually have voxel sizes that are equal, (...) and the index dimension has a larger value, but other ratios can exist.
 
 === Converting Between Millimeters and Voxel Addresses
 
-Converting between patient coordinates in millimeters and (I,R,C) array coordinates, we define some utility code to assist with the conversion. Flipping the axes is encoded in a $3 times 3$ matrix. The metadata we need to convert from patient coordinates to array coordinates is contained in the MetaIO file alongside the CT data itself.
+(...) Converting between patient coordinates in millimeters and $(I, R, C)$ array coordinates, we define some utility code to assist with the conversion. Flipping the axes is encoded in a $3 times 3$ matrix. The metadata we need to convert from patient coordinates to array coordinates is contained in the MetaIO file alongside the CT data itself.
 
-In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
+(...) In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
 
-== Training
-=== Overview
+== Segmentation
+/*
+ *------------------------------------------------------------------------------
+ */
 
-- *CNN*: The design of a convolutional neural network for detecting tumors are based on alternative image recognition that can be used as a starting point. This Convolutional neural networks typically have a tail, backbone, and head. The tail processes the input, while the backbone contains most of the layers arranged in series of blocks. The head converts the output from the backbone to the desired output form.
+The process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a *U-Net*. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels.
 
-- *Epoch Training*: The epoch is divided into 20193 steps called batches, each containing 256 data points. Once the data is loaded and the training process begins, monitoring the performance of the computing resources is crucial to ensure that resources are being used effectively.
+=== Semantic segmentation: Per-pixel classification
 
-- *Metrics*: displays training and validation metrics in a graphical format, making it easier to interpret the data. We can adjust the smoothing option to remove noise from trend lines if our data is noisy.
-
-  - Recall is the ability to identify all relevant things.
-  - while precision is the ability to identify only relevant things.
-
-
-The logging output are include the precision by including the count of correctly identified and the total number of samples for both negative and positive samples.
-
-
-- *Overfitting*: Overfitting occurs when a model learns specific properties of the training set, losing the ability to generalize, and making it less accurate in predicting samples that haven't been trained on. For instance. To avoid overfitting, we must examine the right metrics. Looking at our overall loss, everything might seem fine, but that's because our validation set is unbalanced, and the negative samples dominate, making it hard for the model to memorize individual details. To prevent overfitting, we use data augmentation, which involves modifying a dataset by applying synthetic alterations to individual samples, resulting in a new dataset with a larger number of effective samples. Five specific data augmentation techniques are discussed, including mirroring the image, shifting it by a few voxels, scaling it up or down, rotating it around the head-foot axis, and adding noise to the image.
-
-- *Data Automating*: This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
-
-=== Segmentation
-
-The process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a U-Net. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels.
-
-==== Semantic segmentation: Per-pixel classification
+U-Net network is a popular architecture for semantic segmentation. It was originally proposed for biomedical image segmentation, but since then it has been widely used for several other domains such as self-driving cars, satellite imagery, and more. The U-Net architecture includes an encoder that down-samples the input image, which is then followed by an up-sampling decoder. This allows the network to learn high-level semantic features while preserving the spatial information, making it suitable for semantic segmentation.
 
 Semantic segmentation identifies different objects and where they are in a given image. If there are multiple cats in an image, semantic segmentation can identify each cat's position. The existing classification models can't pinpoint where the cat is; they can only predict whether or not a cat is present in the image.
 
 Semantic segmentation requires combining raw pixels to develop specific detectors for items like color and then building on this to create more informative feature detectors to finally identify specific things like a cat or a dog. Nonetheless, the segmentation model will not give us a single classification-like list of binary flags like classification models since the output should be a heatmap or mask.
 
-The U-Net architecture is a design for a neural network that can produce pixelwise output and was invented for segmentation. The design of this architecture is complicated, as it is a lot different compared to the mostly sequential structure of the classifiers.
+=== Why we need heatmap or mask as output of segmentation
+The output of a U-Net network in biomedical image segmentation is typically a heatmap or a mask because these formats provide a clear visual representation of the boundaries that the network has identified in the image. A heatmap is a colored image that highlights the regions of the input image that are most important for the output classes, whereas a mask is a binary image that indicates which pixels belong to which class.
 
-The U-Net architecture is good for image segmentation. The model has a U-shape, and it operates at different resolutions. It first goes from top left to bottom center through a series of convolutions and downscaling, then uses upscaling convolutions to get back to the full resolution. The key innovation behind U-Net is having the final detail layers operating with the best of both worlds.
-
-
-==== Updating the dataset for segmentation
-
-Our source data remains the same: CT scans and annotation data. But, our model produces output of a different form than we had previously.
-
-We are going to begin by converting the nodule locations we have into bounding boxes that cover the entire nodule.
-
-To accomplish this goal, we start the origin of our search at the annotated center of our nodule. We then examine the density of the voxels adjacent to our origin on the column and row axis until we hit low-density voxels, which indicate that we've reached normal lung tissue. Finally, we search in the third dimension.
-
-==== gole of segmentation
-
-The process of designing and creating datasets for training and validating a segmentation model for detecting nodules in CT scans.
+In biomedical image segmentation, it is important to accurately identify the areas of interest, such as tumors or blood vessels, to aid in diagnosis and treatment. The heatmap or mask allows for easy visualization of these areas and can be used by medical professionals to make more informed decisions. Moreover, the heatmap or mask output can be used as input for further processing and analysis, such as quantifying the size or volume of a segmented region.
 
 
-- For input into UNet, we have seven input channels; $3+3$ context slices, and 1 slice that is the focus for what we're actually segmenting.
-- We have one output class indicating whether this voxel is part of a nodule.
+=== UNet Architecture for Image Segmentation
+
+*U-Net* is a convolutional neural network that can produce pixelwise output for image segmentation. It has a U-shaped encoder-decoder structure that operates at different resolutions. The encoder network reduces the spatial dimensions and increases the number of filters at each block, while the decoder network does the opposite. The key innovation of U-Net is the use of skip connections that link the encoder and decoder blocks at the same level, allowing the network to capture multi-scale features and produce more precise segmentations.
+
+We use the same source data as before: CT scans and annotation data. Our goal is to create bounding boxes that cover the whole nodules based on their annotated centers. This will help us with segmentation, which is the process of identifying regions of interest in images. To do this, we search for voxels with high density around the center of each nodule on the row and column axis. We stop when we reach voxels with low density, which indicate normal lung tissue. Then we repeat the search in the third dimension.
 
 
+We have seven input channels for UNet: three context slices before and after the focus slice, and one focus slice that we segment. We have one output class indicating whether a voxel is part of a nodule.
 
-=== Predicting
+=== Creating an Empty Image for Flagging Errors
 
 Create an empty image with 512x512 pixels and three color channels.
 
 The image is used for flagging false positives and false negatives in a prediction. False positives are marked in red and overlaid on the image, while false negatives are marked in green. Pixels that are both false negatives and false positives are marked in orange. The final image is clipped between 0 and 1.
 
-
+=== Visualizing CT Image with Predicted Nodules
 The goal is to have a grayscale CT image with predicted-nodule pixels in various colors. Red is used for incorrect pixels (false positives and false negatives), green is used for correctly predicted pixels inside the nodule, and half-strength mask added green is used for false negatives, which appear as orange.
 
-=== Save Model
+=== Save segmentation Model
 To save only the parameters of the model, this approach allows us to load those parameters into any model that expects parameters of the same shape, even if the class doesn't match the saved model.
 
+== Classification
+/*
+ *------------------------------------------------------------------------------
+ */
 
-==== Writing Code for Nodule Analysis
 
+This step involves dividing the CT scan into individual slices. The output of the segmentation step is an array of per-pixel probabilities, indicating whether the pixel is part of a nodule. These slice-wise predictions are collected in a mask array with the same shape as the CT scan input, and a threshold is applied to the predictions to obtain a binary array. A cleanup step which shortens the flagged area and removes small components.
+
+
+
+== Diagnosing the patient
+/*
+ *------------------------------------------------------------------------------
+ */
+
+
+Writing Code for Nodule Analysis:
 - Segment CT scan image: Isolate and label regions of interest within the CT scan image using segmentation techniques.
 
 - Grouping: Group the segmented voxels into "lumps" based on their location and proximity to one another. A simple way to do this is to identify the boundaries of each lump, such as by finding the dashed outline surrounding highlighted areas in the image.
@@ -232,14 +239,11 @@ To save only the parameters of the model, this approach allows us to load those 
 
 ![figure 14.3](https://cdn.mathpix.com/cropped/2023_04_27_14ff7830b8aaf17904d3g-177.jpg?height=972&width=1430&top_left_y=189&top_left_x=223)
 
-=== Classification
-
-This step involves dividing the CT scan into individual slices. The output of the segmentation step is an array of per-pixel probabilities, indicating whether the pixel is part of a nodule. These slice-wise predictions are collected in a mask array with the same shape as the CT scan input, and a threshold is applied to the predictions to obtain a binary array. A cleanup step which shortens the flagged area and removes small components.
-
 == Conclusion
+
 The identifying nodule candidates in CT scans for possible cancer detection. A connected-components algorithm is used for grouping the suspected nodule voxels. The labeled chunks are passed on to a classification module to reduce false positives. Finally, the identified regions in the CT scan are cropped and passed onto the classification module using DataLoader.
 
-We use a data loader to loop over a candidate list to threshold the output probabilities to get a list of things our model thinks are actual nodules, which would be output for a radiologist to inspect while adjusting the threshold to err a bit on the safe side. A single CT scan from the validation set is run and 16 nodule candidates are found.
+We use a data loader, to loop over a candidate list to threshold. The output probabilities to get a list of things our model thinks are actual nodules, which would be output for a radiologist to inspect while adjusting the threshold to err a bit on the safe side. A single CT scan from the validation set is run, and 16 nodule candidates are found.
 
 The task of identifying malignant nodules from benign ones in CT scans after implementing the nodule-detection task of the LUNA challenge. Even with a good system, diagnosing malignancy would need a more comprehensive view of the patient, additional non-CT context, and a biopsy instead of just looking at a particular nodule in isolation on a CT scan. This task is likely to be performed by a doctor for some time to come.
 
@@ -248,6 +252,6 @@ The key takeaways from the article are:
 - Splitting training and validation (and test) sets between patients is important to avoid errors.
 - Converting pixel-wise marks to nodules can be achieved using traditional image processing.
 - The diagnosis performs both segmentation and classification.
-- TensorBoard can help us visualise and identify network anomalies.
+- TensorBoard can help us visualize and identify network anomalies.
 - There is no magic bullet when training neural networks.
 
