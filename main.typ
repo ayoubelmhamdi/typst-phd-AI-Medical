@@ -1,5 +1,6 @@
 #import "book.typ": book
 #import "cover.typ": cover
+#import "image.typ": *
 #import "functions.typ": heading_center
 
 #let book_info = (
@@ -41,7 +42,7 @@ Nous tenons à remercier d’abord toutes les équipes pédagogiques de *la Fili
 Science de la Matière Physique* de la Faculté des Sciences à Meknès, ainsi que les
 professeurs ayant contribué activement à notre formation.
 
-Nous profitons de cette occasion pour remercier vivement notre Professeur
+Nous profitons de cette occasion, pour remercier vivement notre Professeur
 *RAJAE SEBIHI* qui n’a pas cessé de nous encourager tout au long de
 l’exécution de notre Projet de Fin d’Études, ainsi que pour sa générosité et ses
 compétences en matière de formation et d’encadrement. Nous lui sommes
@@ -61,22 +62,24 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 
 #outline()
 
-= RÉSUMÉ.LLLL 7
-#lorem(120)
+= RÉSUMÉ.
+#lorem(10)
 
 
 = INTRODUCTION GÉNÉRALE.
-#lorem(120)
+#lorem(10)
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
-#lorem(50)
+#lorem(10)
 = APERÇU SUR DEEP LEARNING
-#lorem(120)
+#lorem(10)
 = DETECTING LUNG CANCER NODULES
 
 == introduction
 The project is to create a detector for lung cancer, and based on the *LUNA dataset* #link("https://luna16.grand-challenge.org/Description")[luna16.grand-challenge.org]  that is a collection of CT scans of patients with lung nodules, which are small growths in the lungs that may indicate cancer. The dataset is part of a Grand Challenge, which is a competition among researchers to develop and test methods for detecting and classifying nodules. The dataset is open and publicly available, which allows for more collaboration
 and innovation in the field of medical imaging. The LUNA dataset has two tracks: one for finding the locations of nodules in the scans, and another for reducing false positives by distinguishing benign from malignant nodules.
 
+// #end-to-end()
+// #end-to-end2()
 
 Automating this process will provide an experience in dealing with difficult scenarios where solving problems is challenging. Automatic detection of lung cancer is challenging, and even professional specialists face difficulty in identifying malignant tumors. Automating the process with deep learning will be more demanding and require a structured approach to succeeding.
 
@@ -90,15 +93,6 @@ Instead of analyzing the entire CT scan, it will break down the problem into sim
 
 As for choosing the batch size, it depends on your specific situation. For example, with an image size of 2400x2400x3x4, a single image takes ~70 MB, so a batch size of 5 might be more realistic. However, this depends on the available GPU memory, and using 16-bit values instead of 32-bit can help double the batch size
 //[](https://ai.stackexchange.com/questions/3938/how-do-i-handle-large-images-when-training-a-cnn).
-
-=== Approach for Training our Model
-The goal of this project is to create an end-to-end solution for detecting cancerous nodules in lung CT scans using PyTorch. The approach involves five main steps:
-
-1. Loading the CT data and converting it into a PyTorch dataset.
-2. Segmenting the image to identify potential tumors.
-3. Grouping interesting voxels to form candidates.
-4. Classifying the nodules using a classification model.
-5. Diagnosing the patient based on the malignancy of the identified nodules, combining segmentation and classification models for a final diagnosis.
 
 === Definitions.
 
@@ -119,7 +113,18 @@ The logging output are include the precision by including the count of correctly
 
 - *Data Automating*: This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
 
-== Manipulation the Data
+- **Thresholding** is a simple and common method of segmentation that works by selecting a pixel value (called a threshold) that separates the foreground (the region of interest) from the background (the rest of the image)[^3^]. For example, if you want to segment the bone from a CT scan, you can choose a threshold that corresponds to the intensity of bone pixels and ignore the pixels that are lower or higher than that value. However, thresholding is not always accurate or robust, especially when dealing with complex or noisy images.
+
+=== Approach for Training our Model involves five main steps
+The goal of this project is to create an end-to-end solution for detecting cancerous nodules in lung CT scans using PyTorch. The approach involves five main steps:
+
+1. Loading the CT data and converting it into a PyTorch dataset.
+2. Segmenting the image to identify potential tumors.
+3. Grouping interesting voxels to form candidates.
+4. Classifying the nodules using a classification model.
+5. Diagnosing the patient based on the malignancy of the identified nodules, combining segmentation and classification models for a final diagnosis.
+
+== step 1: Manipulation the Data
 
 === Data Conversions
 
@@ -170,7 +175,15 @@ The size of the voxels varies between CT scans and typically are not cubes. The 
 
 (...) In CT scan images of patients with lung nodules, most of the data is not relevant to the nodule (up to 99.9999%). To extract the nods, an area around each candidate will be extracted, so the model can focus on one candidate at a time.
 
-== Segmentation
+
+
+
+// segmentation ch13
+// classification ch12
+//
+
+
+== step 2: Segmentation
 /*
  *------------------------------------------------------------------------------
  */
@@ -208,10 +221,12 @@ We overlay the predicted segmentation map on the original CT image and use diffe
 
 The pixel values are normalized between 0 and 1. The goal is to have a clear visualization of the nodules and the errors in the prediction.
 
-=== Save segmentation Model
-To save only the parameters of the model, this approach allows us to load those parameters into any model that expects parameters of the same shape, even if the class doesn't match the saved model.
+== step 3: Grouping nodules.
 
-== Classification
+We use segmentation to find ROIs that might be nodules in CT images. Then we group pixels that are next to each other and above the limit. Each group is a nodule candidate with a center point (index, row, column). We use these points to classify the candidates. Grouping makes the search easier and removes noise.
+
+
+== step 4: Classification
 /*
  *------------------------------------------------------------------------------
  */
@@ -221,22 +236,14 @@ This step involves dividing the CT scan into individual slices. The output of th
 
 
 
-== Diagnosing the patient
+== step 5: Diagnosing the patient
 /*
  *------------------------------------------------------------------------------
  */
 
 
-Writing Code for Nodule Analysis:
-- Segment CT scan image: Isolate and label regions of interest within the CT scan image using segmentation techniques.
+We use the LIDC annotations to decide if a nodule (a small lump) in the lung is cancerous or not. The LIDC annotations are labels that up to four doctors gave to each nodule based on how it looks in a CT scan. They used a scale from 1 to 5, where 1 means the nodule is very unlikely to be cancerous and 5 means it is very likely to be cancerous. These labels are not based on other information about the patient, such as their medical history or symptoms. To make a final decision, we will use a rule that says a nodule is cancerous if at least two doctors gave it a 4 or a 5. This rule is not very precise and there are other ways of using the labels, such as taking the average or ignoring some nodules.
 
-- Grouping: Group the segmented voxels into "lumps" based on their location and proximity to one another. A simple way to do this is to identify the boundaries of each lump, such as by finding the dashed outline surrounding highlighted areas in the image.
-
-- Calculate center of mass (COM) coordinates: Calculate the COM coordinates for each lump of segmented voxels. This provides useful information about the location and distribution of specific features within the image.
-
-- Classification: Use machine learning algorithms to classify the resulting sample tuples containing the COM coordinates, based on criteria such as size, shape, and alignment. This can help identify specific structures or patterns within the image and provide insights into the underlying condition being examined.
-
-![figure 14.3](https://cdn.mathpix.com/cropped/2023_04_27_14ff7830b8aaf17904d3g-177.jpg?height=972&width=1430&top_left_y=189&top_left_x=223)
 
 == Conclusion
 
@@ -246,7 +253,6 @@ We use a data loader, to loop over a candidate list to threshold. The output pro
 
 The task of identifying malignant nodules from benign ones in CT scans after implementing the nodule-detection task of the LUNA challenge. Even with a good system, diagnosing malignancy would need a more comprehensive view of the patient, additional non-CT context, and a biopsy instead of just looking at a particular nodule in isolation on a CT scan. This task is likely to be performed by a doctor for some time to come.
 
-The key takeaways from the article are:
 
 - Splitting training and validation (and test) sets between patients is important to avoid errors.
 - Converting pixel-wise marks to nodules can be achieved using traditional image processing.
@@ -254,3 +260,9 @@ The key takeaways from the article are:
 - TensorBoard can help us visualize and identify network anomalies.
 - There is no magic bullet when training neural networks.
 
+This system is not ready to replace a human radiologist, but it could be a useful tool to help them find suspicious areas in the scans. And would need more data and validation from experts, as well as regulatory approval from authorities. The system would also need to run in a scalable environment that can handle different cases and situations.
+
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+
+= RÉSULTATS ET DISSCUSSION
+= CONCLUSION
