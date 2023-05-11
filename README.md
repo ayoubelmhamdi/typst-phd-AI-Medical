@@ -6,7 +6,7 @@ A PFE en FR using [typst.app](https://typst.app).
 
 ### PDF
 
-[pfe.pdf](./build/main.pdf)
+[pfe.pdf][(./build/main.pdf](https://github.com/ayoubelmhamdi/typst-phd-AI-Medical/raw/master/build/main.pdf)
 
 ### Plan
 
