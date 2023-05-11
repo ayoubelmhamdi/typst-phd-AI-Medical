@@ -6,7 +6,7 @@ A PFE en FR using [typst.app](https://typst.app).
 
 ### PDF
 
-[pfe.pdf](./build/pfe.pdf)
+[pfe.pdf](./build/main.pdf)
 
 ### Plan
 
