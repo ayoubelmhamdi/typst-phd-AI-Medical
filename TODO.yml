@@ -21,3 +21,16 @@ PDF:
 PowerPoint:
   title: AI in MEDICINE
   date: 2023
+
+BIB:
+  source 1:
+    url: https://www.kaggle.com/code/moha5282/preprocessing-tutorial-lung-cancer
+    steps: init
+  source 2:
+    url: https://www.kaggle.com/code/daniel036/first-pass-through-data-w-3d-convnet-b8aad2
+    steps:
+      acc = 0.0069%
+  source 3:
+    url: https://www.kaggle.com/code/shivanir23/luna-pytorch-vs-cancer
+    steps:
+      acc = 99% error
