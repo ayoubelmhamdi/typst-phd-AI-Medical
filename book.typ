@@ -184,6 +184,16 @@
     })
   // ===========================================
   // ===========================================
+  show raw: it => {
+    // set text(font: songti, 12pt)
+
+   set align(left)
+    set block(inset: 5pt, fill: luma(240))
+    pad(0.5em, it)
+    // it
+  }
+
+  //---------------
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
 
