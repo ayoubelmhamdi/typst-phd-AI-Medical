@@ -1,10 +1,11 @@
+typst=typst4
 
 compile:
-	typst  --font-path ~/home/.fonts compile main.typ build/main.pdf
+	$(typst)  --font-path ~/home/.fonts compile main.typ build/main.pdf
 watch:
-	typst --font-path ~/home/.fonts watch main.typ build/main.pdf
+	$(typst) --font-path ~/home/.fonts watch main.typ build/main.pdf
 test:
-	typst --font-path ~/home/.fonts watch test.typ build/main.pdf
+	$(typst) --font-path ~/home/.fonts watch test.typ build/main.pdf
 
 image:
 	convert -density 300 build/main.pdf -quality 100 pfe.jpg
