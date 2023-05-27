@@ -187,7 +187,7 @@
   show raw: it => {
     // set text(font: songti, 12pt)
 
-   set align(left)
+   set align(center)
     set block(inset: 5pt, fill: luma(240))
     pad(0.5em, it)
     // it
