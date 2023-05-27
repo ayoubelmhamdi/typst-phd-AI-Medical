@@ -113,7 +113,8 @@
       set text(weight: "bold", fill: rgb("#1e045b"))
       let depth=3
       let indent= false
-      let elements = query(heading, after: loc)
+      // let elements = query(heading, after: loc) // work in tyspt-v0.2.0
+      let elements = query( selector(heading).after(loc), loc,)
 
       for el in elements {
         if el.outlined == false { continue }
