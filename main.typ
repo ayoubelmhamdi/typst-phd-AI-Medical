@@ -72,6 +72,118 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. ■
 #lorem(10)
 = APERÇU SUR DEEP LEARNING
 
+== Introduction
+L'apprentissage profond est une branche de l'apprentissage automatique, qui est lui-même un domaine de l'intelligence artificielle. L'apprentissage profond permet de prédire ou d'analyser des données de haute dimension ou complexes, comme les images, les textes ou les sons, d'une manière similaire au cerveau humain. L'apprentissage profond utilise des réseaux de neurones artificiels multicouches qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une grande capacité d'adaptation et d'évolution avec le changement de l'environnement.
+
+Par conséquent, l'apprentissage profond se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur. De plus, l'apprentissage profond peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
+
+Ainsi, nous voyons que l'apprentissage profond est un domaine récent et prometteur en informatique qui mérite l'attention et la recherche, et qui peut contribuer à résoudre de nombreux problèmes dans différents domaines tels que la traduction, la reconnaissance d'images et de sons, etc.
+
+Pour comprendre le principe de l'apprentissage profond, on peut utiliser des exemples de notre vie quotidienne. Lorsque nous voulons améliorer certains résultats, on change certains facteurs influençant ces résultats de manière cyclique, en se basant sur l'expérience et l'erreur. Par exemple, un vendeur de fruits essaie d'augmenter son revenu en changeant la quantité et les types de fruits offerts aux clients, en se référant aux ventes passées et actuelles. Il n'y a pas de règle fixe qui détermine la quantité de chaque fruit que le vendeur doit fournir, il doit donc expérimenter jusqu'à ce qu'il atteigne le point d'équilibre entre l'offre et la demande.
+
+En apprentissage profond, on utilise une fonction mathématique appelée fonction coût pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on utilise une autre fonction appelée fonction optimisation pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la fonction coût. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
+
+Cet exemple peut nous donner une idée qui nous aide à comprendre l'apprentissage en profondeur, mais il résume des concepts fondamentaux de l'apprentissage en profondeur tels que la fonction de coût ou la fonction de régression graduelle et l'optimisation, ce qui est clair pour nous dans des applications telles que la traduction automatique ou la vision par ordinateur.
+
+Dans la traduction automatique, un système d’apprentissage en profondeur utilise un réseau neuronal pour convertir une phrase d’une langue à une autre. Ce système utilise une fonction de coût pour mesurer la différence entre la traduction générée et la traduction cible. Ensuite, il utilise un algorithme d’optimisation tel que la descente de gradient pour ajuster le poids de chaque cellule neuronale dans le réseau afin de minimiser la valeur de la fonction de coût. Ce processus est répété sur un grand ensemble de phrases à traduire jusqu’à ce que le système soit capable de générer des traductions précises et naturelles.
+
+En vision par ordinateur, un système d’apprentissage en profondeur utilise des réseaux neuronaux artificiels pour extraire des informations et des perspectives à partir d’images et de vidéos. Certaines applications dans ce domaine sont:
+
+- *Surveillance du contenu*: pour supprimer automatiquement le contenu non sécurisé ou inapproprié des archives d’images et de vidéos.
+
+- *Reconnaissance faciale*: pour identifier l’identité des personnes ou extraire des caractéristiques de leur visage, telles que l’ouverture ou la fermeture des yeux, le port de lunettes ou de moustaches.
+
+- *Violation du droit d’auteur*: pour supprimer le contenu volé ou détourné d’images ou de vidéos protégées par des droits d’auteur.
+
+Ces applications sont rendues possibles grâce à l’utilisation de réseaux neuronaux profonds qui peuvent apprendre à partir d’un grand nombre d’exemples et extraire des caractéristiques complexes à partir des données.
+
+
+
+== Les réseaux de neurones artificiels
+Les réseaux de neurones artificiels sont des modèles d'intelligence artificielle qui utilisent des cellules nerveuses artificielles pour convertir les entrées en sorties. Chaque cellule nerveuse reçoit des signaux d'autres cellules et envoie des signaux à d'autres cellules. Chaque signal est ajouté à une valeur de poids qui détermine sa force et son importance. Chaque cellule nerveuse calcule la somme des signaux reçus et applique une fonction d'activation pour produire un signal de sortie.
+
+=== Les réseaux de neurones artificiels et leur relation avec la fonction linéaire.
+
+La fonction linéaire est un type de fonctions mathématiques qui décrit une relation simple entre deux variables, où un changement dans l'une entraîne un changement proportionnel dans l'autre. Par exemple, si nous avons une fonction qui convertit la température de Celsius en Fahrenheit, cette fonction sera linéaire, car chaque augmentation d'un degré Celsius entraîne une augmentation constante de la température en Fahrenheit.
+
+La formule utilisée pour convertir la température de Celsius en Fahrenheit est :
+
+$ °F = 1.8  °C + 32 $
+
+Dans cette formule, nous pouvons définir deux facteurs principaux : le poids des entrées et l'ordonnée à l'origine. Le poids des entrées est un nombre qui multiplie la valeur de la variable indépendante (°C) pour déterminer son effet sur la valeur de la variable dépendante (°F). Dans ce cas, le poids des entrées est 1.8. L'ordonnée à l'origine est un nombre qui est ajouté au produit du poids des entrées par la valeur de la variable indépendante pour déterminer la valeur de la variable dépendante lorsque la variable indépendante est égale à zéro. Dans ce cas, l'ordonnée à l'origine est 32.
+
+Ces exemples montrent comment utiliser une fonction linéaire pour convertir la température de Celsius en Fahrenheit. Mais comment utiliser une fonction linéaire pour comprendre le concept de coût et d'optimisation dans l'apprentissage profond ?
+
+Dans l'apprentissage profond, nous utilisons des fonctions linéaires pour produire des résultats basés sur un ensemble d'entrées. Chaque entrée a un poids qui ajuste la mesure de son impact sur le résultat produit. Ensuite, nous utilisons une fonction de coût pour mesurer la différence entre les résultats produits et les résultats cibles. Ensuite, nous utilisons un algorithme d'optimisation pour ajuster les poids des entrées afin de réduire la valeur de la fonction de coût.
+
+== exemple de calcul de la température en Fahrenheit à l'aide de l'apprentissage en profondeur.
+
+Comme première étape dans l'apprentissage profond, nous devons collecter un ensemble de données qui forment des paires d'entrées et de résultats cibles. Dans l'exemple de conversion de la température de Celsius en Fahrenheit, nous utilisons un tableau avec des mesures différentes de température dans les deux systèmes comme des paires d'entrées et de résultats cibles :
+
+#align(center,
+  table(
+    columns: (auto, auto),
+    inset: 10pt,
+    align: horizon,
+    [°C]  ,[°F],
+    [-40 ],[ -40 ],
+    [-20 ],[ -4  ],
+    [ 0  ],[ 32  ],
+    [ 20 ],[ 68  ],
+    [ 40 ],[ 104 ],
+    [ 60 ],[ 140 ],
+    [ 80 ],[ 176 ],
+    [ 100],[ 212 ],
+  )
+)
+
+Ce tableau nous permet de comparer la valeur de la température en Celsius avec sa valeur correspondante en Fahrenheit. Mais que se passe-t-il si nous voulons convertir une valeur qui n’est pas dans le tableau ? Pouvons-nous trouver le poids des entrées et la coupe de l’axe qui convient pour représenter ces données ?
+
+La réponse est oui, mais pas facilement. Si nous essayons de deviner le poids des entrées et la coupe de l’axe au hasard, nous obtiendrons des résultats différents des résultats cibles. Par exemple, si nous supposons que le poids des entrées est de 2 et que la coupe de l’axe est de 0, notre fonction sera :
+
+$ °F = (°C × 2) + 0 $
+
+Cette fonction donne des résultats imprécis. Par exemple, si nous voulons convertir 20°C en Fahrenheit, elle donne :
+
+$ °F = (20 × 2) + 0 = 40 $
+
+Et c’est une erreur car la valeur correcte est $68°F$.
+
+Alors, comment trouvons-nous le poids des entrées et la coupe de l’axe corrects ? C’est là que l’apprentissage en profondeur intervient. L’apprentissage en profondeur utilise un algorithme appelé régression pour trouver les meilleures valeurs pour ces deux facteurs afin de réduire l’écart entre les résultats générés et les résultats cibles. Cet écart est appelé fonction de coût ou fonction d’erreur.
+
+La fonction de coût est une fonction mathématique mesurée entre zéro et la valeur maximale possible. Plus la valeur de la fonction de coût est proche de zéro, plus les résultats générés sont proches des résultats cibles. Par exemple, nous utilisons la fonction de coût appelée erreur quadratique moyenne (MSE), qui calcule la moyenne de toutes les mesures d’erreur quadratique entre chaque résultat généré et chaque résultat cible.1
+
+$ "MSE" = (1/n) dot sum (y - y’)^2 $
+
+Où n est le nombre de paires d’entrées et de résultats cibles, y est la mesure du résultat cible et y’ est la mesure du résultat généré.
+
+Ainsi, si nous utilisons la MSE pour mesurer l’écart entre une fonction linéaire et un tableau de conversion des températures Celsius en Fahrenheit, la valeur de la MSE sera :
+
+$ "MSE" = 4200 $
+
+
+Il s’agit d’une explication de l’algorithme de descente de gradient qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût. Le gradient est un vecteur qui indique la direction dans laquelle la fonction de coût augmente. En se déplaçant dans la direction opposée, nous pouvons trouver le point le plus bas de la fonction de coût, qui correspond aux meilleures valeurs pour les poids et les biais. La règle de mise à jour pour les poids et les biais est donnée par:
+
+$ w == w - α * (∂"MSE")/(∂w) $
+
+$ b == b - α * (∂"MSE")/(∂b) $
+
+Où α est appelé taux d’apprentissage et est un petit nombre positif qui contrôle la taille du pas que nous prenons à chaque itération pour réduire la différence entre les résultats attendus et initiaux. $(∂"MSE")/(∂w)$ et $(∂"MSE")/(∂b)$ sont les dérivées partielles de la fonction de coût par rapport aux poids et aux biais respectivement. Ces dérivées partielles nous disent dans quelle mesure la fonction de coût change lorsque le poids ou le biais change légèrement.
+
+Pour calculer ces dérivées partielles, nous pouvons utiliser une technique appelée règle de chaîne, qui nous permet de décomposer une fonction complexe en fonctions plus simples et de multiplier leurs dérivées. Par exemple, si nous avons une fonction $f (x) = g (h (x))$, où g et h sont des fonctions plus simples, nous pouvons écrire:
+
+$ (∂f)/(∂x) = (∂g)/(∂h) * (∂h)/(∂x) $
+
+En utilisant cette technique, nous pouvons trouver les dérivées partielles de MSE par rapport à w et b comme suit:
+
+$ (∂"MSE")/(∂w) = (1/n) dot sum (-2x dot (y - y’)) $
+
+$ (∂"MSE")/(∂b) = (1/n) dot (-2 dot (y - y’)) $
+
+Où x est la valeur d’entrée (°C), y est la valeur cible de sortie (°F) et y 'est la valeur de sortie obtenue en utilisant notre fonction linéaire.
+
+== fin
+
 == A Simple Linear Regression Example in Python
 
 In this article, we will see how to implement a simple linear regression model using gradient descent in Python. Linear regression is a supervised learning technique that tries to find a linear relationship between an input feature and an output label. Gradient descent is an optimization algorithm that iteratively updates the parameters of the model to minimize a cost function.
