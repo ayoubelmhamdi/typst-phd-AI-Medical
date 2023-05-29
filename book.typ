@@ -189,7 +189,7 @@
     // set text(font: songti, 12pt)
 
    set align(center)
-    set block(inset: 5pt, fill: luma(240))
+    set block(inset: 5pt, fill: luma(240),width:90%)
     pad(0.5em, it)
     // it
   }
