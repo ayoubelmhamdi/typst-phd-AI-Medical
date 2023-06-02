@@ -1,0 +1,20 @@
+#!/bin/bash
+
+FILE="${1:-}"
+TMP="$(mktemp)"
+if [ -z "$FILE" ];then
+  echo "Usage:"
+  echo "    typst-to-md file.typ"
+  exit 1
+fi
+
+cp "$FILE" "$TMP"
+
+sed -i 's@^= @# @' "$TMP"
+sed -i 's@^== @## @' "$TMP"
+sed -i 's@^=== @### @' "$TMP"
+sed -i 's@^==== @#### @' "$TMP"
+sed -i 's@^===== @##### @' "$TMP"
+sed -i 's@^====== @###### @' "$TMP"
+
+cat "$TMP"
