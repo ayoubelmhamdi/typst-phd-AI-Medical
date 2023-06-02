@@ -3,6 +3,9 @@
 #import "image.typ": *
 #import "functions.typ": heading_center
 
+#let finchapiter = text(fill:rgb("#ff00ff"),[■])
+#let MSE = "MSE"
+
 #let book_info = (
   title: "UTILISATION DU DEEP LEARNING POUR IDENTIFIER LES NODULES PULMONAIRES CANCÉREUX SUR LES IMAGES DE TDM",
   // title: "DÉTECTION DES NODULES PULMONAIRES CANCÉREUX PAR DES RÉSEAUX DE NEURONES PROFONDS À PARTIR D'IMAGES DE TOMODENSITOMÉTRIE.",
@@ -56,20 +59,20 @@ A la même occasion, nous voudrons également remercier chaleureusement nos
 parents qui nous ont toujours encouragés durant notre cursus de formation.
 
 Enfin, nos vifs remerciements sont adressés à toutes ces personnes qui nous
-ont apporté leur aide précieuse et leur soutien inconditionnel. ■
+ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 
 = TABLE DES MATIÈRES
 
 #outline()
 
 = RÉSUMÉ.
-#lorem(10)
+#lorem(10) #finchapiter
 
 
 = INTRODUCTION GÉNÉRALE.
-#lorem(10)
+#lorem(10) #finchapiter
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
-#lorem(10)
+#lorem(10) #finchapiter
 = APERÇU SUR DEEP LEARNING
 
 == Introduction
@@ -194,7 +197,6 @@ Et c’est une erreur car la valeur correcte est $68°F$.
 )
 Alors, comment trouvons-nous le poids des entrées et la coupe de l’axe corrects ? C’est là que l’apprentissage en profondeur intervient. L’apprentissage en profondeur utilise un algorithme appelé régression pour trouver les meilleures valeurs pour ces deux facteurs afin de réduire l’écart entre les résultats générés et les résultats cibles. Cet écart est appelé fonction de coût ou fonction d’erreur.
 
-#let MSE = "MSE"
 
 La fonction de coût est une fonction mathématique mesurée entre zéro et la valeur maximale possible. Plus la valeur de la fonction de coût est proche de zéro, plus les résultats générés sont proches des résultats cibles. Par exemple, nous utilisons la fonction de coût appelée erreur quadratique moyenne $MSE$, qui calcule la moyenne de toutes les mesures d’erreur quadratique entre chaque résultat généré et chaque résultat cible.
 
@@ -206,7 +208,7 @@ Ainsi, si nous utilisons la $MSE$ pour mesurer l’écart entre une fonction lin
 
 $ MSE &= 1/n dot sum (y - y_0)^2\
       &= 1/n dot sum ((w x+b) - y_0)^2\
-      &= 4200 $
+      &= 4480 $
 
 
 Il s’agit d’une explication de l’algorithme de descente de gradient@goodfellow2016deep qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût. Le gradient est un vecteur qui indique la direction dans laquelle la fonction de coût augmente. En se déplaçant dans la direction opposée, nous pouvons trouver le point le plus bas de la fonction de coût, qui correspond aux meilleures valeurs pour les poids et les biais. La règle de mise à jour pour les poids et les biais est donnée par:
@@ -241,7 +243,9 @@ Et on peut programmer un code simple en language C qui effectue cette tâche.
 #include <stdio.h>
 #include <stdlib.h>
 
+// Train Data
 float td[][2] = {
+    // C   F
     {-40, -40},
     {-20, -4 },
     {0,   32 },
@@ -252,11 +256,8 @@ float td[][2] = {
     {100, 212},
 };
 
-#define N 8
+#define N 8 // Number of item in Train Data
 
-float randf(void) {
-  return (float) rand() / (float) RAND_MAX;
-}
 
 // Define the learning alpha
 #define ALPHA 0.00001
@@ -324,8 +325,8 @@ int main() {
   // Test the neuron with some new inputs
   double x_new = 50;                   // Celsius
   double y_new = predict(x_new, w, b); // Fahrenheit
-  printf("Fahrenheit of 50C: 122\n");
-  printf("Prediction of 50C: %f\n", y_new);
+  printf("Fahrenheit of 50C: 122F\n");
+  printf("Prediction of 50C: %.1fF\n", y_new);
 
   return 0;
 }
@@ -348,10 +349,11 @@ Iteration: 90000, Cost:0.029 w=1.802 b=31.795
 
 Final values are: w = 1.801169 and b = 31.883127
 
-Fahrenheit of 50C: 122
-Prediction of 50C: 121.941577
+Fahrenheit of 50C: 122F
+Prediction of 50C: 121.9F
 ```
 
+#finchapiter
 #bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")
 
 = DETECTING LUNG CANCER NODULES
