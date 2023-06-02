@@ -24,7 +24,7 @@
     number-align: center
   )
 
-  set text(size: 14pt)
+  set text(lang:"fr", size: 14pt)
   set document(author: authors, title: title)
 
 
@@ -186,12 +186,10 @@
   // ===========================================
   // ===========================================
   show raw: it => {
-    // set text(font: songti, 12pt)
-
+   // set text(font: songti, 12pt)
    set align(center)
-    set block(inset: 5pt, fill: luma(240),width:90%)
-    pad(0.5em, it)
-    // it
+   set block(inset: 5pt, fill: luma(240))
+   pad(0.5em, it)
   }
 
   //---------------
