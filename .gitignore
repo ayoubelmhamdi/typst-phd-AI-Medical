@@ -10,3 +10,4 @@ pfe.pdf
 *.pdf
 .err.log
 sug.typ
+ltex.hiddenFalsePositives.en.txt
