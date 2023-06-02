@@ -187,7 +187,7 @@ $ °F = (20 × 1) + 0 = 20 $
 Et c’est une erreur car la valeur correcte est $68°F$.
 
 #images(
-  filename:"images/temperaturesPrevuesReelles.png",
+  filename:"images/temperaturesPrevuesReelles.svg",
   caption:[L'écart entre les températures prévues et réelles],
   width: 50%
   // ref:
@@ -205,14 +205,15 @@ Où $n$ est le nombre de paires d’entrées et de résultats cibles, $y$ (ou $�
 Ainsi, si nous utilisons la $MSE$ pour mesurer l’écart entre une fonction linéaire et un tableau de conversion des températures Celsius en Fahrenheit, la valeur de la $MSE$ sera :
 
 $ MSE &= 1/n dot sum (y - y_0)^2\
+      &= 1/n dot sum ((w x+b) - y_0)^2\
       &= 4200 $
 
 
 Il s’agit d’une explication de l’algorithme de descente de gradient@goodfellow2016deep qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût. Le gradient est un vecteur qui indique la direction dans laquelle la fonction de coût augmente. En se déplaçant dans la direction opposée, nous pouvons trouver le point le plus bas de la fonction de coût, qui correspond aux meilleures valeurs pour les poids et les biais. La règle de mise à jour pour les poids et les biais est donnée par:
 
-$ w == w - α * (∂MSE)/(∂w) $
+$ w_(n+1) = w_n - α * (∂MSE)/(∂w) $
 
-$ b == b - α * (∂MSE)/(∂b) $
+$ b_(n+1) = b_n - α * (∂MSE)/(∂b) $
 
 Où α est appelé taux d’apprentissage et est un petit nombre positif qui contrôle la taille du pas que nous prenons à chaque itération pour réduire la différence entre les résultats attendus et initiaux. $(∂MSE)/(∂w)$ et $(∂MSE)/(∂b)$ sont les dérivées partielles de la fonction de coût par rapport aux poids et aux biais respectivement. Ces dérivées partielles nous disent dans quelle mesure la fonction de coût change lorsque le poids ou le biais change légèrement.
 
@@ -222,45 +223,134 @@ $ (∂f)/(∂x) = (∂g)/(∂h) * (∂h)/(∂x) $
 
 En utilisant cette technique, nous pouvons trouver les dérivées partielles de $MSE$ par rapport à w et b comme suit:
 
-$ (∂MSE)/(∂w) = 1/n  sum (-2x (y - y_0)) $
+$ (∂MSE)/(∂w) &= 1/n  sum (-2x (y - y_0)) \
+(∂MSE)/(∂b) &= 1/n  (-2  (y - y_0)) $
 
-$ (∂MSE)/(∂b) = 1/n  (-2  (y - y_0)) $
+Et finalemet:
+$ w_(n+1) &= w_n + α  sum x (y - y_0) \
+          b_(n+1) &= b_n + α  sum (y - y_0))  $
 
-Où $x$ est la valeur d’entrée $°C$, $y$ est la valeur cible de sortie $°F$ et $y$ est la valeur de sortie obtenue en utilisant notre fonction linéaire.
+Où $x$ est la valeur d’entrée $°C$, $y_0$ est la valeur cible de sortie $°F$ et $y$ est la valeur de sortie obtenue en utilisant notre fonction linéaire.
+en choisie $α = 2α/n$ car $α$ est un nombre arbitraire comme epsilon. Cela signifie que vous pouvez simplifier les formules en éliminant le facteur $2/n$, ce qui ne change pas le sens de l'algorithme.
 
 En utilisant ces formules, on peut mettre à jour notre poids et notre biais à chaque itération jusqu'à ce qu'on atteigne un point où la fonction de coût est réduite au minimum.
 
 Et on peut programmer un code simple en language C qui effectue cette tâche.
+```c
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+float td[][2] = {
+    {-40, -40},
+    {-20, -4 },
+    {0,   32 },
+    {20,  68 },
+    {40,  104},
+    {60,  140},
+    {80,  176},
+    {100, 212},
+};
+
+#define N 8
+
+float randf(void) {
+  return (float) rand() / (float) RAND_MAX;
+}
+
+// Define the learning alpha
+#define ALPHA 0.00001
+
+// Define the number of iterations
+#define EPOCS 100 * 1000
+```
+#pagebreak()
+```c
+// Define a function to compute the mean squared error
+double cost(double w, double b) {
+  double error = 0.0;
+  for (int i = 0; i < N; ++i) {
+    double x = td[i][0];
+    double y = td[i][1];
+    double d = y - (w * x + b);
+    error += d * d;
+  }
+  return error / (int) N;
+}
+
+// Define a function to perform gradient descent
+void gradient_descent(double *w, double *b) {
+  // Derivative of cost function with respect to w or b
+  double dw = 0.0;
+  double db = 0.0;
+  for (int i = 0; i < N; i++) {
+    double x  = td[i][0];
+    double y0 = td[i][1];
+    double y  = *w * x + *b;
+    dw += x * (y - y0);
+    db += (y - y0);
+  }
+  // Update w and b using the learning rate and the derivatives
+  *w = *w - ALPHA * dw;
+  *b = *b - ALPHA * db;
+}
+
+// Define a function to train the neuron using gradient descent
+void train(double *w, double *b) {
+  for (int i = 0; i < EPOCS; i++) {
+    gradient_descent(w, b);
+    if (i % 101000 == 0)
+      printf("Iteration: %d, Cost:%3.3f w=%.3lf b=%.3lf\n", i, cost(*w, *b), *w, *b);
+  }
+}
+
+// Define a function to predict the output using the neuron
+double predict(double x, double w, double b) {
+  return w * x + b;
+}
+```
+```c
+int main() {
+  // Initialize w and b randomly
+  double w = (double) rand() / RAND_MAX;
+  double b = (double) rand() / RAND_MAX;
+
+  // Train the neuron using gradient descent
+  train(&w, &b);
+
+  // Print the final values of w and b
+  printf("\nFinal values are: w = %f and b = %f\n\n", w, b);
+
+  // Test the neuron with some new inputs
+  double x_new = 50;                   // Celsius
+  double y_new = predict(x_new, w, b); // Fahrenheit
+  printf("Fahrenheit of 50C: 122\n");
+  printf("Prediction of 50C: %f\n", y_new);
+
+  return 0;
+}
+```
 
 
-//== useful of back-propagations
-//To find the optimal values of *w* and *b* that minimize the cost function, we will use an iterative optimization algorithm called gradient descent. Gradient descent works by updating the parameters in the opposite direction of the gradient (the slope) of the cost function. The gradient is approximated by using a small value called *rate*, which represents a tiny change in the parameter. The update rule for each parameter is:
-//
-//$ w_"new" = w_"old" - "rate" * ("cost"(w_"old" + epsilon, b_"old") - "cost"(w_"old" - epsilon, b_"old")) / (2 * epsilon) $
-//
-//
-//==== The Results
-//
 //The output of running the script shows that the weight parameter converges to 2, which is the true slope of the data set. The bias parameter converges to 0, which is the true intercept of the data set. The cost function reaches its minimum value when the parameters are optimal. This means that our script successfully learns the linear relationship between *x* and *y* from the data set.
-//
-//#show raw.where(block: true): it => {
-//set text()
-// set text(size:11pt)
-// set block(width:100%)
-// it
-//}
-//
-//```log
-//Iteration 1: Cost = 9.5423086, Weight = 5.271154, Bias =  0.000000
-//Iteration 2: Cost = 6.0665968, Weight = 4.616938, Bias = -0.052711
-//Iteration 3: Cost = 3.8627789, Weight = 4.063723, Bias = -0.105423
-//Iteration 4: Cost = 2.4620997, Weight = 3.596508, Bias = -0.158134
-//Iteration 5: Cost = 1.5692793, Weight = 3.207292, Bias = -0.210846
-//Iteration 6: Cost = 1.0013785, Weight = 2.888077, Bias = -0.263557
-//Iteration 7: Cost = 0.6390747, Weight = 2.631861, Bias = -0.316269
-//Iteration 8: Cost = 0.4080748, Weight = 2.431646, Bias = -0.368980
-//Iteration 9: Cost = 0.2606879, Weight = 2.280430, Bias = -0.421692
-//```
+
+```log
+Iteration: 0, Cost:3519.467 w=1.146 b=0.399
+Iteration: 10000, Cost:227.957 w=1.981 b=13.954
+Iteration: 20000, Cost:74.384 w=1.903 b=21.692
+Iteration: 30000, Cost:24.272 w=1.859 b=26.112
+Iteration: 40000, Cost:7.920 w=1.834 b=28.636
+Iteration: 50000, Cost:2.584 w=1.819 b=30.079
+Iteration: 60000, Cost:0.843 w=1.811 b=30.902
+Iteration: 70000, Cost:0.275 w=1.806 b=31.373
+Iteration: 80000, Cost:0.090 w=1.804 b=31.642
+Iteration: 90000, Cost:0.029 w=1.802 b=31.795
+
+Final values are: w = 1.801169 and b = 31.883127
+
+Fahrenheit of 50C: 122
+Prediction of 50C: 121.941577
+```
 
 #bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")
 
