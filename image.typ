@@ -1,9 +1,11 @@
 #let counter_image = counter(figure.where(kind: image))
 
-#let images = (
-  "path":"images/end-to-end.png",
-  caption: [the caption]
-)
+#let images(filename:"", caption:[], width:100%, ref:none) = {
+  figure(
+    image(filename, width: width),
+    caption: caption,
+  )
+}
 
 #let end-to-end() = {
   counter_image.update(n => n - 1)
@@ -23,13 +25,5 @@
       A step in the molecular testing
       pipeline of our lab.
     ],
-  )
-}
-
-
-#let cImage(path) = {
-  figure(
-    image(path, width: 10%),
-    caption: images.get(path),
   )
 }
