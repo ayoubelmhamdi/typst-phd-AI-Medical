@@ -1,6 +1,7 @@
 conf.typ
 final.pdf
-
+build/
+!build/main.pdf
 conf.pdf
 cover.pdf
 final.pdf
