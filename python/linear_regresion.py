@@ -14,9 +14,12 @@ td = np.array(
         [220, 428, 220],
     ]
 )
+X= np.arange(0,200)
+Y= X*0.513765+6.285257
 
 plt.plot(td[:, 0], td[:, 1], "bo--")
 plt.plot(td[:, 0], td[:, 2], "r")
+plt.plot(X, Y, "g")
 
 plt.title("Températures prévues et réelles")
 plt.xlabel("Celsius")
@@ -47,5 +50,5 @@ plt.minorticks_on()
 # Set the ticks to be every 40
 plt.xticks(np.arange(0, 221, 100))
 plt.yticks(np.arange(0, 221, 100))
-plt.savefig("temperaturesPrevuesReelles.svg")
+# plt.savefig("temperaturesPrevuesReelles.svg")
 plt.show()
