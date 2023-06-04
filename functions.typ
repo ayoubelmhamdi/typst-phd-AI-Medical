@@ -25,3 +25,8 @@
     caption: caption,
   )
 }
+
+#let italic(it) = [
+    #set text(style: "italic")
+    #it
+]
