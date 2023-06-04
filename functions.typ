@@ -16,3 +16,12 @@
   show link: underline
   link(the_link)[#text]
 }
+
+#let counter_image = counter(figure.where(kind: image))
+
+#let images(filename:"", caption:[], width:100%, ref:none) = {
+  figure(
+    image(filename, width: width),
+    caption: caption,
+  )
+}
