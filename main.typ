@@ -1,7 +1,6 @@
 #import "book.typ": book
 #import "cover.typ": cover
-#import "image.typ": *
-#import "functions.typ": heading_center
+#import "functions.typ": heading_center, images
 
 #let finchapiter = text(fill:rgb("#ff00ff"),[■])
 #let MSE = "MSE"
@@ -39,6 +38,8 @@
  *   title: "Vision par ordinateur pour le dépistage des nodules pulmonaires cancéreux à l'aide d'images de tomodensitométrie.",
  *   title: "Dépistage automatisé des nodules pulmonaires cancéreux par analyse d'images de tomodensitométrie.",
  */
+
+
 = REMERCIEMENTS
 
 Nous tenons à remercier d’abord toutes les équipes pédagogiques de *la Filière
@@ -363,9 +364,6 @@ The project is to create a detector for lung cancer, and based on the *LUNA data
 
 LUNA16 It contains **1,186 lung nodules** annotated in **888 CT scans** by 4 experienced radiologists. The LUNA dataset has two tracks: one for finding the locations of nodules in the scans, and another for reducing false positives by distinguishing benign from malignant nodules.
 
-// #end-to-end()
-// #end-to-end2()
-
 Automating this process will provide an experience in dealing with difficult scenarios where solving problems is challenging. Automatic detection of lung cancer is challenging, and even professional specialists face difficulty in identifying malignant tumors. Automating the process with deep learning will be more demanding and require a structured approach to succeeding.
 
 
@@ -468,10 +466,10 @@ The size of the voxels varies between CT scans and typically are not cubes. The 
 //
 
 
-== step 2: Segmentation
 /*
  *------------------------------------------------------------------------------
  */
+== step 2: Segmentation
 
 The process of segmentation to identify possible nodules, which is step 2 of the project's plan. The segmentation model is created using a *U-Net*. The objective is to flag voxels that might be part of a nodule and use the classification step to reduce the number of incorrectly marked voxels.
 
@@ -484,6 +482,7 @@ Semantic segmentation identifies different objects and where they are in a given
 Semantic segmentation requires combining raw pixels to develop specific detectors for items like color and then building on this to create more informative feature detectors to finally identify specific things like a cat or a dog. Nonetheless, the segmentation model will not give us a single classification-like list of binary flags like classification models since the output should be a heatmap or mask.
 
 === Why we need heatmap or mask as output of segmentation
+
 The output of a U-Net network in biomedical image segmentation is typically a heatmap or a mask because these formats provide a clear visual representation of the boundaries that the network has identified in the image. A heatmap is a colored image that highlights the regions of the input image that are most important for the output classes, whereas a mask is a binary image that indicates which pixels belong to which class.
 
 In biomedical image segmentation, it is important to accurately identify the areas of interest, such as tumors or blood vessels, to aid in diagnosis and treatment. The heatmap or mask allows for easy visualization of these areas and can be used by medical professionals to make more informed decisions. Moreover, the heatmap or mask output can be used as input for further processing and analysis, such as quantifying the size or volume of a segmented region.
