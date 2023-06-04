@@ -1,6 +1,6 @@
 #import "book.typ": book
 #import "cover.typ": cover
-#import "functions.typ": heading_center, images
+#import "functions.typ": heading_center, images, italic
 
 #let finchapiter = text(fill:rgb("#ff00ff"),[■])
 #let MSE = "MSE"
@@ -122,7 +122,7 @@ Ces applications sont rendues possibles grâce à l’utilisation de réseaux ne
 
 
 
-=== Les réseaux de neurones artificiels
+== Les réseaux de neurones artificiels
 Les réseaux de neurones artificiels sont des modèles d'intelligence artificielle qui utilisent des cellules nerveuses artificielles pour convertir les entrées en sorties. Chaque cellule nerveuse reçoit des signaux d'autres cellules et envoie des signaux à d'autres cellules. Chaque signal est ajouté à une valeur de poids qui détermine sa force et son importance. Chaque cellule nerveuse calcule la somme des signaux reçus et applique une fonction d'activation pour produire un signal de sortie.
 
 #images(
@@ -362,7 +362,7 @@ Prediction of 50C: 121.9F
 == introduction
 The project is to create a detector for lung cancer, and based on the *LUNA dataset* #link("https://luna16.grand-challenge.org/Description")[luna16.grand-challenge.org]  that is a collection of CT scans of patients with lung nodules, which are small growths in the lungs that may indicate cancer. The dataset is part of a Grand Challenge, which is a competition among researchers to develop and test methods for detecting and classifying nodules. The dataset is open and publicly available,
 
-LUNA16 It contains **1,186 lung nodules** annotated in **888 CT scans** by 4 experienced radiologists. The LUNA dataset has two tracks: one for finding the locations of nodules in the scans, and another for reducing false positives by distinguishing benign from malignant nodules.
+LUNA16 It contains #italic("1,186 lung nodules") annotated in #italic("888 CT scans") by 4 experienced radiologists. The LUNA dataset has two tracks: one for finding the locations of nodules in the scans, and another for reducing false positives by distinguishing benign from malignant nodules.
 
 Automating this process will provide an experience in dealing with difficult scenarios where solving problems is challenging. Automatic detection of lung cancer is challenging, and even professional specialists face difficulty in identifying malignant tumors. Automating the process with deep learning will be more demanding and require a structured approach to succeeding.
 
@@ -396,7 +396,7 @@ The logging output are include the precision by including the count of correctly
 
 - *Data Automating*: This technique are designed to create new training samples from the existing ones by applying simple transformations. The transformations include shifting/mirroring, scaling, rotation, and adding noise.
 
-- **Thresholding** is a simple and common method of segmentation that works by selecting a pixel value (called a threshold) that separates the foreground (the region of interest) from the background (the rest of the image)[^3^]. For example, if you want to segment the bone from a CT scan, you can choose a threshold that corresponds to the intensity of bone pixels and ignore the pixels that are lower or higher than that value. However, thresholding is not always accurate or robust, especially when dealing with complex or noisy images.
+- *Thresholding* is a simple and common method of segmentation that works by selecting a pixel value (called a threshold) that separates the foreground (the region of interest) from the background (the rest of the image)[^3^]. For example, if you want to segment the bone from a CT scan, you can choose a threshold that corresponds to the intensity of bone pixels and ignore the pixels that are lower or higher than that value. However, thresholding is not always accurate or robust, especially when dealing with complex or noisy images.
 
 === Approach for Training our Model involves five main steps
 The goal of this project is to create an end-to-end solution for detecting cancerous nodules in lung CT scans using PyTorch. The approach involves five main steps:
