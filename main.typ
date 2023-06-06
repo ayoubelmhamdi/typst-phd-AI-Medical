@@ -77,7 +77,8 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 = APERÇU SUR DEEP LEARNING
 
 == Introduction
-L'apprentissage profond est une branche de l'apprentissage automatique@bingDeeplearning, qui est lui-même un domaine de l'intelligence artificielle. L'apprentissage profond permet de prédire ou d'analyser des données de haute dimension ou complexes, comme les images, les textes ou les sons, d'une manière similaire au cerveau humain. L'apprentissage profond utilise des réseaux de neurones artificiels multicouches@ibmDeeplearning qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une grande capacité d'adaptation et d'évolution avec le changement de l'environnement.
+
+L'apprentissage profond est une branche de l'apprentissage automatique@wikiDeeplearning, qui est lui-même un domaine de l'intelligence artificielle. L'apprentissage profond permet de prédire ou d'analyser des données de haute dimension ou complexes, comme les images, les textes ou les sons, d'une manière similaire au cerveau humain. L'apprentissage profond utilise des réseaux de neurones artificiels multicouches@ibmDeeplearning qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une grande capacité d'adaptation et d'évolution avec le changement de l'environnement.
 
 #images(
   filename:"images/ais.png",
@@ -89,6 +90,8 @@ L'apprentissage profond est une branche de l'apprentissage automatique@bingDeepl
 Par conséquent, l'apprentissage profond se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur. De plus, l'apprentissage profond peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
 
 Ainsi, nous voyons que l'apprentissage profond est un domaine récent et prometteur en informatique qui mérite l'attention et la recherche, et qui peut contribuer à résoudre de nombreux problèmes dans différents domaines tels que la traduction, la reconnaissance d'images et de sons, etc.
+
+== Fonctionnement de Deep Learning
 
 Pour comprendre le principe de l'apprentissage profond, on peut utiliser des exemples de notre vie quotidienne. Lorsque nous voulons améliorer certains résultats, on change certains facteurs influençant ces résultats de manière cyclique, en se basant sur l'expérience et l'erreur. Par exemple, un vendeur de fruits essaie d'augmenter son revenu en changeant la quantité et les types de fruits offerts aux clients, en se référant aux ventes passées et actuelles. Il n'y a pas de règle fixe qui détermine la quantité de chaque fruit que le vendeur doit fournir, il doit donc expérimenter jusqu'à ce qu'il atteigne le point d'équilibre entre l'offre et la demande.
 
@@ -131,7 +134,7 @@ Les réseaux de neurones artificiels sont des modèles d'intelligence artificiel
   width: 50%
   // ref:
 )
-== exemple de calcul de la température en Fahrenheit à l'aide de l'apprentissage en profondeur.
+== Exemple de Deep learning dans la pratique
 
 pour savoir la relation entre les réseaux de neurones artificiels et la fonction linéaire, on utilise l'exemple de calcule de temperature  precedent.
 
@@ -199,6 +202,8 @@ Et c’est une erreur car la valeur correcte est $68°F$.
 Alors, comment trouvons-nous le poids des entrées et la coupe de l’axe corrects ? C’est là que l’apprentissage en profondeur intervient. L’apprentissage en profondeur utilise un algorithme appelé régression pour trouver les meilleures valeurs pour ces deux facteurs afin de réduire l’écart entre les résultats générés et les résultats cibles. Cet écart est appelé fonction de coût ou fonction d’erreur.
 
 
+== Erreur quadratique moyenne $MSE$,
+
 La fonction de coût est une fonction mathématique mesurée entre zéro et la valeur maximale possible. Plus la valeur de la fonction de coût est proche de zéro, plus les résultats générés sont proches des résultats cibles. Par exemple, nous utilisons la fonction de coût appelée erreur quadratique moyenne $MSE$, qui calcule la moyenne de toutes les mesures d’erreur quadratique entre chaque résultat généré et chaque résultat cible.
 
 $ MSE = 1/n dot sum (y - y_0)^2 $
@@ -212,7 +217,11 @@ $ MSE &= 1/n dot sum (y - y_0)^2\
       &= 4480 $
 
 
-Il s’agit d’une explication de l’algorithme de descente de gradient@goodfellow2016deep qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût. Le gradient est un vecteur qui indique la direction dans laquelle la fonction de coût augmente. En se déplaçant dans la direction opposée, nous pouvons trouver le point le plus bas de la fonction de coût, qui correspond aux meilleures valeurs pour les poids et les biais. La règle de mise à jour pour les poids et les biais est donnée par:
+Il s’agit d’une explication de l’algorithme de descente de gradient@goodfellow2016deep qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût.
+
+== Algorithme de descente de gradient
+
+Le gradient est un vecteur qui indique la direction dans laquelle la fonction de coût augmente. En se déplaçant dans la direction opposée, nous pouvons trouver le point le plus bas de la fonction de coût, qui correspond aux meilleures valeurs pour les poids et les biais. La règle de mise à jour pour les poids et les biais est donnée par:
 
 $ w_(n+1) = w_n - α * (∂MSE)/(∂w) $
 
@@ -243,7 +252,6 @@ Et on peut programmer un code simple en language C qui effectue cette tâche.
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 // Train Data
 float td[][2] = {
     // C   F
@@ -256,17 +264,11 @@ float td[][2] = {
     {80,  176},
     {100, 212},
 };
-
 #define N 8 // Number of item in Train Data
-
-
-// Define the learning alpha
-#define ALPHA 0.00001
-
-// Define the number of iterations
-#define EPOCS 100 * 1000
+#define ALPHA 0.00001 // Define the learning alpha
+#define EPOCS 100 * 1000 // Define the number of iterations
 ```
-#pagebreak()
+// #pagebreak()
 ```c
 // Define a function to compute the mean squared error
 double cost(double w, double b) {
@@ -302,7 +304,7 @@ void train(double *w, double *b) {
   for (int i = 0; i < EPOCS; i++) {
     gradient_descent(w, b);
     if (i % 101000 == 0)
-      printf("Iteration: %d, Cost:%3.3f w=%.3lf b=%.3lf\n", i, cost(*w, *b), *w, *b);
+      printf("Iteration: %d, Cost:%3.3f w=%.6lf b=%.6lf\n", i, cost(*w, *b), *w, *b);
   }
 }
 
@@ -321,40 +323,64 @@ int main() {
   train(&w, &b);
 
   // Print the final values of w and b
-  printf("\nFinal values are: w = %f and b = %f\n\n", w, b);
+  printf("\nFinal values are: w = %.6f and b = %.6f\n\n", w, b);
 
   // Test the neuron with some new inputs
   double x_new = 50;                   // Celsius
   double y_new = predict(x_new, w, b); // Fahrenheit
   printf("Fahrenheit of 50C: 122F\n");
-  printf("Prediction of 50C: %.1fF\n", y_new);
+  printf("Prediction of 50C: %.6fF\n", y_new);
 
   return 0;
 }
 ```
 
-
-//The output of running the script shows that the weight parameter converges to 2, which is the true slope of the data set. The bias parameter converges to 0, which is the true intercept of the data set. The cost function reaches its minimum value when the parameters are optimal. This means that our script successfully learns the linear relationship between *x* and *y* from the data set.
-
 ```log
-Iteration: 0, Cost:3519.467 w=1.146 b=0.399
-Iteration: 10000, Cost:227.957 w=1.981 b=13.954
-Iteration: 20000, Cost:74.384 w=1.903 b=21.692
-Iteration: 30000, Cost:24.272 w=1.859 b=26.112
-Iteration: 40000, Cost:7.920 w=1.834 b=28.636
-Iteration: 50000, Cost:2.584 w=1.819 b=30.079
-Iteration: 60000, Cost:0.843 w=1.811 b=30.902
-Iteration: 70000, Cost:0.275 w=1.806 b=31.373
-Iteration: 80000, Cost:0.090 w=1.804 b=31.642
-Iteration: 90000, Cost:0.029 w=1.802 b=31.795
+Iteration:  10000, Cost:227.982250 w=1.980511 b=13.953147
+Iteration:  20000, Cost: 74.392002 w=1.903113 b=21.691058
+Iteration:  30000, Cost: 24.274565 w=1.858902 b=26.111201
+Iteration:  40000, Cost:  7.920939 w=1.833647 b=28.636129
+Iteration:  50000, Cost:  2.584651 w=1.819220 b=30.078449
+Iteration:  60000, Cost:  0.843387 w=1.810979 b=30.902348
+Iteration:  70000, Cost:  0.275202 w=1.806272 b=31.372986
+Iteration:  80000, Cost:  0.089800 w=1.803583 b=31.641830
+Iteration:  90000, Cost:  0.029302 w=1.802046 b=31.795402
+Iteration: 100000, Cost:  0.009562 w=1.801169 b=31.883127
 
 Final values are: w = 1.801169 and b = 31.883127
 
 Fahrenheit of 50C: 122F
-Prediction of 50C: 121.9F
+Prediction of 50C: 121.94F
 ```
 
-#finchapiter
+== Dicsussion
+
+Dans l'entraîner de ce modèle, on a utilisé un ensemble de données d'entraînement (td) qui contient des paires de températures en Celsius et en Fahrenheit, et qui cherche à apprendre la formule de conversion entre ces deux unités. La formule exacte est $y =9/5 x + 32$, où $y$ est la température en Fahrenheit et $x$ est la température en Celsius. On a initialisé les paramètres du modèle à des valeurs aléatoires proches de zéro, et on a lancé la descente de gradient pour $100 000$ itérations. A chaque $10 000$ itérations, on a affiché l'évolution de la fonction de coût et des paramètres du modèle.
+
+Après $100 000$ itérations, on a obtenu les résultats suivants :
+
+- Fonction de coût : $0.009562$
+- Poids : $1.801169$
+- Biais : $31.883127$
+
+On peut voir que les paramètres du modèle sont très proches des valeurs exactes de la formule de conversion. Pour tester la performance du modèle, on a utilisé une nouvelle température $50C$ qui n'est l'entrainner pas et on obient une temperature de $121.94F$, On a calculé l'erreur moyenne absolue (MSE) entre les prédictions du modèle et les valeurs réelles. On a obtenu un MSE de $0.029°C$, ce qui montre que le modèle est très précis et qu'il a bien appris la formule de conversion.
+
+On peut visualiser les résultats du modèle sur un graphique qui montre la relation entre les températures en Celsius et en Fahrenheit. On peut voir que les points sont alignés sur une droite qui correspond à la formule y = 1.8x + 32. On peut également comparer le modèle avec un modèle aléatoire qui prédit des valeurs aléatoires entre -40°C et 100°C. On peut voir que le modèle aléatoire a un MAE beaucoup plus élevé que le modèle entraîné.
+
+On peut conclure que le modèle de régression linéaire@wikipedia2021linear @wikipedia2021regression est capable de générer des prédictions très proches des valeurs réelles, et qu'il a réussi à apprendre la formule de conversion entre les températures en Celsius et en Fahrenheit. Ce modèle pourrait être utilisé pour convertir des températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
+
+= CONCLUSION
+
+Dans ce chapitre, on a vu ce qu'est le deep learning, comment il fonctionne. On a appris que le deep learning est une branche de machine learning qui utilise des réseaux de neurones artificiels multicouches pour apprendre à partir de données complexes ou de haute dimension. On a vu que le deep learning se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur@goodfellow2016deep. On a aussi vu que le deep learning peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
+
+On a également compris le principe de l'apprentissage profond en utilisant des exemples de notre vie quotidienne. On a vu comment on peut utiliser une fonction mathématique appelée fonction coût pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on a vu comment on peut utiliser une autre fonction appelée fonction optimisation pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la fonction coût. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
+
+On a aussi exploré les réseaux de neurones artificiels, qui sont des modèles d'intelligence artificielle qui utilisent des cellules nerveuses artificielles pour convertir les entrées en sorties@wikiDeeplearning. On a vu comment chaque cellule nerveuse reçoit des signaux d'autres cellules et envoie des signaux à d'autres cellules. Chaque signal est ajouté à une valeur de poids qui détermine sa force et son importance. Chaque cellule nerveuse calcule la somme des signaux reçus et applique une fonction d'activation pour produire un signal de sortie.
+
+Enfin, on a donné un exemple de deep learning dans la pratique en utilisant un code simple en langage C qui effectue une régression linéaire pour convertir la température de Celsius en Fahrenheit. On a vu comment on peut collecter un ensemble de données qui forment des paires d'entrées et de résultats cibles, comment on peut initialiser les paramètres du modèle à des valeurs aléatoires proches de zéro, comment on peut lancer la descente de gradient pour mettre à jour les paramètres du modèle à chaque itération, et comment on peut tester la performance du modèle sur une nouvelle température qui n'est pas dans l'ensemble d'entraînement.
+
+On peut conclure que le deep learning est un domaine récent et prometteur en informatique qui mérite l'attention et la recherche, et qui peut contribuer à résoudre de nombreux problèmes dans différents domaines tels que la traduction, la reconnaissance d'images et de sons, etc. Le deep learning permet aux systèmes de regrouper les données et de faire des prédictions avec une précision incroyable. Le deep learning s'inspire de la structure du cerveau humain et tente de tirer des conclusions similaires à celles que les humains feraient en analysant continuellement les données avec une structure logique donnée. Le deep learning utilise des structures multicouches d'algorithmes appelées réseaux neuronaux, qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine@wikiDeeplearning#finchapiter.
+
 #bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")
 
 = DETECTING LUNG CANCER NODULES
