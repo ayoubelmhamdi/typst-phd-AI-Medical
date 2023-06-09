@@ -78,7 +78,7 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 
 == Introduction
 
-L'apprentissage profond est une branche de l'apprentissage automatique@wikiDeeplearning, qui est lui-même un domaine de l'intelligence artificielle. L'apprentissage profond permet de prédire ou d'analyser des données de haute dimension ou complexes, comme les images, les textes ou les sons, d'une manière similaire au cerveau humain. L'apprentissage profond utilise des réseaux de neurones artificiels multicouches@ibmDeeplearning qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une grande capacité d'adaptation et d'évolution avec le changement de l'environnement.
+L'apprentissage profond est une branche de l'apprentissage automatique@wikiDeeplearning, qui est lui-même un domaine de l'intelligence artificielle. L'apprentissage profond permet de prédire ou d'analyser des données de haute dimension ou complexes, comme les images, les textes ou les sons, d'une manière similaire au cerveau humain. L'apprentissage profond utilise des réseaux de neurones artificiels multicouches@ibmDeeplearning qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une grande capacité d'adaptation et d'évolution avec le changement de données.
 
 #images(
   filename:"images/ais.png",
@@ -95,9 +95,11 @@ Ainsi, nous voyons que l'apprentissage profond est un domaine récent et promett
 
 Pour comprendre le principe de l'apprentissage profond, on peut utiliser des exemples de notre vie quotidienne. Lorsque nous voulons améliorer certains résultats, on change certains facteurs influençant ces résultats de manière cyclique, en se basant sur l'expérience et l'erreur. Par exemple, un vendeur de fruits essaie d'augmenter son revenu en changeant la quantité et les types de fruits offerts aux clients, en se référant aux ventes passées et actuelles. Il n'y a pas de règle fixe qui détermine la quantité de chaque fruit que le vendeur doit fournir, il doit donc expérimenter jusqu'à ce qu'il atteigne le point d'équilibre entre l'offre et la demande.
 
-En apprentissage profond, on utilise une fonction mathématique appelée fonction coût pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on utilise une autre fonction appelée fonction optimisation pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la fonction coût. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
+En apprentissage profond, on utilise une fonction mathématique appelée *fonction coût* pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on utilise une autre fonction appelée *fonction optimisation* pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la *fonction coût*. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
 
 Cet exemple peut nous donner une idée qui nous aide à comprendre l'apprentissage en profondeur, mais il résume des concepts fondamentaux de l'apprentissage en profondeur tels que la fonction de coût ou la fonction de régression graduelle et l'optimisation@wikiDeeplearning, ce qui est clair pour nous dans des applications telles que la traduction automatique ou la vision par ordinateur.
+
+== Applications
 
 Dans la traduction automatique, un système d’apprentissage en profondeur utilise un réseau neuronal pour convertir une phrase d’une langue à une autre. Ce système utilise une fonction de coût pour mesurer la différence entre la traduction générée et la traduction cible. Ensuite, il utilise un algorithme d’optimisation tel que la descente de gradient pour ajuster le poids de chaque cellule neuronale dans le réseau afin de minimiser la valeur de la fonction de coût. Ce processus est répété sur un grand ensemble de phrases à traduire jusqu’à ce que le système soit capable de générer des traductions précises et naturelles.
 
@@ -136,7 +138,7 @@ Les réseaux de neurones artificiels sont des modèles d'intelligence artificiel
 )
 == Exemple de Deep learning dans la pratique
 
-pour savoir la relation entre les réseaux de neurones artificiels et la fonction linéaire, on utilise l'exemple de calcule de temperature  precedent.
+Pour savoir la relation entre les réseaux de neurones artificiels et la fonction linéaire, on utilise l'exemple de calcule de temperature  precedent.
 
 La fonction linéaire est un type de fonctions mathématiques qui décrit une relation simple entre deux variables, où un changement dans l'une entraîne un changement proportionnel dans l'autre. Par exemple, si nous avons une fonction qui convertit la température de Celsius en Fahrenheit, cette fonction sera linéaire, car chaque augmentation d'un degré Celsius entraîne une augmentation constante de la température en Fahrenheit.
 
@@ -145,7 +147,13 @@ La formule utilisée pour convertir la température de Celsius en Fahrenheit est
 
 $ °F = 9/5  °C + 32 $
 
-
+On peut le représenter par le schéma de réseau suivant:
+#images(
+  filename:"images/celsius-fahrenheit.png",
+  caption: [Relation enter deux échelles de température Celsius et Fahrenheit ],
+  width: 10%
+  // ref:
+)
 
 #images(
   filename:"images/celsius-fahrenheit.png",
@@ -373,7 +381,7 @@ On peut conclure que le modèle de régression linéaire@wikipedia2021linear @wi
 
 Dans ce chapitre, on a vu ce qu'est le deep learning, comment il fonctionne. On a appris que le deep learning est une branche de machine learning qui utilise des réseaux de neurones artificiels multicouches pour apprendre à partir de données complexes ou de haute dimension. On a vu que le deep learning se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur@goodfellow2016deep. On a aussi vu que le deep learning peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
 
-On a également compris le principe de l'apprentissage profond en utilisant des exemples de notre vie quotidienne. On a vu comment on peut utiliser une fonction mathématique appelée fonction coût pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on a vu comment on peut utiliser une autre fonction appelée fonction optimisation pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la fonction coût. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
+On a également compris le principe de l'apprentissage profond en utilisant des exemples de notre vie quotidienne. On a vu comment on peut utiliser une fonction mathématique appelée *fonction coût* pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on a vu comment on peut utiliser une autre fonction appelée *fonction optimisation* pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la *fonction coût*. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
 
 On a aussi exploré les réseaux de neurones artificiels, qui sont des modèles d'intelligence artificielle qui utilisent des cellules nerveuses artificielles pour convertir les entrées en sorties@wikiDeeplearning. On a vu comment chaque cellule nerveuse reçoit des signaux d'autres cellules et envoie des signaux à d'autres cellules. Chaque signal est ajouté à une valeur de poids qui détermine sa force et son importance. Chaque cellule nerveuse calcule la somme des signaux reçus et applique une fonction d'activation pour produire un signal de sortie.
 
