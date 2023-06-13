@@ -1,4 +1,4 @@
-typst=typst4
+typst=typst5
 
 compile:
 	$(typst)  --font-path ~/home/.fonts compile main.typ build/main.pdf
