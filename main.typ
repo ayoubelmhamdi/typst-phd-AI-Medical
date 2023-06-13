@@ -2,7 +2,7 @@
 #import "cover.typ": cover
 #import "functions.typ": heading_center, images, italic
 
-#let finchapiter = text(fill:rgb("#ff00ff"),[■])
+#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 #let MSE = "MSE"
 
 #let book_info = (
@@ -377,7 +377,7 @@ On peut visualiser les résultats du modèle sur un graphique qui montre la rela
 
 On peut conclure que le modèle de régression linéaire@wikipedia2021linear @wikipedia2021regression est capable de générer des prédictions très proches des valeurs réelles, et qu'il a réussi à apprendre la formule de conversion entre les températures en Celsius et en Fahrenheit. Ce modèle pourrait être utilisé pour convertir des températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
 
-= CONCLUSION
+= CONCLUSION.
 
 Dans ce chapitre, on a vu ce qu'est le deep learning, comment il fonctionne. On a appris que le deep learning est une branche de machine learning qui utilise des réseaux de neurones artificiels multicouches pour apprendre à partir de données complexes ou de haute dimension. On a vu que le deep learning se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur@goodfellow2016deep. On a aussi vu que le deep learning peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
 
@@ -387,9 +387,43 @@ On a aussi exploré les réseaux de neurones artificiels, qui sont des modèles 
 
 Enfin, on a donné un exemple de deep learning dans la pratique en utilisant un code simple en langage C qui effectue une régression linéaire pour convertir la température de Celsius en Fahrenheit. On a vu comment on peut collecter un ensemble de données qui forment des paires d'entrées et de résultats cibles, comment on peut initialiser les paramètres du modèle à des valeurs aléatoires proches de zéro, comment on peut lancer la descente de gradient pour mettre à jour les paramètres du modèle à chaque itération, et comment on peut tester la performance du modèle sur une nouvelle température qui n'est pas dans l'ensemble d'entraînement.
 
-On peut conclure que le deep learning est un domaine récent et prometteur en informatique qui mérite l'attention et la recherche, et qui peut contribuer à résoudre de nombreux problèmes dans différents domaines tels que la traduction, la reconnaissance d'images et de sons, etc. Le deep learning permet aux systèmes de regrouper les données et de faire des prédictions avec une précision incroyable. Le deep learning s'inspire de la structure du cerveau humain et tente de tirer des conclusions similaires à celles que les humains feraient en analysant continuellement les données avec une structure logique donnée. Le deep learning utilise des structures multicouches d'algorithmes appelées réseaux neuronaux, qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine@wikiDeeplearning#finchapiter.
+On peut conclure que le deep learning est un domaine récent et prometteur en informatique qui mérite l'attention et la recherche, et qui peut contribuer à résoudre de nombreux problèmes dans différents domaines tels que la traduction, la reconnaissance d'images et de sons, etc. Le deep learning permet aux systèmes de regrouper les données et de faire des prédictions avec une précision incroyable. Le deep learning s'inspire de la structure du cerveau humain et tente de tirer des conclusions similaires à celles que les humains feraient en analysant continuellement les données avec une structure logique donnée. Le deep learning utilise des structures multicouches d'algorithmes appelées réseaux neuronaux, qui peuvent extraire les sens et les motifs cachés dans les données sans avoir besoin d'intervention humaine@wikiDeeplearning. #finchapiter
 
-#bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+// #counter(heading).step()
+
+= IMAGE POSSESSING
+
+== Introduction
+
+Les images tridimensionnelles qui portent des informations vitales sur la santé humaine sont connues sous le nom d'images scanner (CT scan) et sont utilisées dans le diagnostic et le traitement de nombreuses maladies telles que le cancer, les accidents vasculaires cérébraux et les fractures@aggarwal2018neural. Ces images nécessitent un traitement spécial pour éliminer les distorsions, améliorer la qualité et extraire les caractéristiques importantes @zhang2023dive. C'est pourquoi on utilise des réseaux de neurones artificiels avancés capables de traiter efficacement ces images. Les réseaux de neurones artificiels sont un système inspiré du fonctionnement des cellules du cerveau dans le traitement de l'information et se composent d'un ensemble de cellules nerveuses qui reçoivent et envoient des signaux en utilisant des fonctions d'activation, des poids et des biais. Le réseau de neurones se compose de plusieurs couches, y compris la couche d'entrée, la couche de sortie et les couches cachées.
+
+Cette étude vise à passer en revue les principaux types de réseaux de neurones utilisés dans le domaine de l'imagerie médicale, en particulier les images scanner. Elle vise également à expliquer l'importance des matrices dans le stockage et la mise à jour des paramètres dans un réseau de neurones, en mettant en lumière un exemple d'un réseau de neurones écrit avec des matrices et des vecteurs.
+
+== Fonctions d'activation
+
+Dans l'axe précédent, nous avons vu comment l'apprentissage profond prédit la température Fahrenheit en utilisant une seule cellule nerveuse basée sur les données initiales uniquement. La solution requise était une équation pour une ligne droite qui pouvait être représentée par une ligne droite. Mais dans certains cas, la distribution des données est courbe comme une fonction sinus ou autre, et ne peut pas être représentée par une ligne droite. Nous avons donc besoin d'ajouter des fonctions non linéaires appelées fonctions d'activation, qui aident à plier la courbe linéaire générée par les cellules nerveuses en utilisant la puissance de leur poids et de leur biais. Les fonctions d'activation les plus courantes sont la fonction relu et la fonction sigmoid.
+
+Un réseau de neurones se compose généralement de plusieurs couches, chaque couche étant composée d'un ensemble de cellules nerveuses. La première couche joue le rôle de récepteur des données et s'appelle la couche d'entrée (input layer), la dernière joue le rôle de sortie des données du réseau et s'appelle la couche de sortie (output layer), et entre elles il y a plusieurs couches appelées les couches cachées (hidden layers), qui jouent le rôle de récepteur des signaux des couches précédentes et de les envoyer aux couches suivantes.
+
+== Comment utiliser les matrices dans l'apprentissage profond ?
+
+Les matrices sont un moyen efficace de stocker et mettre à jour les paramètres dans un réseau de neurones. Plus le nombre de cellules et de liens dans un réseau de neurones est élevé, plus le nombre de paramètres à modifier pour améliorer les performances du réseau est élevé. Nous utilisons donc des matrices pour éviter d'écrire des lignes de code répétitives pour corriger chaque paramètre individuellement. Au lieu de cela, nous utilisons des boucles itératives et des opérations algébriques sur les matrices pour mettre à jour les paramètres plus rapidement et plus simplement.
+
+== Exemple d'un réseau de neurones écrit avec des matrices et des vecteurs
+
+Supposons que nous ayons un réseau de neurones composé de deux couches cachées et deux entrées et une sortie, pour prédire la valeur attendue de l'opération logique gates ou du traitement médical.
+
+Dans ce réseau, nous avons six cellules nerveuses et 13 liens, dont nous voulons prédire la valeur à partir des données initiales dans le tableau ci-dessus, puis essayer de réduire l'écart entre les données que nous trouverons et les données initiales en utilisant la descente de gradient.
+
+== Types de réseaux de neurones
+
+Les réseaux de neurones peuvent être classés en plusieurs types selon la structure et les applications utilisées. Les réseaux de neurones peuvent être multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types. Le type de réseau de neurones est choisi en fonction du problème posé et des données disponibles.
+
+= CONCLUSION.
+// #bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")  // ch2
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+// remove it on multi bibleotquie
 
 = DETECTING LUNG CANCER NODULES
 
@@ -563,7 +597,7 @@ This step involves dividing the CT scan into individual slices. The output of th
 We use the LIDC annotations to decide if a nodule (a small lump) in the lung is cancerous or not. The LIDC annotations are labels that up to four doctors gave to each nodule based on how it looks in a CT scan. They used a scale from 1 to 5, where 1 means the nodule is very unlikely to be cancerous and 5 means it is very likely to be cancerous. These labels are not based on other information about the patient, such as their medical history or symptoms. To make a final decision, we will use a rule that says a nodule is cancerous if at least two doctors gave it a 4 or a 5. This rule is not very precise and there are other ways of using the labels, such as taking the average or ignoring some nodules.
 
 
-== Conclusion
+== Conclusion.
 
 The identifying nodule candidates in CT scans for possible cancer detection. A connected-components algorithm is used for grouping the suspected nodule voxels. The labeled chunks are passed on to a classification module to reduce false positives. Finally, the identified regions in the CT scan are cropped and passed onto the classification module using DataLoader.
 
@@ -579,6 +613,21 @@ The task of identifying malignant nodules from benign ones in CT scans after imp
 - There is no magic bullet when training neural networks.
 
 This system is not ready to replace a human radiologist, but it could be a useful tool to help them find suspicious areas in the scans. And would need more data and validation from experts, as well as regulatory approval from authorities. The system would also need to run in a scalable environment that can handle different cases and situations.
+
+
+// test outline
+
+= CONCLUSION.
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+
+= XXXX
+== title
+= CONCLUSION.
+= RÉFÉRENCES BIBLIOGRAPHIQUES.
+
+= CONCLUSION GÉNÉRALE.
+
+//fin test outline
 
 //// --------------------------------------
 //= RÉSUMÉ
@@ -637,15 +686,13 @@ This system is not ready to replace a human radiologist, but it could be a usefu
 //== Clustering results
 //== Classification accuracy
 //== Clinical implications
-//
-//
-//= RÉFÉRENCES BIBLIOGRAPHIQUES.
-//= CONCLUSION
-//== Summary of the main contributions
-//== Limitations and challenges
-//== Perspectives and recommendations
-//
-//
+
+
+// = RÉFÉRENCES BIBLIOGRAPHIQUES.
+// = CONCLUSION.
+// == Summary of the main contributions.
+// == Limitations and challenges.
+// == Perspectives and recommendations
 //= Literature Review and Theory Framework
 //== Screening for lung cancer and challenges
 //== Traditional methods for lung nodule detection and limitations
@@ -712,3 +759,9 @@ This system is not ready to replace a human radiologist, but it could be a usefu
 // reduce time:
 // Transformers :
 // [[ Transformers are designed to handle sequential input data. However, they aren’t restricted to processing that data in sequential order. Instead, transformers use attention—a technique that allows models to assign different levels of influence to different pieces of input data and to identify the context for individual pieces of data in an input sequence. This allows for an increased level of parallelization, which can reduce model training times.]]
+
+
+
+
+
+#bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee") // ch1
