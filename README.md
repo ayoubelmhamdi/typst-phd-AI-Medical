@@ -8,6 +8,6 @@ A PFE en FR using [typst.app](https://typst.app).
 
 [pfe.pdf](https://github.com/ayoubelmhamdi/typst-phd-AI-Medical/raw/master/build/main.pdf)
 
-### Plan
+### COVER
 
 ![Preview](images/main.jpg)
