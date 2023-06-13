@@ -22,6 +22,9 @@ PowerPoint:
   title: AI in MEDICINE
   date: 2023
 
+Github-seg:
+  brain-seg: https://github.com/sdsubhajitdas/Brain-Tumor-Segmentation
+
 BIB:
   source 1:
     url: https://www.kaggle.com/code/moha5282/preprocessing-tutorial-lung-cancer
