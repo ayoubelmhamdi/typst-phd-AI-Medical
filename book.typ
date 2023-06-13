@@ -3,7 +3,7 @@
   "RÉSUMÉ.",
   "INTRODUCTION GÉNÉRALE.",
   "RÉFÉRENCES BIBLIOGRAPHIQUES.",
-  "CONCLUSION",
+  "CONCLUSION.",
   "CONCLUSION GÉNÉRALE."
 )
 
@@ -43,12 +43,8 @@
   show heading.where(level: 1): it => {
     set par(justify: true)
     pagebreak()
-    // pagebreak(weak:true)
-    // v(0.5em)
     if it.body.text in execption_outline {
-      // like REMERCIEMENTS
       counter(heading).update(())
-      // set heading(outlined: false) -- not work
       align(
           center,
           text(
@@ -58,15 +54,16 @@
             it.body
         )
       )
-    }
+    } // heading == REMERCIEMENTS
     else if it.body.text in execption_chapter {
     // like RÉFÉRENCES BIBLIOGRAPHIQUES.
+      counter(heading).update(n => n - 1)
       align(
         center,
-        counter(heading).update(())
+        // [] +
         // + linebreak()
         // + v(-4em)
-        + text(
+        text(
             weight: "bold",
             size:22pt,
             fill: rgb("#1e045b"),
@@ -75,9 +72,8 @@
         + linebreak()
         // + v(3em)
       )
-    }
+    } // heading == CONCLUSION.
     else  {
-      // any other I.
       align(
         center,
         block(
@@ -101,7 +97,7 @@
           )
         )
       )
-    }
+    } // heading == chapter [0-9]
 
     v(3em)
   }
@@ -193,7 +189,48 @@
    it
   }
 
-  //---------------
+  // -----------------------------------------------------------
+    // set figure(
+    //     numbering: "I.1.",
+    // )
+  set figure(
+    numbering: (..nums) => locate(loc => {
+        numbering("I.1", counter(heading).at(loc).first(), ..nums)
+    })
+  )
+
+  show figure: it => {
+
+    set align(center)
+    if it.kind == image {
+      it.body
+      text(weight:"bold", it.supplement +
+      " " +it.counter.display(it.numbering)+ ": ")
+      text(style: "italic" ,it.caption)
+
+    } // image
+    else if it.kind == "table" {
+      set text(font: songti, size: 12pt)
+      it.body
+      set text(font: heiti, size: 12pt)
+      it.supplement
+      " " + it.counter.display(it.numbering)
+      " " + it.caption
+    } // table
+    else if it.kind == "equation" {
+      grid(
+        columns: (20fr, 1fr),
+        it.body,
+        align(center + horizon,
+          it.counter.display(it.numbering)
+        )
+      )
+    } // equation
+    else {
+      it
+    } // else figure
+  }
+  // -----------------------------------------------------------
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
 
