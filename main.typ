@@ -111,7 +111,7 @@ Ce problème est également appelé "classification d'objets" et peut-être plus
 
 #images(
   filename:"images/MNIST-Dataset.png",
-  caption:[Un exemple de chiffres de la base MNIST.],
+  caption:[Un exemple de chiffres de en jeu de données MNIST.],
   width: 50%
   // ref:
 )
@@ -166,7 +166,7 @@ Dans cette formule, nous pouvons définir deux facteurs principaux : le poids de
 
 Ces exemples montrent comment utiliser une fonction linéaire pour convertir la température de Celsius en Fahrenheit. Mais comment utiliser une fonction linéaire pour comprendre le concept de coût et d'optimisation dans l'apprentissage profond ?
 
-Dans l'apprentissage profond, nous utilisons des fonctions linéaires pour produire des résultats basés sur un ensemble d'entrées. Chaque entrée a un poids qui ajuste la mesure de son impact sur le résultat produit. Ensuite, nous utilisons une fonction de coût pour mesurer la différence entre les résultats produits et les résultats cibles. Ensuite, nous utilisons un algorithme d'optimisation@goodfellow2016deep@kingma2014adam pour ajuster les poids des entrées afin de réduire la valeur de la fonction de coût.
+Dans l'apprentissage profond, nous utilisons des fonctions linéaires pour produire des résultats basés sur un ensemble d'entrées. Chaque entrée a un poids qui ajuste la mesure de son impact sur le résultat produit. Ensuite, nous utilisons une fonction de coût pour mesurer la différence entre les résultats produits et les résultats cibles. Ensuite, nous utilisons un algorithme d'optimisation@Goodfellow-et-al-2016@kingma2014adam pour ajuster les poids des entrées afin de réduire la valeur de la fonction de coût.
 
 
 Comme première étape dans l'apprentissage profond, nous devons collecter un ensemble de données qui forment des paires d'entrées et de résultats cibles. Dans l'exemple de conversion de la température de Celsius en Fahrenheit, nous utilisons un tableau avec des mesures différentes de température dans les deux systèmes comme des paires d'entrées et de résultats cibles :
@@ -225,7 +225,7 @@ $ MSE &= 1/n dot sum (y - y_0)^2\
       &= 4480 $
 
 
-Il s’agit d’une explication de l’algorithme de descente de gradient@goodfellow2016deep qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût.
+Il s’agit d’une explication de l’algorithme de descente de gradient@Goodfellow-et-al-2016 qui est utilisé pour trouver les meilleurs poids d’entrée et les biais afin que la valeur de la fonction de coût soit réduite à zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en les mettant à jour fréquemment en se déplaçant dans la direction opposée du gradient de la fonction de coût.
 
 == Algorithme de descente de gradient
 
@@ -375,11 +375,11 @@ On peut voir que les paramètres du modèle sont très proches des valeurs exact
 
 On peut visualiser les résultats du modèle sur un graphique qui montre la relation entre les températures en Celsius et en Fahrenheit. On peut voir que les points sont alignés sur une droite qui correspond à la formule y = 1.8x + 32. On peut également comparer le modèle avec un modèle aléatoire qui prédit des valeurs aléatoires entre -40°C et 100°C. On peut voir que le modèle aléatoire a un MAE beaucoup plus élevé que le modèle entraîné.
 
-On peut conclure que le modèle de régression linéaire@wikipedia2021linear @wikipedia2021regression est capable de générer des prédictions très proches des valeurs réelles, et qu'il a réussi à apprendre la formule de conversion entre les températures en Celsius et en Fahrenheit. Ce modèle pourrait être utilisé pour convertir des températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
+On peut conclure que le modèle de régression linéaire@wikipediaLinearRegression@wikipediaLinearRegressionfr@wikipediaAlgorithmeDuGradient est capable de générer des prédictions très proches des valeurs réelles, et qu'il a réussi à apprendre la formule de conversion entre les températures en Celsius et en Fahrenheit. Ce modèle pourrait être utilisé pour convertir des températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
 
 = CONCLUSION.
 
-Dans ce chapitre, on a vu ce qu'est le deep learning, comment il fonctionne. On a appris que le deep learning est une branche de machine learning qui utilise des réseaux de neurones artificiels multicouches pour apprendre à partir de données complexes ou de haute dimension. On a vu que le deep learning se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur@goodfellow2016deep. On a aussi vu que le deep learning peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
+Dans ce chapitre, on a vu ce qu'est le deep learning, comment il fonctionne. On a appris que le deep learning est une branche de machine learning qui utilise des réseaux de neurones artificiels multicouches pour apprendre à partir de données complexes ou de haute dimension. On a vu que le deep learning se distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres règles et algorithmes par essai et erreur@Goodfellow-et-al-2016. On a aussi vu que le deep learning peut surmonter certains des problèmes rencontrés par l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des données.
 
 On a également compris le principe de l'apprentissage profond en utilisant des exemples de notre vie quotidienne. On a vu comment on peut utiliser une fonction mathématique appelée *fonction coût* pour mesurer la différence entre les résultats d'un modèle d'apprentissage et les résultats souhaités ou corrects. Puis on a vu comment on peut utiliser une autre fonction appelée *fonction optimisation* pour ajuster la valeur de chaque cellule neuronale dans le réseau d'apprentissage afin de réduire la valeur de la *fonction coût*. Ces étapes sont répétées sur un grand ensemble de données jusqu'à ce que le modèle d'apprentissage soit capable d'accomplir les tâches demandées avec précision ou acceptabilité.
 
@@ -392,33 +392,74 @@ On peut conclure que le deep learning est un domaine récent et prometteur en in
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 // #counter(heading).step()
 
-= IMAGE POSSESSING
+// = TRAITEMENT D\'IMAGES PAR DEEP LEARNING.
+#let ima = text(size:12pt,"D'IMAGES")
+= TRAITEMENT D IMAGES PAR DEEP LEARNING.
 
 == Introduction
 
-Les images tridimensionnelles qui portent des informations vitales sur la santé humaine sont connues sous le nom d'images scanner (CT scan) et sont utilisées dans le diagnostic et le traitement de nombreuses maladies telles que le cancer, les accidents vasculaires cérébraux et les fractures@aggarwal2018neural. Ces images nécessitent un traitement spécial pour éliminer les distorsions, améliorer la qualité et extraire les caractéristiques importantes @zhang2023dive. C'est pourquoi on utilise des réseaux de neurones artificiels avancés capables de traiter efficacement ces images. Les réseaux de neurones artificiels sont un système inspiré du fonctionnement des cellules du cerveau dans le traitement de l'information et se composent d'un ensemble de cellules nerveuses qui reçoivent et envoient des signaux en utilisant des fonctions d'activation, des poids et des biais. Le réseau de neurones se compose de plusieurs couches, y compris la couche d'entrée, la couche de sortie et les couches cachées.
+Les images tridimensionnelles qui portent des informations vitales sur la santé humaine sont connues sous le nom d'images scanner (CT scan) et sont utilisées dans le diagnostic et le traitement de nombreuses maladies telles que le cancer, les accidents vasculaires cérébraux et les fractures@aggarwal2018neural. Ces images nécessitent un traitement spécial pour éliminer les distorsions, améliorer la qualité et extraire les caractéristiques importantes @zhang2023dive. C'est pourquoi on utilise des réseaux de neurones artificiels avancés capables de traiter efficacement ces images. Les réseaux de neurones artificiels sont un système inspiré du fonctionnement des cellules du cerveau dans le traitement de l'information et se composent d'un ensemble de cellules nerveuses qui reçoivent et envoient des signaux en utilisant des fonctions d'activation, des poids et des biais.
+
+Le réseau de neurones se compose de plusieurs couches, y compris la couche d'entrée(input layer), la couche de sortie (output layer) et les couches cachées (hidden layers). Chaque couche étant composée d'un ensemble de cellules nerveuses. La première couche joue le rôle de récepteur des données et la dernière joue le rôle de sortie des données du réseau, et entre elles il y a plusieurs couches qui jouent le rôle de récepteur des signaux des couches précédentes et de les envoyer aux couches suivantes.
 
 Cette étude vise à passer en revue les principaux types de réseaux de neurones utilisés dans le domaine de l'imagerie médicale, en particulier les images scanner. Elle vise également à expliquer l'importance des matrices dans le stockage et la mise à jour des paramètres dans un réseau de neurones, en mettant en lumière un exemple d'un réseau de neurones écrit avec des matrices et des vecteurs.
 
 == Fonctions d'activation
 
-Dans l'axe précédent, nous avons vu comment l'apprentissage profond prédit la température Fahrenheit en utilisant une seule cellule nerveuse basée sur les données initiales uniquement. La solution requise était une équation pour une ligne droite qui pouvait être représentée par une ligne droite. Mais dans certains cas, la distribution des données est courbe comme une fonction sinus ou autre, et ne peut pas être représentée par une ligne droite. Nous avons donc besoin d'ajouter des fonctions non linéaires appelées fonctions d'activation, qui aident à plier la courbe linéaire générée par les cellules nerveuses en utilisant la puissance de leur poids et de leur biais. Les fonctions d'activation les plus courantes sont la fonction relu et la fonction sigmoid.
+Dans l'axe précédent, nous avons vu comment l'apprentissage profond prédit la température Fahrenheit en utilisant une seule cellule nerveuse basée sur les données initiales uniquement. La solution requise était une équation pour une ligne droite qui pouvait être représentée par une ligne droite. Mais dans certains cas, la distribution des données est courbe comme une fonction sinus ou autre, et ne peut pas être représentée par une ligne droite. Nous avons donc besoin d'ajouter des fonctions non linéaires appelées fonctions d'activation, qui aident à plier la courbe linéaire générée par les cellules nerveuses en utilisant la puissance de leur poids et de leur biais. Les fonctions d'activation les plus courantes sont la fonction relu et la fonction sigmoid@Goodfellow-et-al-2016.
 
-Un réseau de neurones se compose généralement de plusieurs couches, chaque couche étant composée d'un ensemble de cellules nerveuses. La première couche joue le rôle de récepteur des données et s'appelle la couche d'entrée (input layer), la dernière joue le rôle de sortie des données du réseau et s'appelle la couche de sortie (output layer), et entre elles il y a plusieurs couches appelées les couches cachées (hidden layers), qui jouent le rôle de récepteur des signaux des couches précédentes et de les envoyer aux couches suivantes.
+=== Relu
+=== Segmoid
+
 
 == Comment utiliser les matrices dans l'apprentissage profond ?
 
-Les matrices sont un moyen efficace de stocker et mettre à jour les paramètres dans un réseau de neurones. Plus le nombre de cellules et de liens dans un réseau de neurones est élevé, plus le nombre de paramètres à modifier pour améliorer les performances du réseau est élevé. Nous utilisons donc des matrices pour éviter d'écrire des lignes de code répétitives pour corriger chaque paramètre individuellement. Au lieu de cela, nous utilisons des boucles itératives et des opérations algébriques sur les matrices pour mettre à jour les paramètres plus rapidement et plus simplement.
+Les matrices sont un moyen efficace de stocker et mettre à jour les paramètres dans un réseau de neurones. Plus le nombre de cellules et de liens dans un réseau de neurones est élevé, plus le nombre de paramètres à modifier pour améliorer les performances du réseau est élevé. Nous utilisons donc des matrices pour éviter d'écrire des lignes de code répétitives pour corriger chaque paramètre individuellement. Au lieu de cela, nous utilisons des boucles itératives et des opérations algébriques sur les matrices pour mettre à jour les paramètres plus rapidement et plus simplement@bishop2006pattern.
 
-== Exemple d'un réseau de neurones écrit avec des matrices et des vecteurs
+=== Exemple d'un réseau de neurones écrit avec des matrices et des vecteurs
 
-Supposons que nous ayons un réseau de neurones composé de deux couches cachées et deux entrées et une sortie, pour prédire la valeur attendue de l'opération logique gates ou du traitement médical.
+Supposons que nous ayons un réseau de neurones composé de deux entrées et une sortie et un couche cachées. Dans ce réseau, nous avons 4 cellules nerveuses et 12 liens.
 
-Dans ce réseau, nous avons six cellules nerveuses et 13 liens, dont nous voulons prédire la valeur à partir des données initiales dans le tableau ci-dessus, puis essayer de réduire l'écart entre les données que nous trouverons et les données initiales en utilisant la descente de gradient.
+#images(
+  filename:"images/4-nerons.svg",
+  caption:[iii],
+  width: 70%
+  // ref:
+)
+
+L'euquation de prédication c'est comme suit:
+
+$ y = a_1^((1))+a_2^((1))+a_3^((1))+a_4^((1)) $
+
+$
+  a_1^((1)) &=  w_11^((1)) x_1 + w_21^((1)) x_2 + b_1^((1)) \
+  a_2^((1)) &=  w_12^((1)) x_1 + w_22^((1)) x_2 + b_2^((1)) \
+  a_3^((1)) &=  w_13^((1)) x_1 + w_23^((1)) x_2 + b_3^((1)) \
+  a_4^((1)) &=  w_14^((1)) x_1 + w_24^((1)) x_2 + b_4^((1))
+$
+
+
+$ y =
+
+  (
+     mat(x_1, x_2)
+
+     mat(
+       w_11^((1)),   w_12^((1)) , w_13^((1)), w_14^((1));
+       w_21^((1)),   w_22^((1)) , w_23^((1)), w_24^((1));
+     )
+     +
+     mat( b_1^((1)) , b_2^((1)) , b_3^((1)) , b_4^((1)); )
+  )
+  vec(1, 1, 1, 1)
+$
+
+
 
 == Types de réseaux de neurones
 
-Les réseaux de neurones peuvent être classés en plusieurs types selon la structure et les applications utilisées. Les réseaux de neurones peuvent être multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types. Le type de réseau de neurones est choisi en fonction du problème posé et des données disponibles.
+// melonge ces lignes:
+Les réseaux de neurones peuvent être classés en plusieurs types selon la structure et les applications utilisées. Les réseaux de neurones peuvent être multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types. Le type de réseau de neurones est choisi en fonction du problème posé et des données disponibles@lecun2015deep.
 
 = CONCLUSION.
 // #bibliography("ch1.bib",title: "RÉFÉRENCES BIBLIOGRAPHIQUES.",style: "ieee")  // ch2
