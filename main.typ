@@ -412,13 +412,12 @@ Dans l'axe précédent, nous avons vu comment l'apprentissage profond prédit la
 === Segmoid
 
 
-== Comment utiliser les matrices dans l'apprentissage profond ?
+== L'importance des matrices dans l'apprentissage profond.
 
 Les matrices sont un moyen efficace de stocker et mettre à jour les paramètres dans un réseau de neurones. Plus le nombre de cellules et de liens dans un réseau de neurones est élevé, plus le nombre de paramètres à modifier pour améliorer les performances du réseau est élevé. Nous utilisons donc des matrices pour éviter d'écrire des lignes de code répétitives pour corriger chaque paramètre individuellement. Au lieu de cela, nous utilisons des boucles itératives et des opérations algébriques sur les matrices pour mettre à jour les paramètres plus rapidement et plus simplement@bishop2006pattern.
 
-=== Exemple d'un réseau de neurones écrit avec des matrices et des vecteurs
-
-Supposons que nous ayons un réseau de neurones composé de deux entrées et une sortie et un couche cachées. Dans ce réseau, nous avons 4 cellules nerveuses et 12 liens.
+Soit un réseau de neurones avec deux entrées, une sortie et une couche cachée. Ce réseau contient 4 neurones et 12 paramètres. Si on ajoute des couches cachées supplémentaires, on augmente le nombre de variables. Cela complexifie les équations et les matrices. On utilise pas des fonctions d'activation pour simplifier le calcul. Le but est de faciliter la traduction du réseau en matrices, avant de le coder dans un langage de programmation.
+// edit
 
 #images(
   filename:"images/4-nerons.svg",
@@ -427,9 +426,11 @@ Supposons que nous ayons un réseau de neurones composé de deux entrées et une
   // ref:
 )
 
-L'euquation de prédication c'est comme suit:
+L'euquation de prédication $y$ c'est comme suit:
 
 $ y = a_1^((1))+a_2^((1))+a_3^((1))+a_4^((1)) $
+
+Avec
 
 $
   a_1^((1)) &=  w_11^((1)) x_1 + w_21^((1)) x_2 + b_1^((1)) \
@@ -438,6 +439,7 @@ $
   a_4^((1)) &=  w_14^((1)) x_1 + w_24^((1)) x_2 + b_4^((1))
 $
 
+et finalemet:
 
 $ y =
 
