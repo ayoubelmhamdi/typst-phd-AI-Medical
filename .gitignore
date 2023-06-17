@@ -1,11 +1,10 @@
 conf.typ
 final.pdf
-build/
 !build/main.pdf
+build/
 conf.pdf
 cover.pdf
 final.pdf
-main.pdf
 pfe.pdf
 *.pdf
 .err.log
