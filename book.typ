@@ -8,8 +8,8 @@
 )
 
 #let execption_outline=(
-  "REMERCIEMENTS",
-  "TABLE DES MATIÈRES",
+  "REMERCIEMENTS.",
+  "TABLE DES MATIÈRES.",
 )
 
 #let book( dict, body) = {
@@ -203,10 +203,20 @@
 
     set align(center)
     if it.kind == image {
-      it.body
-      text(weight:"bold", it.supplement +
-      " " +it.counter.display(it.numbering)+ ": ")
-      text(style: "italic" ,it.caption)
+      if it.caption != none {
+        it.body
+        text(
+          weight:"bold",
+          it.supplement +
+          " " +
+          it.counter.display(it.numbering)+
+          ": "
+        )
+        text(style: "italic" ,it.caption)
+      }
+      else {
+        it.body
+      }
 
     } // image
     else if it.kind == "table" {
