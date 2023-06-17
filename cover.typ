@@ -23,10 +23,15 @@
         weight: "bold",
         size: 22pt,
         v(0.5em) +
-        [Filière : Sciences de la Matière Physique] +
-        v(0.25em) +
-        [MÉMOIRE DE PROJET TUTORÉ]
+        [Master Spécialise en Physique Médicale] +
+        v(0.25em)
+      ) +
+      text(
+        weight: "bold",
+        size: 18pt,
+        [Mémoire de Projet de Fin d Études]
       )
+
     )
   )
   v(1.5em)
