@@ -13,9 +13,10 @@
 )
 
 #let book( dict, body) = {
-  let title=dict.title;
+  let title=dict.title
   let authors=dict.authors
   let encaders=dict.encaders
+
   set page(
     paper: "a4",
     // height :21cm ,
@@ -56,13 +57,11 @@
       )
     } // heading == REMERCIEMENTS
     else if it.body.text in execption_chapter {
-    // like RÉFÉRENCES BIBLIOGRAPHIQUES.
-      counter(heading).update(n => n - 1)
+      if it.numbering != none {
+        counter(heading).update(n => n - 1)
+      }
       align(
         center,
-        // [] +
-        // + linebreak()
-        // + v(-4em)
         text(
             weight: "bold",
             size:22pt,
@@ -70,7 +69,6 @@
             it.body
           )
         + linebreak()
-        // + v(3em)
       )
     } // heading == CONCLUSION.
     else  {
@@ -121,12 +119,8 @@
           " "
         }
         let line = {
-          // if indent {
-          //   h(1em * (el.level - 1 ))
-          // }
-
+          // ----------------------------------
           if el.level == 1 {
-      // ++++++++++++++++++++++++++++++++++
             if el.body.text in execption_chapter {
             // like RÉFÉRENCES BIBLIOGRAPHIQUES.
               text(
@@ -137,7 +131,7 @@
               )
             }
             else  {
-              // any other I.
+              // non exeption chapters
               block(
                 text(
                   weight: "bold",
@@ -155,7 +149,7 @@
                 v(-1.5em)
               )
             }
-      // ++++++++++++++++++++++++++++++++++
+      // ++++++++++++++++++++++++++++++++++ // fin  heading L1
           } else if el.level == 3 {
             text(
               h(22pt) +
@@ -165,16 +159,20 @@
             )
             el.body
 
-          } else {
+      // ++++++++++++++++++++++++++++++++++ // fin  heading L3
+          } else{
             maybe_number
             el.body
           }
+      // ++++++++++++++++++++++++++++++++++ // fin other heading level
 
           box(width: 1fr)
           text(fill:black, str(counter(page).at(el.location()).first()))
 
           linebreak()
         }
+
+      // ---------------------------------- // fin line
 
         link(el.location(), line)
       }
