@@ -1,4 +1,4 @@
-typst=typst5
+typst=typst5 -v
 
 watch:
 	$(typst) --font-path ~/home/.fonts watch main.typ build/main.pdf
@@ -14,4 +14,4 @@ image:
 	rm pfe-*.jpg
 
 clean:
-	rm *.pdf
+	rm *.pdf chapters/*.pdf
