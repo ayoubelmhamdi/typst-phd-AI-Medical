@@ -12,6 +12,17 @@
   "TABLE DES MATIÈRES.",
 )
 
+#let intorduction_outline=(
+  [Définitions.],
+  [Contexte et importance de la détection du cancer du poumon à l'aide de l'apprentissage en profondeur.],
+  [Aperçu de la structure de votre thèse.],
+  [Fournir un contexte et un cadre pour votre sujet de recherche.],
+  [Expliquer l'importance et la motivation de votre recherche.],
+  [Objectifs et objectifs de votre recherche.],
+)
+
+
+
 #let book( dict, body) = {
   let title=dict.title
   let authors=dict.authors
@@ -39,8 +50,9 @@
   show heading.where(level: 2): set text(size:18pt)
   show heading.where(level: 3): set text(size:14pt)
 
-  // ===========================================
-  // ===========================================
+ /* ===========================================
+  *                 HEADING
+  * ===========================================*/
   show heading.where(level: 1): it => {
     set par(justify: true)
     pagebreak()
@@ -98,11 +110,43 @@
     } // heading == chapter [0-9]
 
     v(3em)
-  }
+  } // fin L1
 
-  // ===========================================
-  //                 Outline
-  // ===========================================
+  show heading.where(level: 2): it => locate(loc => {
+    let levels = counter(heading).at(loc)
+    let deepest = if levels != () {
+        levels.last()
+    } else {
+        1
+    }
+
+    if it.body in intorduction_outline {
+    set text(weight: "bold", fill: rgb("#1e045b"))
+        text(
+          fill: rgb("#1e045b"),
+           // it.numbering.trim("I.1.")
+           // it.numbering
+           str(deepest)
+          + ". " + it.body + linebreak()
+        )
+
+          // // counter(heading).step(level: 2)
+          // if it.body in intorduction_outline {
+          //       text(
+          //         fill: rgb("#1e045b"),
+          //          // it.numbering.trim("I.1.")
+          //          it.numbering
+          //         + " " + it.body
+          //       )
+  } else {
+    it
+  }
+})
+
+
+ /* ===========================================
+  *                  OUTLINE
+  * ===========================================*/
   show outline: it => locate(loc => {
       set text(weight: "bold", fill: rgb("#1e045b"))
       let depth=3
@@ -118,6 +162,7 @@
           numbering(el.numbering, ..counter(heading).at(el.location()))
           " "
         }
+
         let line = {
           // ----------------------------------
           if el.level == 1 {
@@ -150,17 +195,31 @@
               )
             }
       // ++++++++++++++++++++++++++++++++++ // fin  heading L1
-          } else if el.level == 3 {
-            text(
-              h(22pt) +
-              str(counter(heading).at(el.location()).at(-1)) +
-              // [--] + maybe_number +
-              ". "
-            )
-            el.body
-
+          } else if el.level == 2 {
+              if el.body in intorduction_outline {
+                text(
+                  h(22pt) +
+                  str(counter(heading).at(el.location()).at(-1)) +
+                  // [--] + maybe_number +
+                  ". "
+                )
+                el.body
+              } else {
+                maybe_number
+                el.body
+              }
+      // ++++++++++++++++++++++++++++++++++ // fin  heading L2
+          } else if el.level == 3   {
+              text(
+                h(22pt) +
+                str(counter(heading).at(el.location()).at(-1)) +
+                // [--] + maybe_number +
+                ". "
+              )
+              el.body
       // ++++++++++++++++++++++++++++++++++ // fin  heading L3
-          } else{
+          }
+          else{
             maybe_number
             el.body
           }
