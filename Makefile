@@ -14,4 +14,5 @@ image:
 	rm pfe-*.jpg
 
 clean:
-	rm *.pdf chapters/*.pdf
+	@rm -f *.pdf chapters/*.pdf main.pdf build/main.pdf
+	@rm -f images/rem-*
