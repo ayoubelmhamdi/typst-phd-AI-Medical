@@ -12,14 +12,14 @@
   "TABLE DES MATIÈRES.",
 )
 
-#let intorduction_outline=(
-  [Définitions.],
-  [Contexte et importance de la détection du cancer du poumon à l'aide de l'apprentissage en profondeur.],
-  [Aperçu de la structure de votre thèse.],
-  [Fournir un contexte et un cadre pour votre sujet de recherche.],
-  [Expliquer l'importance et la motivation de votre recherche.],
-  [Objectifs et objectifs de votre recherche.],
-)
+// #let intorduction_outline=(
+//   [Définitions.],
+//   [Contexte et importance de la détection du cancer du poumon à l'aide de l'apprentissage en profondeur.],
+//   [Aperçu de la structure de votre thèse.],
+//   [Fournir un contexte et un cadre pour votre sujet de recherche.],
+//   [Expliquer l'importance et la motivation de votre recherche.],
+//   [Objectifs et objectifs de votre recherche.],
+// )
 
 
 
@@ -97,7 +97,7 @@
               + counter(heading).display()
             ) +
             linebreak() +
-            v(1em) +
+              v(1em) +
             text(
               weight: "bold",
               size:20pt,
@@ -120,24 +120,12 @@
         1
     }
 
-    if it.body in intorduction_outline {
-    set text(weight: "bold", fill: rgb("#1e045b"))
-        text(
-          fill: rgb("#1e045b"),
-           // it.numbering.trim("I.1.")
-           // it.numbering
-           str(deepest)
-          + ". " + it.body + linebreak()
-        )
-
-          // // counter(heading).step(level: 2)
-          // if it.body in intorduction_outline {
-          //       text(
-          //         fill: rgb("#1e045b"),
-          //          // it.numbering.trim("I.1.")
-          //          it.numbering
-          //         + " " + it.body
-          //       )
+    if levels.first() == 0 {
+    text(
+      weight: "bold",
+      fill: rgb("#1e045b"),
+      str(deepest) + ". " + it.body + linebreak()
+    )
   } else {
     it
   }
@@ -196,13 +184,9 @@
             }
       // ++++++++++++++++++++++++++++++++++ // fin  heading L1
           } else if el.level == 2 {
-              if el.body in intorduction_outline {
-                text(
-                  h(22pt) +
-                  str(counter(heading).at(el.location()).at(-1)) +
-                  // [--] + maybe_number +
-                  ". "
-                )
+              if maybe_number.first() == "N" {
+                h(22pt)
+                maybe_number.trim("N.")
                 el.body
               } else {
                 maybe_number
