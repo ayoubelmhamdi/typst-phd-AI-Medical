@@ -84,19 +84,20 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
  *
 */
 //
-// #include "chapters/ch01.typ"
+// #include "chapters/ch01-ana.typ"
 
 //= RÉFÉRENCES BIBLIOGRAPHIQUES.
 //
 //
-// #include "chapters/ch02.typ"
+// #include "chapters/ch02-dep.typ"
 // = RÉFÉRENCES BIBLIOGRAPHIQUES.
 // //
 // //
 
-// #include "chapters/ch03.typ"
-#include "chapters/ch04.typ"
-// #include "chapters/ch05.typ"
+// #include "chapters/ch03-gpt.typ"
+#include "chapters/ch04-art.typ"
+// #include "chapters/ch05-the.typ"
+// #include "chapters/ch06-men.typ"
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 
