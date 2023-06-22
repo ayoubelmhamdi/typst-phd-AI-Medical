@@ -2,6 +2,13 @@
 
 #let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 
+/*
+ *
+ *  GPT 03
+ *
+ */
+
+= DETECTING LUNG CANCER NODULES.
 = MÉTHODES, RÉSULTATS ET DISCUSSION
 
 == Methods

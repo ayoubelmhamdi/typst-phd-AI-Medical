@@ -94,7 +94,8 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 // //
 // //
 
-// #include "chapters/ch04.typ"
+// #include "chapters/ch03.typ"
+#include "chapters/ch04.typ"
 // #include "chapters/ch05.typ"
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
