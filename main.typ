@@ -84,7 +84,7 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
  *
 */
 //
-#include "chapters/ch01.typ"
+// #include "chapters/ch01.typ"
 
 //= RÉFÉRENCES BIBLIOGRAPHIQUES.
 //
@@ -94,14 +94,14 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 // //
 // //
 
-#include "chapters/ch04.typ"
+// #include "chapters/ch04.typ"
 // #include "chapters/ch05.typ"
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 
-= CONCLUSION GÉNÉRALE.
+// = CONCLUSION GÉNÉRALE.
 // #include "chapters/ch05.typ"
 
 
 
-#bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee") // final
+// #bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee") // final
