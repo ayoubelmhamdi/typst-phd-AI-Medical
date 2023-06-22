@@ -9,9 +9,18 @@ Les nodules pulmonaires sont des masses anormales qui se forment dans les poumon
 
 L'anatomie du poumon est complexe et joue un rôle important dans la respiration. Le poumon est divisé en deux lobes principaux et chaque lobe est divisé en segments plus petits. Les poumons sont responsables de l'échange gazeux entre le sang et l'air. Les maladies pulmonaires courantes comprennent l'asthme, la bronchite chronique et l'emphysème.
 
-Le cancer du poumon est une maladie grave qui peut être causée par de nombreux facteurs différents. Il existe plusieurs types de cancer du poumon, notamment le carcinome à petites cellules et le carcinome non à petites cellules. Le traitement dépend du type de cancer et peut inclure la chirurgie, la radiothérapie et la chimiothérapie.
+Le cancer du poumon est une maladie grave qui peut être
+causée par de nombreux facteurs différents. Il existe
+plusieurs types de cancer du poumon, notamment le carcinome
+à petites cellules et le carcinome non à petites cellules.
+Le traitement dépend du type de cancer et peut inclure la
+chirurgie, la radiothérapie et la chimiothérapie.
 
-Les nodules pulmonaires peuvent jouer un rôle important dans le diagnostic du cancer du poumon et le suivi de l'état des patients. Si vous avez d'autres questions sur les nodules pulmonaires ou sur d'autres sujets liés à la santé, n'hésitez pas à me demander.
+Les nodules pulmonaires peuvent jouer un rôle important dans
+le diagnostic du cancer du poumon et le suivi de l'état des
+patients. Si vous avez d'autres questions sur les nodules
+pulmonaires ou sur d'autres sujets liés à la santé,
+n'hésitez pas à me demander.
 
 == Introduction
 === Définition des nodules pulmonaires
