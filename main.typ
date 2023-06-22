@@ -60,31 +60,46 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 
 #outline()
 
-= RÉSUMÉ.
+#include "chapters/resume.typ"
 #lorem(10) #finchapiter
 
 
 = INTRODUCTION GÉNÉRALE.
-#lorem(10) #finchapiter
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
+//1== Définitions.
+//1// == Contexte et importance de la détection du cancer du poumon à l'aide de l'apprentissage en profondeur.
+//1== Contexte
+//1== Aperçu de la structure de votre thèse.
+//1== Fournir un contexte et un cadre pour votre sujet de recherche.
+//1== Expliquer l'importance et la motivation de votre recherche.
+//1== Objectifs et objectifs de votre recherche.
+//1
+//1
+//1#lorem(10) #finchapiter
+//1= RÉFÉRENCES BIBLIOGRAPHIQUES.
 
+/*
+ *
+ * chapters
+ *
+ *
+*/
+//
 #include "chapters/ch01.typ"
+
+//= RÉFÉRENCES BIBLIOGRAPHIQUES.
+//
+//
+// #include "chapters/ch02.typ"
+// = RÉFÉRENCES BIBLIOGRAPHIQUES.
+// //
+// //
+
+#include "chapters/ch04.typ"
+// #include "chapters/ch05.typ"
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
-
-#include "chapters/ch02.typ"
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
-
-
-#include "chapters/ch03.typ"
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
-
-// #include "chapters/ch04.typ"
-
-= FIN
 
 = CONCLUSION GÉNÉRALE.
-
 // #include "chapters/ch05.typ"
 
 
