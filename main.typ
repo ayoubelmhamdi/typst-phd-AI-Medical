@@ -61,7 +61,6 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 #outline()
 
 #include "chapters/resume.typ"
-#lorem(10) #finchapiter
 
 
 = INTRODUCTION GÉNÉRALE.
@@ -94,10 +93,12 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 // //
 // //
 
-// #include "chapters/ch03-gpt.typ"
-#include "chapters/ch04-art.typ"
+#include "chapters/ch03-mrd.typ"
+// #include "chapters/ch04-art.typ"
 // #include "chapters/ch05-the.typ"
 // #include "chapters/ch06-men.typ"
+// #include "chapters/ch07-gpt.typ"
+
 = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 
@@ -106,4 +107,4 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 
 
 
-// #bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee") // final
+#bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee") // final
