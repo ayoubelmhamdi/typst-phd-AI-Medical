@@ -3,7 +3,7 @@
 #let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 
 = RÉSUMÉ.
-- difficult de analyse pour expert.
+- difficulté de analyse pour expert.
 
 Les images médicales jouent un rôle important dans le diagnostic et la prise en charge des cancers. Les oncologues analysent des images pour déterminer les différentes caractéristiques de la tumeur, pour proposer un traitement adapté et suivre l'évolution de la maladie.
 
@@ -18,4 +18,4 @@ Finalement, diagnostic ...
 Les expériences réalisées sur des TDM pulmonaires de haute qualité ont démontré l'efficacité de l'approche proposée pour la segmentation des nodules cancéreuse de  pulmonaire de haut grade,(...detection...).
 
 
-*Mots clés*: Réseau neuronal convolutif, apprentissage profond, CT scan, TDM, radiothérapie, Caner, Nodules pulmonaire, (...).
+*Mots clés*: Réseau neuronal convolutif, apprentissage profond, CT scan, TDM, radiothérapie, Caner, Nodules pulmonaire, (...).#finchapiter
