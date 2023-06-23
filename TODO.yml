@@ -25,6 +25,11 @@ PowerPoint:
 Github-seg:
   brain-seg: https://github.com/sdsubhajitdas/Brain-Tumor-Segmentation
 
+Articls:
+  url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9688236/
+Theses:
+  lung16: https://arxiv.org/abs/1903.04711
+
 BIB:
   source 1:
     url: https://www.kaggle.com/code/moha5282/preprocessing-tutorial-lung-cancer
