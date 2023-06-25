@@ -99,10 +99,10 @@ ont apporté leur aide précieuse et leur soutien inconditionnel. #finchapiter
 // #include "chapters/ch06-men.typ"
 // #include "chapters/ch07-gpt.typ"
 
-= RÉFÉRENCES BIBLIOGRAPHIQUES.
+// = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
 
-// = CONCLUSION GÉNÉRALE.
+= CONCLUSION GÉNÉRALE.
 // #include "chapters/ch05.typ"
 
 

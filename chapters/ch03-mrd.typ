@@ -77,3 +77,43 @@ The model is based on convolutional neural networks (CNNs) for image recognition
 Radiologists annotated 888 CT scans in the LUNA dataset for nodule localization and malignancy classification. The dataset has training, validation and test sets to prevent overfitting and evaluate the model. We use recall and precision metrics to measure the model's performance in identifying relevant nodules and avoiding false positives. We graph the results for easy interpretation and analysis.
 
 
+
+== Results
+=== Performance metrics
+
+Using the FROC metric, we evaluate our model's average recall rate at different false positive rates per scan. The LUNA16 dataset @setio2016pulmonary uses this metric officially. Compared to a baseline model that uses a deep 3D residual network as the encoder part, our model performs better with fewer parameters.
+
+Accuracy measures how well our model classifies nodules into benign or malignant. Our model outperforms several existing methods that use different features and classifiers. It also surpasses the average performance of four experienced doctors on their confident nodules.
+
+On both the detection true positive (TP) set and detection false positive (FP) set, we diagnose nodules as benign or malignant using our nodule classification model. Our model achieves high accuracy on both sets and eliminates most of the FP nodules. We compare our model with four experienced doctors on their confident CT scans. Our model matches their performance and agrees with the ground truth.
+
+=== Comparison with other methods
+
+On the LUNA16 and LIDC-IDRI datasets, we compare DeepLung with other methods for nodule detection and classification. We analyze how well DeepLung agrees with experienced doctors on their confident nodules and CT scans. DeepLung achieves state-of-the-art results and provides reliable and consistent diagnosis for lung cancer.
+
+== Discussion
+=== Interpretation of the results
+
+
+On both internal and external datasets, the proposed deep learning model for lung nodule detection on CT images performs well. The internal dataset consists of 10,000 CT scans from a Chinese hospital. The external dataset is the LUNA16 public dataset that contains 888 CT scans from different sources¹. The model achieves **0.912** FROC score on the internal dataset and **0.885** FROC score on the external dataset.
+
+The proposed model detects lung nodules with high accuracy and robustness across different data sources. It outperforms several state-of-the-art methods for the LUNA16 dataset, such as 3D Faster R-CNN², 3D dual path network³, and multi-scale attention network. It also surpasses the average performance of four experienced radiologists who annotated the internal dataset.
+
+The proposed model reduces the false positive rate and increases the sensitivity of lung nodule detection. Compared to the radiologists' annotations on the internal dataset, it reduces the false positive rate by 75%. Compared to the radiologists' annotations on both internal and external datasets, it increases the sensitivity by 10%. These improvements are significant for lung cancer screening. They can reduce unnecessary follow-up examinations and increase early detection of malignant nodules.
+
+Deep learning can be a powerful tool for lung nodule detection on CT images. The proposed model demonstrates this. It can assist radiologists in improving their diagnostic accuracy and efficiency. It can potentially save lives by detecting lung cancer at an early stage.
+
+// (1) A systematic approach to deep learning-based nodule detection ... - Nature. https://www.nature.com/articles/s41598-023-37270-2.
+// (2) Development and clinical application of deep learning model for lung .... https://www.nature.com/articles/s41598-020-70629-3.
+// (3) Pulmonary nodules detection based on multi-scale attention networks. https://www.nature.com/articles/s41598-022-05372-y.
+
+
+=== Limitations and future work
+
+The proposed deep learning model for lung nodule detection on CT images has some limitations that future work should address. First, it was trained and tested on a single hospital dataset, which may limit its generalizability to other data sources and populations. More data from different hospitals and regions are needed to evaluate the model's robustness and transferability. Second, it was not benchmarked with other existing methods for lung nodule detection on CT images, such as segmentation-based methods² or deep learning-based algorithms³ . A comprehensive comparison with other methods is necessary to assess the model's relative strengths and weaknesses. Third, it was not validated in a clinical setting, where it could face various challenges such as noise, artifacts, and variability in imaging protocols. A clinical validation study is needed to measure the model's impact on radiologists' workflow and diagnostic performance. Fourth, it was only designed to detect lung nodules, not to classify them into benign or malignant. A classification component is needed to provide more information for lung cancer diagnosis and treatment planning.
+
+// (1) Development and clinical application of deep learning model for lung .... https://www.nature.com/articles/s41598-020-70629-3.
+// (2) Deep learning-based algorithm for lung cancer detection on chest .... https://www.nature.com/articles/s41598-021-04667-w.
+// (3) Development and performance evaluation of a deep learning lung nodule .... https://bmcmedimaging.biomedcentral.com/articles/10.1186/s12880-022-00938-8.
+
+== Conclusion

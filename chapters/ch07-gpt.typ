@@ -93,30 +93,13 @@ The segmentation model is created using a U-Net architecture that can produce pi
 
 
 == Results
-=== {{{
+
 === Performance Metrics
-
-==== Data Conversion and Manipulation
-
-The first step in the process of detecting lung cancer nodules using deep learning is to load the CT data and convert it into a PyTorch dataset. To do this, the raw data files must be converted into a format that is usable by PyTorch, which means converting the 3D array of intensity data into PyTorch Tensors [Source 5](https://paperswithcode.com/dataset/luna16). The data consists of approximately 32 million voxels, which is much larger than the nodules themselves. To make the task more manageable, the model will focus on a relevant crop of the CT scan. There are various steps involved in processing the data, including understanding the data, mapping location information to array indexes, and converting the CT scan intensity into mass density [text].
-
-=== U-Net Architecture for Image Segmentation
-
-U-Net is a convolutional neural network that can produce pixelwise output for image segmentation. It has a U-shaped encoder-decoder structure that operates at different resolutions. The encoder network reduces the spatial dimensions and increases the number of filters at each block, while the decoder network does the opposite. The key innovation of U-Net is the use of skip connections that link the encoder and decoder blocks at the same level, allowing the network to capture multi-scale features and produce more precise segmentations [text].
-
-==== Nodule Candidate Grouping and Classification
-
-After segmenting the image to identify potential tumors, the next step is to group interesting voxels to form candidates. This can be done by searching for voxels with high density around the center of each nodule on the row and column axis, stopping when low-density voxels are reached, which indicate normal lung tissue. The search is then repeated in the third dimension [text]. Each group is a nodule candidate with a center point (index, row, column). These points are used to classify the candidates, making the search easier and removing noise [text].
-
-==== Diagnosing the Patient
-
-The final step in the process is to diagnose the patient based on the malignancy of the identified nodules. This is done by combining the segmentation and classification models for a final diagnosis. The LIDC annotations are used to decide if a nodule in the lung is cancerous or not. These annotations are labels given by up to four doctors based on how the nodule looks in a CT scan, using a scale from 1 to 5. To make a final decision, a rule is applied that states a nodule is cancerous if at least two doctors gave it a score of 4 or 5. This rule is not very precise, and there are other ways of using the labels, such as taking the average or ignoring some nodules [text].
+XXX
 
 ==== Evaluation Metrics
 
 The performance of the model can be evaluated using various metrics such as accuracy, sensitivity, and specificity. #linkb("https://www.hindawi.com/journals/jhe/2019/5156416/", "For example"), a study on the LIDC/IDRI dataset extracted by the LUNA16 challenge achieved a classification accuracy of 97.2%, sensitivity of 96.0%, and specificity of 97.3% . Other studies have reported similarly high-quality results in detecting and #linkb("https://www.hindawi.com/journals/jhe/2019/5156416/", "classifying lung nodule").
-
-=== }}}
 
 
 === Comparison with Other Methods
