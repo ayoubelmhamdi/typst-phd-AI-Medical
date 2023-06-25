@@ -119,32 +119,18 @@ For performance evaluation, we used a Competitive Performance Metric (CPM) score
 
 We evaluated the proposed method with 5-fold cross-validation. To avoid a potential bias problem due to the high imbalance in the number of samples between nodules and non-nodules, we augmented the nodule samples by $90^\circ, 180^\circ$, and $270^\circ$ rotation on a transverse plane and 1-pixel shifting along the x, y, and z axes. Consequently, the ratio between the number of nodules to non-nodules was approximately $1:6$. The detailed numbers of nodules and non-nodules are presented in Table.
 
-## Performance Comparison
-
-To verify the validity of the proposed method,, MGI-CNN, we compared with the existing methods
-
-in the literature that achieved state-of-the-art performance on V1 and/or V2 datasets of the LUNA16 challenge. Concisely, Setio 's method uses 9-view 2D patches, Ding 's method takes 3D patches as input, and Dou 's method uses multi-level 3D patches. Sakamoto 's 2D CNN eliminates the predicted nonconformity in the training data by raising the threshold in every training iteration. Table summarizes the CPM scores over seven different FP/scan values on the V2 and V1 datasets, respectively.
-
-First, on the large-sized V2 dataset, the proposed MGI-CNN was superior to all other competing methods by a large margin in the average CPM.
-
-Notably, when comparing with Dou 's method, which also uses a 3D CNN with the same multi-scale patches as ours, our method increased the average CPM by 0.034 ($ $3% improvement). It is also noteworthy that while the sensitivity of our method at 1, 2, 4, and 8 FP/scan was lower than, our method still achieved the best performance at the 0.125, 0.25, and 0.5 FP/scan. That is, for a low FP rate, which is the main goal of the challenge, our method outperformed those methods.
-
-Over the V1 dataset, our method obtained the highest CPMs under all conditions of the FP/scan as presented in Table. Again, when compared with Dou 's and Setio's work, our method made promising achievements by increasing the average CPM by 0.081 and by 0.070. In comparison with Sakamoto 's method that reported the highest CPM among the competing methods, our MGI-CNN increased by 0.062 ($ $}7.3% improvement).
-
-
-
 
 ## Effects of the Proposed Strategies
 
-To show the effects of our strategies in constructing a multi-scale CNN,, GFE in Fig. and MSFI in Fig. we also conducted experiments with the following Multi-scale CNNs (MCNNs):
+To show the effects of our strategies in constructing a multi-scale CNN. We also conducted experiments with the following Multi-scale CNNs:
 
-- MCNN with Radical integration of Input patches (MCNN-RI): taking multi-scale 3D patches concatenated at the input-level,, $S1 \Vert S2 \Vert S3$, as presented in Fig..
+- With Radical integration of Input patches: taking multi-scale 3D patches concatenated at the input-level,, $S1 \Vert S2 \Vert S3$, as presented in Fig..
 
-- MCNN with radical integration of Low-level feature Representations (MCNN-LR): integrating multi-scale information with feature maps of the first convolution layer as presented in Fig.
+- With radical integration of Low-level feature Representations (MCNN-LR): integrating multi-scale information with feature maps of the first convolution layer as presented in Fig.
 
-- MCNN with zoom-in gradual feature integration (MCNN-ZI): integrating multi-scale patches gradually in the order of $S1-S2-S3$,, the upper network pathway of the proposed network in Fig..
+- With zoom-in gradual feature integration (MCNN-ZI): integrating multi-scale patches gradually in the order of $S1-S2-S3$,, the upper network pathway of the proposed network in Fig..
 
-- MCNN with zoom-out gradual feature integration (MCNN-ZO): integrating multi-scale patches gradually in the order of $S3-S2-S1$,, the lower network pathway of the proposed network in Fig..
+- With zoom-out gradual feature integration (MCNN-ZO): integrating multi-scale patches gradually in the order of $S3-S2-S1$,, the lower network pathway of the proposed network in Fig..
 
 To make these networks have similar capacity, we designed network architectures to have a similar number of tunable parameters: MCNN-RI (9,463,320), MCNN-LR (9,466,880), MCNN-ZI (9,464,320), MCNN-ZO (9,464,320), MGI-CNN (9,472,000), where the number of tunable parameters are in parentheses. We conducted this experiment on the V2 dataset only, because the V1 dataset is a subset of the V2 dataset and reported the results in Table.
 
