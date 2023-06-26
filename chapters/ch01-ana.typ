@@ -40,4 +40,4 @@ n'hésitez pas à me demander.
 // === Le rôle des nodules pulmonaires dans le diagnostic du cancer du poumon et le suivi de l'état des patients
 === Le rôle des nodules pulmonaires dans le diagnostic du cancer.
 
-= CONCLUSION.
+== CONCLUSION.
