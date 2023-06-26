@@ -663,4 +663,4 @@ multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types.
 Le type de réseau de neurones est choisi en fonction du problème posé et des
 données disponibles@lecun2015deep.
 
-= CONCLUSION.
+== CONCLUSION.
