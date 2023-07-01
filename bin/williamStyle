@@ -1,0 +1,46 @@
+#!/bin/bash
+# shellcheck disable=2001,2129
+
+FILE="${1:-}"
+TMP="$(mktemp /tmp/wil.XXXXX)"
+if [ -z "$FILE" ];then
+  echo "Usage:"
+  echo "    create williams/{01..XX}.txt chunks"
+  exit 1
+fi
+
+cp "$FILE" "$TMP"
+
+sed -i 's@^# @<HASH> @' "$TMP"
+sed -i ':a;N;$!ba;s#\n#<NEWLINE>#g' "$TMP"
+sed -i 's@<HASH> @\n# @g' "$TMP"
+
+prompt=""
+
+readarray -t lines < "$TMP"
+
+# Testing
+rm -rf  ./williams
+
+mkdir -p  ./williams
+
+i=0
+for line in "${lines[@]}";do
+  i=$(( i + 1 ))
+  chars="${#line} characters"
+  title="$(echo "$line" |
+           sed 's#^\#\([^<]\+\).*#\1#'|
+           sed 's#[^a-zA-Z0-9]#_#g' |
+           sed 's#\_\+$##g' \
+         )"
+  line="$(echo "$line" | sed 's#<NEWLINE>#\n#g' )"
+  echo "${i}${title}.md"
+
+  echo -n            > "williams/${i}${title}.md" # for not miss make it empty
+  echo -n "$chars"  >> "williams/${i}${title}.md"
+  echo    "$prompt" >> "williams/${i}${title}.md"
+  echo    "$line"   >> "williams/${i}${title}.md"
+done
+
+# cat "$TMP"
+rm -f "$TMP"
