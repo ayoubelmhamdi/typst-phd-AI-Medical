@@ -284,6 +284,14 @@
   // -----------------------------------------------------------
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
+  set math.equation(numbering: "(1)")
 
+  set page(
+      footer: locate( loc => {
+         if counter(page).at(loc).first() > 2 {
+           align(center)[#counter(page).display()]
+         }
+      })
+  )
   body
 }
