@@ -1,4 +1,6 @@
-typst=typst5 -v
+typst=typst6 -v
+
+all: compile
 
 watch:
 	$(typst) --font-path ~/home/.fonts watch main.typ build/main.pdf
