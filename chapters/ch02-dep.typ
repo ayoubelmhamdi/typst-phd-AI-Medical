@@ -147,7 +147,7 @@ constante de la température en Fahrenheit.
 
 La formule utilisée pour convertir la température de Celsius en Fahrenheit est@conversionDeLatemperature :
 
-$ °F = 9/5  °C + 32 $
+$ F = 9/5  C + 32 $
 
 On peut le représenter par le schéma de réseau suivant:
 #images(
@@ -222,12 +222,12 @@ différents des résultats cibles. Par exemple, si nous supposons que le poids
 des entrées est de $2$ et que la coupe de l'axe est de $0$, notre fonction sera
 :
 
-$ °F = (°C × 1) + 0 $
+$ F = (C × 1) + 0 $
 
 Cette fonction donne des résultats imprécis. Par exemple, si nous voulons
 convertir $20°C$ en Fahrenheit, elle donne@Activation:
 
-$ °F = (20 × 1) + 0 = 20 $
+$ F = (20 × 1) + 0 = 20 $
 
 Et c'est une erreur car la valeur correcte est $68°F$.
 
