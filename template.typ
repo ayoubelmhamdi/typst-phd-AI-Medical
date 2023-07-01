@@ -284,7 +284,13 @@
   // -----------------------------------------------------------
   show outline: set block(spacing: 1.25em)
   set par(justify: true)
-  set math.equation(numbering: "(1)")
+  set math.equation(
+    numbering: "(1)",
+  )
+
+
+  show math.equation: set text(weight: "semibold")
+
 
   set page(
       footer: locate( loc => {
