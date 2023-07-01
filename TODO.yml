@@ -38,6 +38,9 @@ BIB:
     url: https://www.kaggle.com/code/daniel036/first-pass-through-data-w-3d-convnet-b8aad2
     steps:
       acc = 0.0069%
+  SEG:
+    info: visualisation with python.
+    url: https://www.kaggle.com/code/kolawole13303/journal-data1-full-preprocessing-tutorial
   source 3:
     url: https://www.kaggle.com/code/shivanir23/luna-pytorch-vs-cancer
     steps:
