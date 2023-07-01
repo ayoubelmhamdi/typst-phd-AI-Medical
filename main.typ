@@ -63,7 +63,8 @@
 // #include "chapters/resume.typ"
 
 
-// = INTRODUCTION GÉNÉRALE.
+#counter(page).update(0)
+= INTRODUCTION GÉNÉRALE.
 //1== Définitions.
 //1// == Contexte et importance de la détection du cancer du poumon à l'aide de l'apprentissage en profondeur.
 //1== Contexte
@@ -83,12 +84,12 @@
  *
 */
 //
-// #include "chapters/ch01-ana.typ"
+#include "chapters/ch01-ana.typ"
 
 //= RÉFÉRENCES BIBLIOGRAPHIQUES.
 //
 //
-// #include "chapters/ch02-dep.typ"
+#include "chapters/ch02-dep.typ"
 // = RÉFÉRENCES BIBLIOGRAPHIQUES.
 // //
 // //
