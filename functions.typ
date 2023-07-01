@@ -30,3 +30,8 @@
     #set text(style: "italic")
     #it
 ]
+
+#let dots = [
+  #box(width: 1fr,repeat[.])
+  #linebreak()
+]
