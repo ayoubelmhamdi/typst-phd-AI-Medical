@@ -21,12 +21,14 @@ prompt1='[text]:
 prompt2='"""
 
 
-[documented_text]:
-"""
-
+[referenced_text]:
 """
 '
+prompt3="$(cat source.md)"
 
+prompt4='
+"""
+'
 
 readarray -t lines < "$TMP"
 
@@ -52,6 +54,8 @@ for line in "${lines[@]}";do
   echo "$prompt1" >> "reference/${i}${title}.md"
   echo "$line"    >> "reference/${i}${title}.md"
   echo "$prompt2" >> "reference/${i}${title}.md"
+  echo "$prompt3" >> "reference/${i}${title}.md"
+  echo "$prompt4" >> "reference/${i}${title}.md"
 done
 
 # cat "$TMP"
