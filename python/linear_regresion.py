@@ -51,4 +51,11 @@ plt.minorticks_on()
 plt.xticks(np.arange(0, 221, 100))
 plt.yticks(np.arange(0, 221, 100))
 # plt.savefig("temperaturesPrevuesReelles.svg")
+
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['bottom'].set_visible(False)
+plt.gca().spines['left'].set_visible(False)
+
+
 plt.show()
