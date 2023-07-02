@@ -44,8 +44,8 @@
 #counter(page).update(0)
 
 #include "chapters/ch00-int.typ"
-// #include "chapters/ch01-ana.typ"
-// #include "chapters/ch02-dep.typ"
+#include "chapters/ch01-ana.typ"
+#include "chapters/ch02-dep.typ"
 // #include "chapters/ch03-mrd.typ"
 // #include "chapters/ch04-art.typ"
 // #include "chapters/ch05-the.typ"
@@ -55,8 +55,7 @@
 
 // #counter(heading).step()
 // #counter(heading).step()
-// #include "chapters/ch09-wil-fr.typ"
-// #include "chapters/ch20.typ"
+#include "chapters/ch20.typ"
 
 // = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
