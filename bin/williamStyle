@@ -11,9 +11,9 @@ fi
 
 cp "$FILE" "$TMP"
 
-sed -i 's@^# @<HASH> @' "$TMP"
+sed -i 's@^## @<HASH> @' "$TMP"
 sed -i ':a;N;$!ba;s#\n#<NEWLINE>#g' "$TMP"
-sed -i 's@<HASH> @\n# @g' "$TMP"
+sed -i 's@<HASH> @\n## @g' "$TMP"
 
 prompt=""
 
