@@ -45,3 +45,19 @@ BIB:
     url: https://www.kaggle.com/code/shivanir23/luna-pytorch-vs-cancer
     steps:
       acc = 99% error
+
+CH2:
+  - definitions.
+  - image trwo cnn
+  - conclusion
+  - corrige image de un seul neurons.
+CH3:
+  - Model correction
+  - CNN image
+  - math recall presssion f1-score.
+
+LEARN:
+  - conv layer
+  - soft max
+  - adam
+  - cross_etrropy
