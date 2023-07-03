@@ -88,19 +88,27 @@ Après avoir préparé les images de scans CT et les masques pulmonaires, l'ense
 
 La construction de l'algorithme de détection des nodules a été divisée en plusieurs étapes impératives. À sa base, l'algorithme reposait sur un modèle de réseau neuronal convolutif (CNN), chargé d'identifier les nodules à partir d'images de scans CT @lin2017feature.
 
+#images(
+    filename:"images/model.png",
+    caption:[
+    La structure du modèle.
+    ],
+    width: 90%
+    // ref:
+    )
+
 Le modèle conçu comprenait :
 
-- Une **couche d'entrée** pour recevoir une image en niveaux de gris 3D.
-- La première couche convolutive (Couche convolutive 1) était codée avec 32 filtres et une taille de noyau de 3x3x3. Le padding a été ajusté à 1 pour préserver les dimensions spatiales de l'image.
-- La sortie de la Couche convolutive 1 a été dirigée à travers une **Fonction d'activation ReLU (Couche d'activation 1)**.
-- Le cadre comprenait également une deuxième couche convolutive (Couche convolutive 2) avec 32 filtres et une taille de noyau de 3x3x3, avec un padding de 1.
-- La sortie de la Couche convolutive 2 s'est retrouvée dans une autre fonction d'activation ReLU (Couche d'activation 2).
-- Un max pooling 3D a été exécuté dans la Couche de max pooling 1 avec une dimension de noyau de 2x2x2 et une stride de 2, réduisant les dimensions spatiales de moitié.
-- Cette structure a ensuite été réitérée avec la Couche convolutive 3 et 4, la Couche d'activation 3 et 4, et la Couche de max pooling 2, bien que les couches convolutives étaient équipées de 64 filtres.
-- La sortie de la dernière couche de max pooling a été compressée en un tenseur 1D dans la Couche d'aplatissement avant de la diriger vers la couche entièrement connectée en utilisant la méthode 'view' de PyTorch.
-- Le tenseur condensé a subi un traitement de couche entièrement connectée (dense), appelé la **Couche entièrement connectée**. Cette couche comportait deux neurones de sortie, correspondant à la présence ou à l'absence de nodules @lin2017focal.
-- Enfin, une fonction softmax a été appliquée à la sortie générée à partir de la couche entièrement connectée dans la Couche softmax. Cette étape est obligatoire pour les tâches de classification binaire, offrant une distribution de probabilité sur les deux classes @lin2017feature.
-
+- Une **couche d'entrée** pour recevoir une image 2D avec une seule couleur de canal.
+- Deux couches convolutives (Couche convolutive 1 et 2) sont définies avec 32 filtres et une taille de noyau de 3x3. Les deux couches utilisent un padding 'same' pour préserver les dimensions spatiales de l'image.
+- Après chaque couche convolutive, une **Fonction d'activation ReLU** est appliquée.
+- Après ces deux couches convolutives, une opération de MaxPooling2D est effectuée pour réduire les dimensions spatiales de moitié.
+- Un autre ensemble de deux couches convolutives (Couche convolutive 3 et 4) est défini, cette fois avec 64 filtres. Chaque couche est suivie d'une fonction d'activation ReLU.
+- Ceci est suivi d'une autre opération de MaxPooling2D.
+- Ensuite, un **GlobalAveragePooling2D** est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
+- Ensuite, une opération **Flatten** est effectuée pour convertir le tenseur multidimensionnel en un vecteur 1D.
+- Ensuite, une **couche entièrement connectée** (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
+- Enfin, une fonction softmax est utilisée comme fonction d'activation de la dernière couche pour effectuer une classification binaire, fournissant une distribution de probabilité sur les deux classes.
 
 Pour entraîner le modèle, l'optimiseur Adam a été utilisé avec un taux d'apprentissage de 0,001, une taille de lot de 40, et la fonction de perte d'entropie croisée binaire. Cette fonction de perte mesure la divergence entre la probabilité prédite par le modèle et la vérité terrain pour chaque image. Elle est adaptée aux problèmes de classification binaire, comme celui de détecter la présence ou l'absence de nodules. L'entropie croisée binaire pénalise les prédictions erronées plus fortement que les prédictions correctes, ce qui encourage le modèle à apprendre à distinguer les nodules des non-nodules avec une grande confiance @Goodfellowetal2016. L'entraînement du modèle s'est étendu sur 100 époques @SetioTBBBC0DFGG16.
 
@@ -169,7 +177,7 @@ Pour résoudre ce problème, il faut une stratégie raffinée pour entraîner no
 - La mise en œuvre de techniques d'augmentation des données pour augmenter le nombre d'échantillons malins dans notre ensemble de données @SetioTBBBC0DFGG16.
 - L'utilisation de techniques de suréchantillonnage ou de sous-échantillonnage pour obtenir un équilibre des classes dans notre ensemble de données @lin2017focal.
 
-Dans notre travail ultérieur, nous visons à incorporer certaines de ces solutions et nous nous attendons à améliorer les performances de notre modèle par rapport à la classification des nodules pulmonaires, pour maîtriser la classification des sous-types de nodules, tels que solides, non-solides, partiellement solides, pérfissuraux, calcifiés et spiculés. Différents traitements sont nécessaires pour différents types de nodules, ce qui rend leur détection précise encore plus pertinente pour un traitement réussi. #finchapiter
+Dans notre travail ultérieur, nous visons à incorporer certaines de ces solutions et nous nous attendons à améliorer les performances de notre modèle par rapport à la classification des nodules pulmonaires, pour maîtriser la classification des sous-types de nodules, tels que solides, non-solides, partiellement solides, pérfissuraux, calcifiés et spiculés. Différents traitements sont nécessaires pour différents types de nodules, ce qui rend leur détection précise encore plus pertinente pour un traitement réussi.
 
 == conclusion
 
@@ -179,4 +187,4 @@ Le modèle a montré un léger avantage dans l'identification des non-nodules, p
 
 Les résultats de notre étude soulignent que le Deep-Learning est efficace pour la détection et la classification des nodules pulmonaires. Il a le potentiel pour faciliter le diagnostic précoce du cancer du poumon, ce qui peut améliorer les chances de survie et l'efficacité du traitement.
 
-Nous cherchons à améliorer notre modèle pour perfectionner sa performance, en particulier dans la détection des sous-types de nodules pulmonaires. Pour cela, des recherches supplémentaires sont nécessaires.
+Nous cherchons à améliorer notre modèle pour perfectionner sa performance, en particulier dans la détection des sous-types de nodules pulmonaires. Pour cela, des recherches supplémentaires sont nécessaires. #finchapiter
