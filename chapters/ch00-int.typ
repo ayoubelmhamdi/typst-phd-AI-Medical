@@ -1,4 +1,5 @@
 #import "../tablex.typ": tablex, cellx, rowspanx, colspanx
+#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 
 = INTRODUCTION GÉNÉRALE.
 == Étendue du problème.
@@ -25,4 +26,4 @@ Un changement significatif dans le paradigme de détection des nodules pulmonair
 
 Des chercheurs ont également suggéré plusieurs stratégies prometteuses pour la détection des anomalies pulmonaires, comme l'utilisation de patches 3D pour une précision accrue avec les données volumétriques et la réduction des faux positifs@Setio2016PulmonaryNetworks@Roth2016ImprovingAggregation. L'extraction graduelle des caractéristiques, une méthode séquentielle qui fusionne l'information de contexte à différentes échelles, offre une alternative à la pratique conventionnelle de l'intégration radicale@Shen2015@Shen2017Multi-cropClassification.
 
-La combinaison holistique de ces approches a permis d'obtenir des modèles plus fiables et robustes pour la détection des nodules pulmonaires. Les régions entourant les nodules pulmonaires potentiels ont été minutieusement examinées et comparées à d'autres organes ou tissus pour améliorer la différenciation des nodules@Shen2017Multi-cropClassification. Les améliorations futures pourraient inclure l'intégration de données contextuelles provenant des zones adjacentes aux nodules, renforçant ainsi potentiellement les performances et l'exactitude des modèles@Dou2016Multi-levelDetection@Shen2017Multi-cropClassification.
+La combinaison holistique de ces approches a permis d'obtenir des modèles plus fiables et robustes pour la détection des nodules pulmonaires. Les régions entourant les nodules pulmonaires potentiels ont été minutieusement examinées et comparées à d'autres organes ou tissus pour améliorer la différenciation des nodules@Shen2017Multi-cropClassification. Les améliorations futures pourraient inclure l'intégration de données contextuelles provenant des zones adjacentes aux nodules, renforçant ainsi potentiellement les performances et l'exactitude des modèles@Dou2016Multi-levelDetection@Shen2017Multi-cropClassification. #finchapiter
