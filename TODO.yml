@@ -47,16 +47,22 @@ BIB:
       acc = 99% error
 
 CH2:
-  - definitions.
-  - image trwo cnn
-  - conclusion
-  - corrige image de un seul neurons.
+  - title for youssef images.
+  - ref
+  # - conc
+  - continute de parragraphe
+
+CH2:
+  # - definitions.
+  # - image trwo cnn
+  # - conclusion
+  # - ref wikipedia as notes.
 CH3:
-  - Model correction
-  - CNN image
-  - math recall presssion f1-score.
-  - dot at the end of titles.
-  -  #finchapiter att the end
+  # - Model correction
+  # - CNN image
+  # - math recall presssion f1-score.
+  # -  #finchapiter att the end
+  # - dot at the end of titles.
 
 LEARN:
   - conv layer
