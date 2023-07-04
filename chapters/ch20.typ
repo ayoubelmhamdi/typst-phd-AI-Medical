@@ -1,7 +1,7 @@
 #import "../functions.typ": heading_center, images, italic,linkb, dots
 #import "../tablex.typ": tablex, cellx, rowspanx, colspanx, hlinex
 
-#let finchapiter = text(size: 18pt, fill:rgb("#1E045B"),"■")
+#let finchapiter = text(fill:rgb("#1E045B"),"■")
 
 = DÉTECTION DES NODULES PULMONAIRES DU CANCER.
 == Introduction.
