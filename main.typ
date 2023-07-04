@@ -33,15 +33,15 @@
   doc
 )
 
+#counter(page).update(0)
 #cover(book_info)
-// remerci
-// #include "chapters/ch00-rem.typ"
+#include "chapters/ch00-rem.typ"
 
 = TABLE DES MATIÈRES.
 
 #outline()
-// #include "chapters/resume.typ"
 #counter(page).update(0)
+#include "chapters/resume.typ"
 
 #include "chapters/ch00-int.typ"
 #include "chapters/ch01-ana.typ"
