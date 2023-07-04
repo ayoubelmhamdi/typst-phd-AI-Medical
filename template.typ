@@ -294,9 +294,12 @@
 
   set page(
       footer: locate( loc => {
-         if counter(page).at(loc).first() > 2 {
+         if counter(page).at(loc).first() > 0 {
            align(center)[#counter(page).display()]
          }
+         // else{
+         //  [HIDE: ] + counter(page).display()
+         // }
       })
   )
   body
