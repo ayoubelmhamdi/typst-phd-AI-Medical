@@ -1,6 +1,6 @@
 #import "../functions.typ": heading_center, images, italic
 
-#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
+#let finchapiter = text(fill:rgb("#1E045B"),[■])
 
 
 = ANATOMIE DES NODULES PULMONAIRES.
@@ -8,92 +8,31 @@
 == Introduction.
 === Definition.
 
-Les nodules pulmonaires sont de petites lésions ou des masses arrondies
-qui se forment dans les poumons et qui sont détectées par des examens
-d'imagerie tels que les radiographies pulmonaires ou les
-tomodensitogrammes. Leur taille peut varier de quelques millimètres à
-plusieurs centimètres de diamètre. Il existe deux principaux types de
-nodules pulmonaires : les nodules bénins, qui sont généralement non
-cancéreux et peuvent être causés par une infection, une inflammation ou
-des réactions à des substances inhalées, et les nodules malins, qui
-peuvent être associés à un cancer du poumon, bien que tous les nodules
-malins ne soient pas nécessairement cancéreux. L'évaluation des nodules
-pulmonaires implique souvent une surveillance régulière avec des examens
-d'imagerie répétés, et parfois une biopsie pour déterminer la nature du
-nodule. Le traitement dépend de la nature du nodule, de sa taille, de sa
-croissance et des symptômes éventuels.
-
-Outre la surveillance régulière et la possibilité d'une biopsie pour
-évaluer les nodules pulmonaires, d'autres facteurs peuvent également
-être pris en compte dans le traitement. Par exemple, si un nodule est
-considéré comme bénin et ne présente pas de risque significatif, il peut
-être conseillé de simplement surveiller son évolution dans le temps sans
-intervention médicale immédiate. En revanche, si un nodule est suspecté
-d'être malin ou s'il présente des caractéristiques inquiétantes, un
-traitement plus agre
+Les nodules pulmonaires, de petites masses arrondies formées dans les poumons, apparaissent lors des examens d'imagerie. Leurs caractéristiques déterminent le traitement : nature (bénin ou malin), taille, croissance, et symptômes éventuels. Pour les évaluer, on utilise souvent la surveillance régulière et la biopsie.
 
 #images(
-  filename:"images/youssef1.png",
+  filename:"images/nod2.png",
   caption:[
-          aa
+          Nodule pulmonaire.
 	  ],
-  width: 70%
+  width: 40%
   // ref:
 )
 
 
 === Types de nodules pulmonaire.
 
-Il existe plusieurs types de nodules pulmonaires, en fonction de leurs
-caractéristiques et de leurs causes. Voici quelques-uns des types les
-plus courants de nodules pulmonaires:
+Les nodules pulmonaires, petites masses arrondies apparues dans les poumons, sont détectés par des examens d'imagerie. Leur traitement dépend de leur nature, taille, croissance et symptômes éventuels. Dans l'évaluation de ces nodules, la surveillance régulière et la biopsie jouent un rôle clé.
 
--   *Nodules infectieux:* Ces nodules sont causés par des infections pulmonaires, telles que la tuberculose, la pneumonie ou les infections fongiques. Ils peuvent présenter des caractéristiques spécifiques en fonction de l'agent pathogène responsable de l'infection.
+Plusieurs types de nodules pulmonaires existent#footnote[https://www.ocean-imagerie.fr/fiche-conseil/nodule-pulmonaire/] : les infectieux, granulomateux, calcifiés et carcinoïdes sont les plus courants. Les nodules infectieux résultent d'infections pulmonaires, comme la tuberculose, la pneumonie ou les infections fongiques, avec des caractéristiques variant selon l'agent pathogène. Les nodules granulomateux se distinguent par une inflammation granulomateuse, souvent liée à des infections spécifiques comme la tuberculose ou la sarcoïdose. Les nodules calcifiés, qui résultent d'infections antérieures ou d'autres processus inflammatoires, contiennent des dépôts de calcification. Les carcinoïdes se développent à partir de cellules neuroendocrines dans les poumons et peuvent être bénins ou malins.
 
--   *Nodules granulomateux:* Ces nodules sont caractérisés par une inflammation granulomateuse et peuvent être associés à des infections spécifiques, telles que la tuberculose ou la sarcoïdose.
+A noter qu'un diagnostic précis des nodules pulmonaires nécessite un examen médical détaillé, incluant des examens d'imagerie, des analyses de sang, et parfois une biopsie pour déterminer la nature du nodule.
 
--   *Nodules calcifiés:* Ces nodules se caractérisent par des dépôts de calcification à l'intérieur de la lésion. Ils peuvent résulter d'infections antérieures ou d'autres processus inflammatoires.
-
--   *Nodules carcinoïdes:* Ces nodules sont généralement petits et se développent à partir de cellules neuroendocrines dans les poumons. Ils peuvent être bénins ou malins.
-
-Il est important de noter que le diagnostic précis des nodules
-pulmonaires nécessite souvent un examen médical approfondi, comprenant
-des examens d'imagerie, des analyses de sang et parfois une biopsie
-pour déterminer la nature du nodule.
+En résumé, la classification des nodules pulmonaires se fait selon leurs causes et caractéristiques. Un examen médical détaillé est souvent nécessaire pour un diagnostic précis.
 
 === Causes des nodule pulmonaire.
 
-Les nodules pulmonaires peuvent avoir des causes diverses, et il est
-important de noter que certaines sont plus fréquentes que d'autres. Les
-infections pulmonaires sont l'une des principales causes des nodules
-pulmonaires, notamment les infections telles que la tuberculose, la
-pneumonie bactérienne, la pneumonie à mycoplasmes, la pneumonie à
-légionelles, la pneumonie fongique et d'autres infections bactériennes
-ou virales. Ces infections peuvent provoquer une inflammation des tissus
-pulmonaires, entraînant la formation de nodules. Les maladies
-inflammatoires sont également associées aux nodules pulmonaires, comme
-la sarcoïdose, qui se caractérise par la formation de granulomes dans
-divers organes, y compris les poumons.
-
-La granulomatose de Wegener est
-une autre maladie inflammatoire qui peut provoquer des nodules
-pulmonaires, accompagnés de lésions dans les voies respiratoires
-supérieures et les reins. Les réactions à des substances inhalées sont
-une autre cause, comme l'exposition à la silice, à l'amiante, au
-baryum ou à d'autres matériaux, qui peuvent entraîner une inflammation
-des poumons et la formation de nodules. Les tumeurs bénignes, telles que
-les hamartomes, peuvent également se présenter sous la forme de nodules
-pulmonaires.
-
-Cependant, il est essentiel de noter que les nodules
-pulmonaires malins peuvent être causés par des tumeurs malignes, y
-compris le cancer du poumon, ainsi que par des cancers métastatiques
-provenant d'autres parties du corps. Certaines maladies vasculaires,
-comme les nodules rhumatoïdes associés à la polyarthrite rhumatoïde ou
-la vascularite, peuvent également entraîner la formation de nodules
-pulmonaires. Pour un diagnostic précis, des examens approfondis tels que
-des radiographies, des tomographies, des analyses de sang ou des
-biopsies doivent être effectués par un professionnel de la santé.
+Les nodules pulmonaires peuvent naître de diverses causes#footnote("https://cancer.ca/fr/cancer-information/cancer-types/lung/what-is-lung-cancer/lung-nodules"). Certaines, comme les infections pulmonaires, les maladies inflammatoires, les réactions à des substances inhalées et les tumeurs bénignes, sont plus courantes. Les nodules malins peuvent découler de tumeurs malignes, y compris le cancer du poumon ou des cancers métastatiques. Des examens détaillés sont nécessaires pour diagnostiquer précisément les nodules pulmonaires. Ils permettent de déterminer l'origine exacte des nodules et d'orienter le traitement adéquat.
 
 === Importance de l'etudes des nodules pulmonaire.
 
@@ -143,15 +82,6 @@ précise et des recommandations appropriées concernant le traitement des
 nodules pulmonaires.
 
 
-#images(
-  filename:"images/youssef2.png",
-  caption:[
-          aa
-	  ],
-  width: 70%
-  // ref:
-)
-
 == Antomie internes et externes du poumant.
 
 L'anatomie pulmonaire est l'étude de la structure des poumons. Les
@@ -168,15 +98,6 @@ On distingue trois régions dans le thorax :
 - le médiastin: occupé par le cœur, les vaisseaux, trachée, œsophage voies lymphatiques... supérieure et a l'arc aortique
 
 - les deux cavités pleuropulmonaires occupées par les poumons. Les deux poumons sont séparés par le médiastin. Le sommet du poumon dépasse légèrement au-dessus de la clavicule : le dôme du poumon se situe au niveau sus-claviculaire.
-
-#images(
-  filename:"images/youssef3.png",
-  caption:[
-          aa
-	  ],
-  width: 70%
-  // ref:
-)
 
 === Morphplogie externe.
 
@@ -197,11 +118,11 @@ On distingue trois régions dans le thorax :
     - un tissu conjonctivo-élastique, constituant la charpente fibreuse
 
 #images(
-  filename:"images/youssef4.png",
+  filename:"images/poum_str.png",
   caption:[
-          aa
+          La structure de poumon#footnote("https://cancer.ca/fr/cancer-information/cancer-types/lung/what-is-lung-cancer/the-lungs").
 	  ],
-  width: 70%
+  width: 100%
   // ref:
 )
 
@@ -250,74 +171,36 @@ l'organisme en oxygène et en gaz carbonique.
 
 === Diagnostique des maladies pulmonaire.
 
-Les méthodes diagnostiques couramment utilisées pour évaluer les
-maladies pulmonaires comprennent l'anamnèse et l'examen physique afin
-de recueillir des informations détaillées sur les symptômes et les
-antécédents médicaux du patient, ainsi que l'examen physique afin de
-détecter des signes spécifiques liés aux affections pulmonaires. Les
-tests de la fonction pulmonaire, tels que la spirométrie, la
-pléthysmographie et la mesure des gaz sanguins, permettent d'évaluer la
-capacité pulmonaire. Les radiographies du thorax fournissent des images
-des poumons et des structures adjacentes afin de détecter les anomalies.
-La tomodensitométrie thoracique (CT) permet une visualisation plus
-détaillée et peut guider les procédures. L'échographie thoracique crée
-des images en temps réel des poumons et des structures environnantes.
-Une biopsie pulmonaire peut être pratiquée pour prélever un échantillon
-de tissu pulmonaire à des fins d'analyse. La scintigraphie pulmonaire
-utilise une substance radioactive pour évaluer la circulation sanguine
-et la ventilation pulmonaire. Le choix des méthodes de diagnostic dépend
-des symptômes, des antécédents médicaux et de la suspicion clinique du
-médecin.
+Pour diagnostiquer les maladies pulmonaires, les médecins recourent à diverses méthodes. Celles-ci débutent par l'anamnèse, l'examen physique et les tests de la fonction pulmonaire, essentiels à l'évaluation de la santé pulmonaire. Les poumons sont ensuite visualisés et leurs anomalies détectées à l'aide de techniques d'imagerie comme la radiographie, la tomodensitométrie, l'échographie, la biopsie et la scintigraphie pulmonaire.
+
+Le choix des procédures de diagnostic est déterminé par les caractéristiques spécifiques du patient et les soupçons cliniques du médecin. Ce dernier, en se basant sur les résultats des examens initiaux, peut suggérer des tests supplémentaires pour établir un diagnostic rigoureux. Ces tests permettent d'identifier la cause exacte de la pathologie pulmonaire et d'orienter le choix du traitement adéquat.
 
 == Cancer du poumon et nodules pulmonaire.
 
 === Causes, types et stades des cancer de poumon.
 
-Le cancer du poumon est une maladie dans laquelle des cellules anormales
-se développent de manière incontrôlée dans le tissu pulmonaire. Les
-principales causes du cancer du poumon sont liées à l'exposition au
-tabagisme, au tabagisme passif, à l'exposition professionnelle à des
-substances cancérigènes telles que l'amiante ou les produits chimiques
-en suspension dans l'air, ainsi qu'à des facteurs génétiques et
-environnementaux.
+Le cancer du poumon, maladie qui voit des cellules anormales croître de manière incontrôlée dans le tissu pulmonaire, découle principalement de l'exposition à la cigarette, le tabagisme passif, l'exposition professionnelle à des subtances cancérigènes comme l'amiante ou les produits chimiques aéroportés, ainsi qu'à des facteurs génétiques et environnementaux.
 
-Il existe deux principaux types de cancer du poumon :
+Deux principales versions de ce cancer existent#footnote("https://www.e-cancer.fr/Patients-et-proches/Les-cancers/Cancer-du-poumon/Les-points-cles"):
 
--   Le cancer du poumon à petites cellules (CPPC) : Ce type de cancer représente environ 10 à 15 % de tous les cas de cancer du poumon. Il est souvent lié au tabagisme et se propage rapidement à d'autres parties du corps.
+- Le cancer du poumon à petites cellules (CPPC) est le responsable d'environ 10 à 15 % des cas, souvent associé au tabagisme et se propage rapidement dans le corps.
+- Le cancer du poumon non à petites cellules (CPNPC) est plus fréquent, représentant 85 à 90 % des cas. Il comprend des sous-types comme l'adénocarcinome, le carcinome épidermoïde et le carcinome à grandes cellules.
 
--   Cancer du poumon non à petites cellules (CPNPC) : Il s'agit du type de cancer le plus courant, représentant environ 85 à 90 % des cas. Le CPNPC comprend plusieurs sous-types, tels que l'adénocarcinome, le carcinome épidermoïde et le carcinome à grandes cellules.
+La stadification du cancer du poumon utilise couramment le système TNM (tumeur, ganglions lymphatiques, métastases) qui évalue la taille de la tumeur originelle (T), l'atteinte des ganglions lymphatiques (N) et la présence de métastases lointaines (M). Les stades se classent comme suit#footnote("https://www.elsan.care/fr/radiotherapie-metz-iprm/nos-actualites/stades-du-cancer-du-poumon-et-esperance-de-vie."):
 
-En termes de stadification du cancer du poumon, le système de
-classification le plus couramment utilisé est le système TNM (tumeur,
-ganglions lymphatiques, métastases). Il évalue la taille de la tumeur
-primaire (T), l'atteinte des ganglions lymphatiques (N) et la présence
-de métastases à distance (M). Les stades du cancer du poumon sont
-généralement classés comme suit :
+- *Stade I* : tumeur limitée au poumon, sans atteinte des ganglions lymphatiques ni métastases à distance.
+- *Stade II* : la tumeur a envahi les ganglions lymphatiques proches du poumon touché ou a infiltré les structures avoisinantes.
+- *Stade III* : la tumeur est plus avancée localement et a envahi plus de ganglions lymphatiques ou de structures adjacentes.
+- *Stade IV* : le cancer a migré à d'autres parties du corps, souvent éloignées des poumons.
 
-- *Stade I* : la tumeur est confinée au poumon, sans atteinte des ganglions lymphatiques ni métastases à distance.
+Il convient de noter que la classification et la stadification peuvent dépendre du système utilisé (par exemple, TNM ou la classification de l'American Joint Committee on Cancer - AJCC).
 
-- *Stade II* : la tumeur s'est propagée aux ganglions lymphatiques proches du poumon atteint ou a envahi les structures voisines.
-
-- *Stade III* : la tumeur est localement avancée et a envahi davantage de ganglions lymphatiques ou de structures adjacentes.
-
-- *Stade IV* : le cancer s'est propagé à d'autres parties du corps, souvent à distance des poumons.
-
-Il est important de noter que la classification et la stadification
-peuvent varier en fonction du système de classification utilisé (par
-exemple, le système TNM ou la classification de l'American Joint
-Committee on Cancer - AJCC).
-
-Le diagnostic précis, le type et le stade du cancer du poumon
-nécessitent une évaluation approfondie par un professionnel de la santé,
-généralement un oncologue ou un pneumologue, à l'aide d'une
-combinaison de tests, notamment des biopsies, des examens d'imagerie
-(tels que le scanner thoracique et le PET scan), des analyses de sang et
-des tests de la fonction pulmonaire.
+Un professionnel de santé, souvent un oncologue ou un pneumologue, à l'aide d'une série d'examens tels que biopsies, examens d'imagerie (comme le scanner thoracique et le PET scan), analyses de sang et tests de la fonction pulmonaire, peut déterminer le diagnostic précis, le type et le stade du cancer du poumon.
 
 #images(
   filename:"images/youssef5.png",
   caption:[
-          aa
+          Stade du cancer du poumon.
 	  ],
   width: 70%
   // ref:
@@ -325,37 +208,27 @@ des tests de la fonction pulmonaire.
 
 === Methodes de traitement du cancer du poumon.
 
-Le traitement du cancer du poumon est complexe et dépend de plusieurs
-facteurs, notamment le type de cancer, le stade de la maladie, la
-présence de métastases et les caractéristiques individuelles du patient.
-Plusieurs méthodes de traitement sont couramment utilisées. La chirurgie
-est souvent réalisée pour enlever la tumeur et, si nécessaire, les
-ganglions lymphatiques voisins. Différentes procédures chirurgicales,
-telles que la lobectomie, la pneumonectomie ou la résection cunéiforme,
-peuvent être effectuées en fonction de l'étendue de la maladie. La
-radiothérapie utilise des rayonnements de haute énergie pour détruire
-les cellules cancéreuses. Elle peut être administrée avant ou après la
-chirurgie, ou comme traitement principal pour les patients inopérables
-ou pour soulager les symptômes. La chimiothérapie consiste à utiliser
-des médicaments anticancéreux pour détruire les cellules cancéreuses.
-Elle peut être administrée avant ou après la chirurgie, ou comme
-traitement principal pour contrôler la maladie avancée ou métastatique.
-Les thérapies ciblées sont des médicaments qui ciblent spécifiquement
-certaines altérations génétiques ou protéiques présentes dans les
-cellules cancéreuses. Elles sont utilisées pour traiter des sous-types
-spécifiques de cancer du poumon non à petites cellules.
-L'immunothérapie stimule le système immunitaire du patient pour qu'il
-lutte contre les cellules cancéreuses. Elle peut être réalisée en
-utilisant des inhibiteurs de points de contrôle immunitaire pour traiter
-certains types de cancer du poumon avancé ou métastatique. La thérapie
-photodynamique combine l'utilisation d'un médicament
-photosensibilisant et d'une lumière laser pour détruire les cellules
-cancéreuses, principalement pour les petites tumeurs. Enfin, les soins
-palliatifs sont essentiels pour soulager les symptômes, améliorer la
-qualité de vie et fournir un soutien général aux patients atteints de
-cancer du poumon avancé ou métastatique. Le choix du traitement dépend
-de la situation individuelle du patient et doit être discuté avec une
-équipe médicale spécialisée dans le traitement du cancer du poumon.
+Le traitement du cancer du poumon, complexe, dépend de plusieurs facteurs : le type et le stade du cancer, la présence de métastases, et les caractéristiques spécifiques du patient#footnote("https://www.fondation-arc.org/cancer/cancer-poumon/traitement-cancer").
+
+- La chirurgie permet d'ôter la tumeur et, si nécessaire, les ganglions lymphatiques proches. En fonction de l'extension de la maladie, différentes opérations, comme la lobectomie, la pneumonectomie ou la résection cunéiforme, peuvent être réalisées.
+- La radiothérapie, utilisant des radiations de haute énergie pour détruire les cellules cancéreuses, peut être administrée avant ou après la chirurgie, ou être le traitement principal pour les patients inopérables ou afin de soulager les symptômes.
+
+#images(
+  filename:"images/radio1.jpg",
+  caption:[
+          Accélérateur linéaire de radiothérapie.
+	  ],
+  width: 50%
+  // ref:
+)
+
+- La chimiothérapie, basée sur des médicaments anticancéreux, peut être administrée avant ou après la chirurgie, ou comme traitement principal en cas de maladie avancée ou métastatique.
+- Les thérapies ciblées sont des médicaments qui ciblent directement certaines altérations génétiques ou protéiques des cellules cancéreuses, utilisés pour traiter des sous-types spécifiques de cancer du poumon non à petites cellules.
+- L'immunothérapie stimule le système immunitaire du patient pour combattre les cellules cancéreuses. Des inhibiteurs de points de contrôle immunitaire peuvent être utilisés pour traiter certains types de cancers du poumon avancés ou métastatiques.
+- La thérapie photodynamique, qui combine l'utilisation d'un médicament photosensibilisant et d'une lumière laser, détruit principalement de petites tumeurs.
+- Les soins palliatifs visent à soulager les symptômes, améliorer la qualité de vie et fournir un soutien aux patients atteints d'un cancer du poumon avancé ou métastatique.
+
+Le choix du traitement est dicté par la situation individuelle du patient et doit être discuté avec une équipe médicale spécialisée dans le traitement du cancer du poumon.
 
 == Conclusion.
 
