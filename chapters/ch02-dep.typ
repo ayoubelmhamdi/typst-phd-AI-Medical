@@ -1,4 +1,5 @@
 #import "../functions.typ": heading_center, images, italic
+#import "../tablex.typ": tablex, cellx, rowspanx, colspanx, hlinex
 
 #let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 
@@ -8,11 +9,11 @@
 == Introduction.
 
 L'apprentissage profond est une branche de l'apprentissage
-automatique@wikiDeeplearning, qui est lui-même un domaine de l'intelligence
+automatique#footnote[https://fr.wikipedia.org/wiki/Apprentissage_profond] <wikiDeeplearning>, qui est lui-même un domaine de l'intelligence
 artificielle. L'apprentissage profond permet de prédire ou d'analyser des
 données de haute dimension ou complexes, comme les images, les textes ou les
 sons, d'une manière similaire au cerveau humain. L'apprentissage profond
-utilise des réseaux de neurones artificiels multicouches@ibmDeeplearning qui
+utilise des réseaux de neurones artificiels multicouches#footnote[https://www.ibm.com/topics/deep-learning] <ibmDeeplearning> qui
 peuvent extraire les sens et les motifs cachés dans les données sans avoir
 besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une
 grande capacité d'adaptation et d'évolution avec le changement de
@@ -65,7 +66,7 @@ demandées avec précision ou acceptabilité.
 Cet exemple peut nous donner une idée qui nous aide à comprendre
 l'apprentissage en profondeur, mais il résume des concepts fondamentaux de
 l'apprentissage en profondeur tels que la fonction de coût ou la fonction de
-régression graduelle et l'optimisation@wikiDeeplearning, ce qui est clair pour
+régression graduelle et l'optimisation<wikideeplearning>, ce qui est clair pour
 nous dans des applications telles que la traduction automatique ou la vision
 par ordinateur.
 
@@ -84,7 +85,7 @@ naturelles.
 En vision par ordinateur, un système d'apprentissage en profondeur utilise des
 réseaux neuronaux artificiels pour extraire des informations et des
 perspectives à partir d'images et de vidéos. Certaines applications dans ce
-domaine sont@brownlee2019:
+domaine sont#footnote[https://machinelearningmastery.com/applications-of-deep-learning-for-computer-vision/] <brownlee2019>:
 
 - La *classification d'images* consiste à attribuer une étiquette à une image ou une photographie entière.
 
@@ -128,7 +129,7 @@ d'activation pour produire un signal de sortie.
 
 #images(
   filename:"images/reseuxActicvation.png",
-  caption:[architecture d'un perceptron multicouche.],
+  caption:[Architecture de modèle multicouche.],
   width: 50%
   // ref:
 )
@@ -151,18 +152,12 @@ $ F = 9/5  C + 32 $
 
 On peut le représenter par le schéma de réseau suivant:
 #images(
-  filename:"images/celsius-fahrenheit.png",
-  caption: [Relation enter deux échelles de température Celsius et Fahrenheit.],
-  width: 10%
+  filename:"images/1-nerons.svg",
+  caption:[Structure mono-neurone..],
+  width: 60%
   // ref:
 )
 
-#images(
-  filename:"images/celsius-fahrenheit.png",
-  caption: [Relation enter deux échelles de température Celsius et Fahrenheit.],
-  width: 50%
-  // ref:
-)
 
 Dans cette formule, nous pouvons définir deux facteurs principaux : le poids
 des entrées et l'ordonnée à l'origine. Le poids des entrées est un nombre qui
@@ -172,6 +167,14 @@ est 1.8. L'ordonnée à l'origine est un nombre qui est ajouté au produit du
 poids des entrées par la valeur de la variable indépendante pour déterminer la
 valeur de la variable dépendante lorsque la variable indépendante est égale à
 zéro. Dans ce cas, l'ordonnée à l'origine est 32.
+
+
+#images(
+  filename:"images/celsius-fahrenheit.png",
+  caption: [Relation enter deux échelles de température Celsius et Fahrenheit.],
+  width: 50%
+  // ref:
+)
 
 Ces exemples montrent comment utiliser une fonction linéaire pour convertir la
 température de Celsius en Fahrenheit. Mais comment utiliser une fonction
@@ -193,22 +196,30 @@ Dans l'exemple de conversion de la température de Celsius en Fahrenheit, nous
 utilisons un tableau avec des mesures différentes de température dans les deux
 systèmes comme des paires d'entrées et de résultats cibles :
 
-#align(center,
-  table(
-    columns: (10em, 10em),
-    inset: 10pt,
-    align: horizon,
-    [°C]  ,[°F],
-    [-40 ],[ -40 ],
-    [-20 ],[ -4  ],
-    [ 0  ],[ 32  ],
-    [ 20 ],[ 68  ],
-    [ 40 ],[ 104 ],
-    [ 60 ],[ 140 ],
-    [ 80 ],[ 176 ],
+#figure(
+  tablex(
+    columns: 2,
+    align: center + horizon,
+    auto-vlines: false,
+    repeat-header: false,
+
+    [*température en Celsius °C*],  [*température en Fahrenheit °F *],
+
+
+    [-40 ],[ -40 ], hlinex(stroke: 0.25pt),
+    [-20 ],[ -4  ], hlinex(stroke: 0.25pt),
+    [ 0  ],[ 32  ], hlinex(stroke: 0.25pt),
+    [ 20 ],[ 68  ], hlinex(stroke: 0.25pt),
+    [ 40 ],[ 104 ], hlinex(stroke: 0.25pt),
+    [ 60 ],[ 140 ], hlinex(stroke: 0.25pt),
+    [ 80 ],[ 176 ], hlinex(stroke: 0.25pt),
     [ 100],[ 212 ],
-  )
+
+  ),
+  caption: [Conversion de températures entre Celsius et Fahrenheit],
 )
+
+
 
 Ce tableau nous permet de comparer la valeur de la température en Celsius avec
 sa valeur correspondante en Fahrenheit. Mais que se passe-t-il si nous voulons
@@ -463,7 +474,7 @@ des valeurs aléatoires entre $-40°C$ et $100°C$. On peut voir que le modèle
 aléatoire a un MAE beaucoup plus élevé que le modèle entraîné.
 
 On peut conclure que le modèle de régression
-linéaire@wikipediaLinearRegression@wikipediaLinearRegressionfr@wikipediaAlgorithmeDuGradient
+linéaire#footnote[https://en.wikipedia.org/wiki/Linear_regression]<wikipediaLinearRegression>, #footnote[https://fr.wikipedia.org/wiki/R%C3%A9gression_lin%C3%A9aire]<wikipediaLinearRegressionfr>, #footnote[https://fr.wikipedia.org/wiki/Algorithme_du_gradient]<wikipediaAlgorithmeDuGradient>
 est capable de générer des prédictions très proches des valeurs réelles, et
 qu'il a réussi à apprendre la formule de conversion entre les températures en
 Celsius et en Fahrenheit. Ce modèle pourrait être utilisé pour convertir des
@@ -496,7 +507,7 @@ températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
  *
  * On a aussi exploré les réseaux de neurones artificiels, qui sont des modèles
  * d'intelligence artificielle qui utilisent des cellules nerveuses artificielles
- * pour convertir les entrées en sorties@wikiDeeplearning. On a vu comment chaque
+ * pour convertir les entrées en sorties<wikiDeeplearning>. On a vu comment chaque
  * cellule nerveuse reçoit des signaux d'autres cellules et envoie des signaux à
  * d'autres cellules. Chaque signal est ajouté à une valeur de poids qui détermine
  * sa force et son importance. Chaque cellule nerveuse calcule la somme des
@@ -523,7 +534,7 @@ températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
  * feraient en analysant continuellement les données avec une structure logique
  * donnée. Le deep learning utilise des structures multicouches d'algorithmes
  * appelées réseaux neuronaux, qui peuvent extraire les sens et les motifs cachés
- * dans les données sans avoir besoin d'intervention humaine@wikiDeeplearning.
+ * dans les données sans avoir besoin d'intervention humaine<wikiDeeplearning>.
  * #finchapiter
  *
  * = RÉFÉRENCES BIBLIOGRAPHIQUES.
@@ -663,4 +674,22 @@ multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types.
 Le type de réseau de neurones est choisi en fonction du problème posé et des
 données disponibles@lecun2015deep.
 
-== CONCLUSION.
+== Conversion d'images en vecteurs pour l'analyse par réseaux neuronaux.
+
+La détection des nodules pulmonaires à l'aide du deep learning repose sur le traitement d'images, spécifiquement des scans de poumons. Ces images, représentées en matrices de pixels, constituent la matière première de notre apprentissage automatique. Chaque pixel de l'image correspond à une valeur qui détermine son intensité ou sa couleur.
+
+En exploitant les caractéristiques matricielles de l'image, nous effectuons des opérations comme la rotation ou le filtrage. Par exemple, une rotation de 90 degrés s'obtient en transposant la matrice. Pour filtrer, il suffit de multiplier la matrice de l'image par un masque, aussi appelé noyau, contenant des coefficients définissant l'effet recherché, tels qu'une amélioration de la netteté ou une détection de contours.
+
+Nos réseaux neuronaux nécessitent des vecteurs en entrée et en sortie - des matrices en une dimension. Cette configuration simplifie les calculs et garantit la compatibilité entre les couches du réseau. Pour transformer notre image en un tel vecteur, nous la redimensionnons en fonction de la taille attendue par le réseau, ensuite nous l’aplatissons en une ligne ou une colonne, et enfin, nous la normalisons, pour que ses valeurs soient allant de 0 à 1. Ces étapes permettent de réduire le nombre de paramètres à prendre en compte et d'améliorer ainsi l'efficacité de notre réseau.
+
+Représenter les images en tant que matrice, opérer sur elles grâce à ces caractéristiques matricielles et les transformer en vecteurs pour les intégrer à notre réseau neuronal, sont des étapes cruciales dans l'exploitation du Deep Learning pour la détection de nodules pulmonaires avec l'ensemble de données Luna16.
+
+== Conclusion.
+
+Après avoir exploré les principes fondamentaux du deep learning, la façon dont les réseaux neuronaux artificiels fonctionnent et le rôle des matrices dans cet apprentissage profond, nous avons pu comprendre l'importance de transformer les données d'images en vecteurs pour leur analyse par les réseaux de neurones. Ce processus s'avère d'une grande importance pour la détection des nodules pulmonaires sur l'ensemble de données Luna16.
+
+Nous avons discuté en profondeur du fonctionnement des réseaux de neurones artificiels, moteurs du Deep Learning, capables d'extracter et d'interpréter des motifs complexes dans les données. Les matrices jouent un rôle central, stockant et mettant à jour les paramètres dans les réseaux neuronaux.
+
+Le processus de transformation des images en vecteurs, pour leur analyse par les réseaux neuronaux, a également été souligné. Cette transformation facilite l'intégration des images dans le réseau et optimise son efficacité.
+
+En résumé, le Deep Learning, grâce à sa capacité à traiter et analyser des images et sa grande adaptabilité, s'impose comme un outil essentiel dans la détection des nodules pulmonaires. L'utilisation de l'ensemble de données Luna16 présente un potentiel énorme pour améliorer la précision et la rapidité des diagnostics, contribuant de manière significative à la lutte contre le cancer du poumon. #finchapiter
