@@ -1,7 +1,7 @@
 #import "../functions.typ": heading_center, images, italic
 #import "../tablex.typ": tablex, cellx, rowspanx, colspanx, hlinex
 
-#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
+#let finchapiter = text(fill:rgb("#1E045B"),[■])
 
 
 = APERÇU SUR DEEP LEARNING.
