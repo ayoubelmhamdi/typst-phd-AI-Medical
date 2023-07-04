@@ -1,6 +1,6 @@
 #import "../functions.typ": heading_center, images, italic,linkb
 
-#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
+#let finchapiter = text(fill:rgb("#1E045B"),[■])
 
 /*
  *
