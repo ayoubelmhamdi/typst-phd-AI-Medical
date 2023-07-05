@@ -1,6 +1,6 @@
 #import "../functions.typ": heading_center, images, italic
 
-#let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
+#let finchapiter = text(fill:rgb("#1E045B"),[■])
 
 = RÉSUMÉ.
 Les images médicales jouent un rôle important dans le diagnostic et la prise en charge des cancers. Les oncologues analysent des images pour déterminer les différentes caractéristiques de la tumeur, pour proposer un traitement adapté et suivre l'évolution de la maladie.
