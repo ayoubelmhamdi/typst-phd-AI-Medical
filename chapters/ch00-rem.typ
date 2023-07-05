@@ -4,9 +4,11 @@
 
 = REMERCIEMENTS.
 
-Nous tenons à remercier d'abord toutes les équipes pédagogiques de *la Filière
-Science de la Matière Physique* de la Faculté des Sciences à Meknès, ainsi que les
-professeurs ayant contribué activement à notre formation.
+
+Nous tenons à remercier d'abord toutes les équipes pédagogiques du Master
+*Technique des Rayonnements et Physique Médicale* de la Faculté des Sciences à
+Meknès,  ainsi que les professeurs ayant contribué activement à notre
+formation.
 
 Nous profitons de cette occasion, pour remercier vivement notre Professeur
 *RAJAE SEBIHI* qui n'a pas cessé de nous encourager tout au long de
