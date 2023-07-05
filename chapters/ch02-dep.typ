@@ -17,7 +17,7 @@ utilise des réseaux de neurones artificiels multicouches#footnote[https://www.i
 peuvent extraire les sens et les motifs cachés dans les données sans avoir
 besoin d'intervention humaine. Ainsi, l'apprentissage profond acquiert une
 grande capacité d'adaptation et d'évolution avec le changement de
-données@Goodfellowetal2016.
+données#cite("Goodfellowetal2016").
 
 #images(
   filename:"images/ais.png",
@@ -146,7 +146,7 @@ linéaire, car chaque augmentation d'un degré Celsius entraîne une augmentatio
 constante de la température en Fahrenheit.
 
 
-La formule utilisée pour convertir la température de Celsius en Fahrenheit est@conversionDeLatemperature :
+La formule utilisée pour convertir la température de Celsius en Fahrenheit est#cite("conversionDeLatemperature") :
 
 $ F = 9/5  C + 32 $
 
@@ -186,7 +186,7 @@ produire des résultats basés sur un ensemble d'entrées. Chaque entrée a un
 poids qui ajuste la mesure de son impact sur le résultat produit. Ensuite, nous
 utilisons une fonction de coût pour mesurer la différence entre les résultats
 produits et les résultats cibles. Ensuite, nous utilisons un algorithme
-d'optimisation@Goodfellowetal2016@kingma2014adam pour ajuster les poids des
+d'optimisation#cite("Goodfellowetal2016","kingma2014adam") pour ajuster les poids des
 entrées afin de réduire la valeur de la fonction de coût.
 
 
@@ -236,7 +236,7 @@ des entrées est de $2$ et que la coupe de l'axe est de $0$, notre fonction sera
 $ F = (C × 1) + 0 $
 
 Cette fonction donne des résultats imprécis. Par exemple, si nous voulons
-convertir $20°C$ en Fahrenheit, elle donne@Activation:
+convertir $20°C$ en Fahrenheit, elle donne#cite("Activation"):
 
 $ F = (20 × 1) + 0 = 20 $
 
@@ -281,7 +281,7 @@ $ E &= 1/n sum (y - y_0)^2\
 
 
 Il s'agit d'une explication de l'algorithme de descente de
-gradient@Goodfellowetal2016 qui est utilisé pour trouver les meilleurs poids
+gradient#cite("Goodfellowetal2016") qui est utilisé pour trouver les meilleurs poids
 d'entrée et les biais afin que la valeur de la fonction de coût soit réduite à
 zéro. Cela se fait en commençant par des poids et des biais aléatoires, puis en
 les mettant à jour fréquemment en se déplaçant dans la direction opposée du
@@ -293,7 +293,7 @@ Le gradient est un vecteur qui indique la direction dans laquelle la fonction
 de coût augmente. En se déplaçant dans la direction opposée, nous pouvons
 trouver le point le plus bas de la fonction de coût, qui correspond aux
 meilleures valeurs pour les poids et les biais. La règle de mise à jour pour
-les poids et les biais est donnée par@rumelhart1986learning:
+les poids et les biais est donnée par#cite("rumelhart1986learning"):
 
 $ w_(n+1) = w_n - epsilon (∂E)/(∂w) $
 
@@ -308,7 +308,7 @@ mesure la fonction de coût change lorsque le poids ou le biais change
 légèrement.
 
 Pour calculer ces dérivées partielles, nous pouvons utiliser une technique
-appelée règle de chaîne@spivak1967calculus, qui nous permet de décomposer une
+appelée règle de chaîne#cite("spivak1967calculus"), qui nous permet de décomposer une
 fonction complexe en fonctions plus simples et de multiplier leurs dérivées.
 Par exemple, si nous avons une fonction $f (x) = g (h (x))$, où g et h sont des
 fonctions plus simples, nous pouvons écrire:
@@ -333,7 +333,7 @@ $y$ est la valeur de sortie obtenue en utilisant notre fonction linéaire.
 
 En utilisant ces formules, on peut mettre à jour notre poids et notre biais à
 chaque itération jusqu'à ce qu'on atteigne un point où la fonction de coût est
-réduite au minimum@rumelhart1986learning@lecun2015deep.
+réduite au minimum#cite("rumelhart1986learning","lecun2015deep").
 
 Et on peut programmer un code simple en langage $CC$ qui effectue cette tâche.
 ```c
@@ -489,7 +489,7 @@ températures dans d'autres unités, comme les kelvins ou les degrés Rankine.
  * données complexes ou de haute dimension. On a vu que le deep learning se
  * distingue de l'apprentissage traditionnel par le fait qu'il ne repose pas sur
  * des règles ou des algorithmes prédéfinis, mais qu'il peut générer ses propres
- * règles et algorithmes par essai et erreur@Goodfellowetal2016. On a aussi vu
+ * règles et algorithmes par essai et erreur#cite("Goodfellowetal2016"). On a aussi vu
  * que le deep learning peut surmonter certains des problèmes rencontrés par
  * l'apprentissage traditionnel, tels que le bruit, le manque ou le changement des
  * données.
@@ -547,9 +547,9 @@ Les images tridimensionnelles qui portent des informations vitales sur la santé
 humaine sont connues sous le nom d'images scanner (CT scan) et sont utilisées
 dans le diagnostic et le traitement de nombreuses maladies telles que le
 cancer, les accidents vasculaires cérébraux et les
-fractures@aggarwal2018neural. Ces images nécessitent un traitement spécial pour
+fractures#cite("aggarwal2018neural"). Ces images nécessitent un traitement spécial pour
 éliminer les distorsions, améliorer la qualité et extraire les caractéristiques
-importantes @zhang2023dive. C'est pourquoi on utilise des réseaux de neurones
+importantes #cite("zhang2023dive"). C'est pourquoi on utilise des réseaux de neurones
 artificiels avancés capables de traiter efficacement ces images. Les réseaux de
 neurones artificiels sont un système inspiré du fonctionnement des cellules du
 cerveau dans le traitement de l'information et se composent d'un ensemble de
@@ -573,7 +573,7 @@ et des vecteurs.
 
 === Fonctions d'activation.
 
-Dans cette exemple, nous avons vu comment l'apprentissage profond prédit la température Fahrenheit en utilisant une seule cellule nerveuse basée sur les données initiales uniquement. La solution requise était une équation pour une ligne droite qui pouvait être représentée par une ligne droite. Mais dans certains cas, la distribution des données est courbe comme une fonction sinus ou autre, et ne peut pas être représentée par une ligne droite. Nous avons donc besoin d'ajouter des fonctions non linéaires appelées fonctions d'activation, qui aident à plier la courbe linéaire générée par les cellules nerveuses en utilisant la puissance de leur poids et de leur biais@Goodfellowetal2016.
+Dans cette exemple, nous avons vu comment l'apprentissage profond prédit la température Fahrenheit en utilisant une seule cellule nerveuse basée sur les données initiales uniquement. La solution requise était une équation pour une ligne droite qui pouvait être représentée par une ligne droite. Mais dans certains cas, la distribution des données est courbe comme une fonction sinus ou autre, et ne peut pas être représentée par une ligne droite. Nous avons donc besoin d'ajouter des fonctions non linéaires appelées fonctions d'activation, qui aident à plier la courbe linéaire générée par les cellules nerveuses en utilisant la puissance de leur poids et de leur biais#cite("Goodfellowetal2016").
 
 #images(
   filename:"images/activation.png",
@@ -611,7 +611,7 @@ améliorer les performances du réseau est élevé. Nous utilisons donc des
 matrices pour éviter d'écrire des lignes de code répétitives pour corriger
 chaque paramètre individuellement. Au lieu de cela, nous utilisons des boucles
 itératives et des opérations algébriques sur les matrices pour mettre à jour
-les paramètres plus rapidement et plus simplement@bishop2006pattern.
+les paramètres plus rapidement et plus simplement#cite("bishop2006pattern").
 
 #images(
     filename:"images/4-nerons.svg",
@@ -672,7 +672,7 @@ Les réseaux de neurones peuvent être classés en plusieurs types selon la
 structure et les applications utilisées. Les réseaux de neurones peuvent être
 multicouches (MLP), récurrents (RNN), convolutionnels (CNN), et d'autres types.
 Le type de réseau de neurones est choisi en fonction du problème posé et des
-données disponibles@lecun2015deep.
+données disponibles#cite("lecun2015deep").
 
 == Conversion d'images en vecteurs pour l'analyse par réseaux neuronaux.
 
