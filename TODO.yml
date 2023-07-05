@@ -47,10 +47,10 @@ BIB:
       acc = 99% error
 
 CH2:
-  - title for youssef images.
-  - ref
+  # - title for youssef images.
+  # - ref
   # - conc
-  - continute de parragraphe
+  # - continute de parragraphe
 
 CH2:
   # - definitions.
