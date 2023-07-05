@@ -216,7 +216,7 @@ Le traitement du cancer du poumon, complexe, dépend de plusieurs facteurs : le 
 #images(
   filename:"images/radio1.jpg",
   caption:[
-          Accélérateur linéaire de radiothérapie.
+          Accélérateur linéaire de radiothérapie#footnote[https://en.wikipedia.org/wiki/Tomotherapy].
 	  ],
   width: 50%
   // ref:
