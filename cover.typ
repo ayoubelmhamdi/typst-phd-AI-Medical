@@ -98,7 +98,7 @@
       text(
         weight: "bold",
         size:16pt,
-        [Soutenu le \*\*/07/2023 devant la Commission d’Examen : ]
+        [Soutenu le 22/07/2023 devant la Commission d’Examen : ]
       )
     )
   )
