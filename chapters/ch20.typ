@@ -3,6 +3,10 @@
 
 #let finchapiter = text(fill:rgb("#1E045B"),"■")
 
+// #linebreak()
+// #linebreak()
+// #counter("tabl").update(n=>n+20)
+
 = DÉTECTION DES NODULES PULMONAIRES DU CANCER.
 == Introduction.
 
@@ -25,6 +29,8 @@ Dans cette étude, nous mettons en œuvre une expérience d'apprentissage automa
   caption: [
     Le nombre total de nodules malin et non bénin.
   ],
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
 )
 
 
@@ -34,8 +40,6 @@ Un total de 6692 nodules ont été isolés à partir de ces scans, dont seulemen
 
 Notre étude comprenait trois étapes principales : le prétraitement des données, le développement de l'algorithme de détection des nodules et l'évaluation des performances #cite("dou2017automated","ding2017accurate","armato2011lidc").
 
-// #linebreak()
-// #linebreak()
 
 === Ressources.
 
@@ -59,6 +63,9 @@ Dans le fichier candidates_V2.csv, quatre colonnes sont illustrées : seriesuid,
     [1.3.6...666836860], [-95.20936148], [-91.80940617], [-377.4263503], [0],
   ),
   caption: [Coordonnées des candidats détectés dans le dataset Luna16 avec diamètres],
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+
 )
 
 
@@ -81,6 +88,10 @@ Le fichier annotations.csv est composé de cinq colonnes : seriesuid, coordX, co
     [1.3.6.1....5208], [69.63901724], [-140.9445859], [876.3744957], [5.786347814],
   ),
   caption: [Annotations des nodules détectés dans le dataset Luna16],
+
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+
 )
 
 
@@ -124,9 +135,14 @@ Dans la phase de prétraitement des données, les scans CT ont été transformé
   caption: [
     Le nombre total de nodules d'entraînement et de tests.
   ],
+
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+
 )
 
-Après avoir préparé les images de scans CT et les masques pulmonaires, l'ensemble de données a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données(4483 nodules), tandis que l'ensemble de test comprenait les 33% restants(2209 nodules). La division a été effectuée en utilisant la fonction train_test_split de la bibliothèque sklearn, avec un paramètre random_state fixé à 42 pour assurer la reproductibilité. Le modèle a été entraîné sur l'ensemble d'entraînement et évalué sur l'ensemble de test. Les performances du modèle ont été mesurées en utilisant la précision, le rappel et le score F1.
+Après avoir préparé les images de scans CT et les masques pulmonaires, l'ensemble de données a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données(4483 nodules), tandis que l'ensemble de test comprenait les 33% restants(2209 nodules). La division a été effectuée en utilisant la fonction train_test_split de la bibliothèque sklearn, avec un paramètre random_state fixé à 42 pour assurer la reproductibilité. Le modèle a été entraîné sur l'ensemble d'entraînement et évalué sur l'ensemble de test. Les performances du modèle ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
+
 
 ==== Développement de l'algorithme de détection des nodules.
 
@@ -159,9 +175,9 @@ Pour entraîner le modèle, l'optimiseur Adam a été utilisé avec un taux d'ap
 == Résultats.
 === Évaluation des performances du modèle.
 
-Nous avons évalué le succès du modèle à travers sa précision sur les ensembles de données d'entraînement et de validation. La précision du modèle sur les données d'entraînement et de validation a été documentée à chaque étape du processus d'apprentissage #cite("SetioTBBBC0DFGG16").
+Nous avons évalué le succès du modèle à travers son *exactitude* sur les ensembles de données d'entraînement et de validation. L'*exactitude* du modèle sur les données d'entraînement et de validation a été documentée à chaque étape du processus d'apprentissage #cite("SetioTBBBC0DFGG16").
 
-Le terme *précision* fait référence à la capacité du modèle à prévoir avec précision les résultats sur les données d'entraînement, tandis que la *précision de validation* signifie la capacité du modèle à étendre ses prédictions à de nouvelles données inédites, c'est-à-dire les données de validation.
+Le terme *exactitude* fait référence à la capacité du modèle à prévoir correctement les résultats sur les données d'entraînement, tandis que l'*exactitude de validation* signifie la capacité du modèle à généraliser ses prédictions à de nouvelles données inédites, c'est-à-dire les données de validation.
 
 
 #images(
@@ -174,71 +190,98 @@ Le terme *précision* fait référence à la capacité du modèle à prévoir av
 )
 
 
-En examinant les valeurs de précision et de précision de validation tout au long des étapes d'apprentissage, il est indiqué que le modèle acquiert des connaissances, comme on peut le voir à travers l'amélioration progressive des précisions d'entraînement et de validation. Le modèle commence avec des précisions relativement plus faibles, autour de 0,64, avant de s'améliorer à plus de 0,89 à la fin de l'entraînement. Cela démontre la capacité raffinée du modèle à catégoriser avec précision un ratio considérable de cas.
+En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au long des étapes d'apprentissage, il est indiqué que le modèle acquiert des connaissances, comme on peut le voir à travers l'amélioration progressive des exactitudes d'entraînement et de validation. Le modèle commence avec des exactitudes relativement plus faibles, autour de $64%$, avant d'augmenter à plus de 89% et de terminer avec un score de 87% à la fin de l'entraînement. Cela démontre la capacité raffinée du modèle à catégoriser correctement un ratio considérable de cas.
 
 === Métriques d'évaluation : Précision, Rappel et Score F1.
 
-La performance du modèle a également été évaluée à l'aide de métriques telles que la *précision*, le *Rappel (sensibilité)* et le *score F1* en plus de la précision. Ces mesures fournissent un aperçu plus large des performances du modèle, en particulier dans les circonstances où un déséquilibre des classes est observé #cite("lin2017focal").
+#block()[
+#set text(9pt, style: "italic")
+#grid(
+  columns: (1fr, 2fr),
+  rows: (auto),
+  gutter: 3pt,
+    figure(
+      tablex(
+        columns: 3,
+        align: center + horizon,
+        auto-vlines: false,
+        repeat-header: false,
 
-#linebreak()
-#figure(
-  tablex(
-    columns: 4,
-    align: center + horizon,
-    auto-vlines: false,
-    repeat-header: false,
-
-    [],         [*Précision*], [ *Rappel (sensibilité)*], [*F1-score*],
-
-
-    [*Class 0*], [$86%$], [$93%$], [$90%$],
-    hlinex(stroke: 0.25pt),
-
-    [*Class 1*], [$88%$], [$77%$], [$82%$],
-  ),
-  caption: [Précision, rappel et F1-score du modèle pour les classes 0 et 1],
-)
+        [],         [*Positive*], [ *Négative*],
 
 
-#figure(
-  tablex(
-    columns: 3,
-    align: center + horizon,
-    auto-vlines: false,
-    repeat-header: false,
+        [*Vrai*], [$652$], [$1286$], hlinex(stroke: 0.25pt),
+        [*Faux*], [$90$], [$199$],
+      )+text(size: 2pt," "),
+      caption: [La matrice de confusion.],
+      kind: "tabl",
+      supplement: [#text(weight: "bold","Table")],
 
-    [],         [*Positive*], [ *Négative*],
+    ),
+    /* -------------------------*/
+    figure(
+      tablex(
+        columns: 4,
+        align: center + horizon,
+        auto-vlines: false,
+        repeat-header: false,
+
+        [],         [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
 
 
-    [*Vrai*], [$652$], [$1286$], hlinex(stroke: 0.25pt),
-    [*Faux*], [$90$], [$199$],
-  ),
-  caption: [La matrice de confusion.],
-)
+        // [*Class 0*], [$86%$],      [$93%$], [$90%$], hlinex(stroke: 0.25pt),
+        // [*Class 1*], [$88%$],      [$77%$], [$82%$], hlinex(stroke: 0.25pt),
+        [*Total*],   [$87.8%$],    [$76.6%$], [$81.8%$],
+      )+text(size: 8pt," "),
+      caption: [Précision, rappel et F1-score du modèle pour les classes 0 et 1],
+      kind: "tabl",
+      supplement: [#text(weight: "bold","Table")],
+    ),
 
-#let TP="TP"
+  )
+]
+
+
+La performance du modèle a aussi été évaluée à partir de **la matrice de confusion**, qui permet de calculer des métriques comme la *précision*, le *rappel (sensibilité)* et le *score F1*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes #cite("lin2017focal").
+
+// #linebreak()
+
+
+#let VP="VP"
 #let FP="FP"
 #let FN="FN"
 
 
-- La *précision* représente la fraction des prédictions positives correctes (plus précisément, lorsque le modèle identifie correctement un nodule) sur toutes les prévisions positives faites par le modèle. Une précision élevée indique un faible taux de faux positifs du modèle. Le modèle a atteint une précision de 0,86 pour la classe 0 et 0,88 pour la classe 1.
-$ "précision" = (TP) / (TP + FP)    $
+- La *précision* représente la fraction des prédictions positives correctes (plus précisément, lorsque le modèle identifie correctement un nodule) sur toutes les prévisions positives faites par le modèle. Une précision élevée indique un faible taux de faux positifs du modèle. Le modèle a atteint une précision de $87.8%$.
 
-#images(
-    filename:"images/pre_recall2.png",
-    caption:[
-    Précision et rappel (« recall »). La précision compte la proportion d'items pertinents parmi les items sélectionnés alors que le rappel compte la proportion d'items pertinents sélectionnés parmi tous les items pertinents sélectionnables.
-    ],
-    width: 60%
-    // ref:
-)
+$ "précision" &= (VP) / (VP + FP) \
+              &= 652/(652+90) \
+              &= 87.8%
+$
+
+// #images(
+//     filename:"images/pre_recall2.png",
+//     caption:[
+//     Précision et rappel (« recall »). La précision compte la proportion d'items pertinents parmi les items sélectionnés alors que le rappel compte la proportion d'items pertinents sélectionnés parmi tous les items pertinents sélectionnables.
+//     ],
+//     width: 60%
+//     // ref:
+// )
 
 
-- Le *Rappel (Sensibilité)*, synonyme de sensibilité ou de taux de vrais positifs, est le rapport des prédictions positives correctes à tous les positifs réels. Un rappel élevé indique que le modèle a correctement identifié la majorité des cas positifs réels. Le modèle a atteint un rappel de 0,93 pour la classe 0 et 0,77 pour la classe 1.
-$ "rappel" = (TP) / (TP + FN)    $
+- Le *Rappel (Sensibilité)*, synonyme de sensibilité ou de taux de vrais positifs, est le rapport des prédictions positives correctes à tous les positifs réels. Un rappel élevé indique que le modèle a correctement identifié la majorité des cas positifs réels. Le modèle a atteint un rappel de $76.6%$.
 
-- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques. Le modèle a obtenu un **score F1** de 0,90 pour la classe 0 et 0,82 pour la classe 1 #cite("lin2017focal").
-$ F_1 = (2 TP)/(2TP + FP + FN)    $
+$ "rappel" &= (VP) / (VP + FN)    \
+           &= 652/(652+199) \
+           &= 76.6%
+$
+
+- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques. Le modèle a obtenu un **score F1** de $81.8%$.
+-
+$ F_1 &= (2 VP)/(2VP + FP + FN)   \
+      &= (2 times 252)/(2 times 256 + 90 + 199) \
+      &= 81.8%
+$
 
 
 
@@ -246,14 +289,19 @@ $ F_1 = (2 TP)/(2TP + FP + FN)    $
 
 == Discussion.
 
-Les résultats illustrent que le modèle a performé de manière compétente dans l'identification des deux classes, avec une légère préférence pour l'identification de la classe 0 (pas de nodule) par rapport à la classe 1 (présence de nodule). En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de **score F1** #cite("SetioTBBBC0DFGG16").
+Les résultats illustrent que le modèle a performé de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de **score F1**.
 
 
-L'ensemble de données présente une disparité excessive entre les classes bénignes et malignes, la classe bénigne étant plus de 400 fois plus prévalente que la classe maligne. Cette disproportion entrave le processus d'apprentissage du modèle pour distinguer entre les classes, et il pourrait par défaut prédire la classe la plus fréquente #cite("lin2017focal"). De plus, en raison du déséquilibre élevé de notre ensemble de données, la précision ne sert pas de mesure de performance appropriée car elle peut présenter un chiffre trompeusement élevé, même lorsque le modèle prédit incorrectement la classe minoritaire #cite("lin2017focal").
+
+L'ensemble de données présente une disparité modérée entre les classes bénignes et malignes, la classe bénigne étant environ deux fois plus prévalente que la classe maligne. Cette disproportion peut affecter le processus d'apprentissage du modèle pour distinguer entre les classes, et il pourrait avoir tendance à prédire la classe la plus fréquente #cite("lin2017focal").
+De plus, en raison du déséquilibre de notre ensemble de données, l'exactitude ne sert pas de mesure de performance suffisante car elle ne reflète pas la capacité du modèle à prédire correctement la classe minoritaire #cite("lin2017focal").
+
 
 Un certain nombre de facteurs peuvent expliquer pourquoi le modèle montre une préférence pour identifier la classe 0 (pas de nodule) par rapport à la classe 1 (présence de nodule). L'une des principales explications pourrait résider dans la composition de l'ensemble de données. Si l'ensemble de données comprend un plus grand nombre d'exemples de la classe 0 que de la classe 1, le modèle pourrait devenir plus apte à identifier la classe dominante, entraînant une performance légèrement supérieure pour cette classe.
 
-De plus, des caractéristiques différentes entre les classes peuvent également conduire à des taux de détection différents. Par exemple, si les nodules pulmonaires ont des caractéristiques moins distinctes que les non-nodules, cela pourrait rendre la classe 1 plus difficile à prévoir. Des analyses ultérieures, telles que des examens approfondis des caractéristiques des données d'entraînement, pourraient aider à clarifier exactement pourquoi ces différences de performances sont observées. Les solutions pourraient impliquer l'utilisation de techniques d'équilibrage de classe comme la sur-échantillonnage de la classe minoritaire ou le sous-échantillonnage de la classe majoritaire.
+Une autre explication possible pourrait être que la détection des nodules est une tâche plus difficile que la détection des non-nodules, car les nodules sont souvent petits, flous ou cachés par d’autres structures pulmonaires. Pour réduire le biais du modèle en faveur de la classe 0, il serait possible d’utiliser des techniques de rééquilibrage des classes, comme le suréchantillonnage ou le sous-échantillonnage, ou d’appliquer une focal loss, qui pénalise davantage les erreurs sur la classe minoritaire #cite("lin2017focal").
+
+De plus, des caractéristiques différentes entre les classes peuvent également conduire à des taux de détection différents. Des analyses ultérieures, telles que des examens approfondis des caractéristiques des données d’entrée, pourraient aider à clarifier exactement pourquoi ces différences de performances sont observées. Les solutions pourraient impliquer l'utilisation de techniques de prétraitement des images, comme la normalisation ou l’augmentation des données, pour améliorer la qualité et la diversité des données d’entrée.
 
 Pour résoudre ce problème, il faut une stratégie raffinée pour entraîner notre modèle et un indicateur de performance amélioré mieux que la précision. Les solutions potentielles comprennent :
 
@@ -275,13 +323,17 @@ Pour résoudre ce problème, il faut une stratégie raffinée pour entraîner no
 
   ),
   caption: [Comparaison avec d'autres études dans la tâche de classification des nodules#cite("Song2017", "Nibali2017", "Zhao2018").],
+
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+
 )
 
 Dans notre travail ultérieur, nous visons à incorporer certaines de ces solutions et nous nous attendons à améliorer les performances de notre modèle par rapport à la classification des nodules pulmonaires, pour maîtriser la classification des sous-types de nodules, tels que solides, non-solides, partiellement solides, pérfissuraux, calcifiés et spiculés. Différents traitements sont nécessaires pour différents types de nodules, ce qui rend leur détection précise encore plus pertinente pour un traitement réussi.
 
 == Conclusion.
 
-Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données LUNA16. Le modèle a affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, il a performé de manière satisfaisante, produisant des scores précis, un bon rappel et un F1 score convaincant pour les nodules, qu'ils soient bénins ou malins.
+Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données LUNA16. Le modèle a affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, il a performé de manière satisfaisante, produisant des scores élevés, un bon rappel et un F1 score convaincant pour les nodules, qu'ils soient bénins ou malins.
 
 Le modèle a montré un léger avantage dans l'identification des non-nodules, probablement à cause du déséquilibre de classes dans l'ensemble de données. Nous envisageons des techniques d'augmentation des données et de rééquilibrage des classes pour remédier à ce problème.
 
