@@ -17,7 +17,9 @@ test:
 
 
 build/main.pdf: main.typ $(DEPS)
+	clear
 	$(typst) compile $<  build/main.pdf
+	@echo "Finished"
 
 image:
 	convert -density 300 build/main.pdf -quality 100 pfe.jpg
