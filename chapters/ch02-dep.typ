@@ -217,6 +217,8 @@ systèmes comme des paires d'entrées et de résultats cibles :
 
   ),
   caption: [Conversion de températures entre Celsius et Fahrenheit],
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
 )
 
 
