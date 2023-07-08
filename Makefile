@@ -1,13 +1,23 @@
 typst=typst6 -v
 
-all: compile
+# all: compile
+.PHONY: build
+all: build/main.pdf
+
+DEPS != find . -type f -iname "*.typ"
 
 watch:
 	$(typst) --font-path ~/home/.fonts watch main.typ build/main.pdf
+
 compile:
-	$(typst)  --font-path ~/home/.fonts compile main.typ build/main.pdf
+	@clear && time $(typst)  --font-path ~/home/.fonts compile main.typ build/main.pdf
+
 test:
 	$(typst) --font-path ~/home/.fonts watch test.typ build/main.pdf
+
+
+build/main.pdf: main.typ $(DEPS)
+	$(typst) compile $<  build/main.pdf
 
 image:
 	convert -density 300 build/main.pdf -quality 100 pfe.jpg
