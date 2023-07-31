@@ -4,7 +4,8 @@
   "INTRODUCTION GÉNÉRALE.",
   "RÉFÉRENCES BIBLIOGRAPHIQUES.",
   // "CONCLUSION.",
-  "CONCLUSION GÉNÉRALE."
+  "CONCLUSION GÉNÉRALE.",
+  "ANNEXE.",
 )
 
 #let execption_outline=(
