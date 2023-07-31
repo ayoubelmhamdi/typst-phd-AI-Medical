@@ -55,6 +55,8 @@
 // #counter(heading).step()
 // #counter(heading).step()
 #include "chapters/ch20.typ"
+#include "chapters/annexe.typ"
+// #include "PPT/main.typ"
 
 // = RÉFÉRENCES BIBLIOGRAPHIQUES.
 
