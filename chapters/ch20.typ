@@ -159,15 +159,15 @@ La construction de l'algorithme de détection des nodules a été divisée en pl
 
 Le modèle conçu comprenait :
 
-- Une **couche d'entrée** pour recevoir une image 2D avec une seule couleur de canal.
+- Une _couche d'entrée_ pour recevoir une image 2D avec une seule couleur de canal.
 - Deux couches convolutives (Couche convolutive 1 et 2) sont définies avec 32 filtres et une taille de noyau de 3x3. Les deux couches utilisent un padding 'same' pour préserver les dimensions spatiales de l'image.
-- Après chaque couche convolutive, une **Fonction d'activation ReLU** est appliquée.
+- Après chaque couche convolutive, une _Fonction d'activation ReLU_ est appliquée.
 - Après ces deux couches convolutives, une opération de MaxPooling2D est effectuée pour réduire les dimensions spatiales de moitié.
 - Un autre ensemble de deux couches convolutives (Couche convolutive 3 et 4) est défini, cette fois avec 64 filtres. Chaque couche est suivie d'une fonction d'activation ReLU.
 - Ceci est suivi d'une autre opération de MaxPooling2D.
-- Ensuite, un **GlobalAveragePooling2D** est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
-- Ensuite, une opération **Flatten** est effectuée pour convertir le tenseur multidimensionnel en un vecteur 1D.
-- Ensuite, une **couche entièrement connectée** (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
+- Ensuite, un _GlobalAveragePooling2D_ est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
+- Ensuite, une opération _Flatten_ est effectuée pour convertir le tenseur multidimensionnel en un vecteur 1D.
+- Ensuite, une _couche entièrement connectée_ (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
 - Enfin, une fonction softmax est utilisée comme fonction d'activation de la dernière couche pour effectuer une classification binaire, fournissant une distribution de probabilité sur les deux classes.
 
 Pour entraîner le modèle, l'optimiseur Adam a été utilisé avec un taux d'apprentissage de 0,001, une taille de lot de 40, et la fonction de perte d'entropie croisée binaire. Cette fonction de perte mesure la divergence entre la probabilité prédite par le modèle et la vérité terrain pour chaque image. Elle est adaptée aux problèmes de classification binaire, comme celui de détecter la présence ou l'absence de nodules. L'entropie croisée binaire pénalise les prédictions erronées plus fortement que les prédictions correctes, ce qui encourage le modèle à apprendre à distinguer les nodules des non-nodules avec une grande confiance #cite("Goodfellowetal2016"). L'entraînement du modèle s'est étendu sur 100 époques #cite("SetioTBBBC0DFGG16").
@@ -242,7 +242,7 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
 ]
 
 
-La performance du modèle a aussi été évaluée à partir de **la matrice de confusion**, qui permet de calculer des métriques comme la *précision*, le *rappel (sensibilité)* et le *score F1*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes #cite("lin2017focal").
+La performance du modèle a aussi été évaluée à partir de _la matrice de confusion_, qui permet de calculer des métriques comme la *précision*, le *rappel (sensibilité)* et le *score F1*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes #cite("lin2017focal").
 
 // #linebreak()
 
@@ -276,7 +276,7 @@ $ "rappel" &= (VP) / (VP + FN)    \
            &= 76.6%
 $
 
-- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques. Le modèle a obtenu un **score F1** de $81.8%$.
+- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques. Le modèle a obtenu un _score F1_ de $81.8%$.
 -
 $ F_1 &= (2 VP)/(2VP + FP + FN)   \
       &= (2 times 252)/(2 times 256 + 90 + 199) \
@@ -289,7 +289,7 @@ $
 
 == Discussion.
 
-Les résultats illustrent que le modèle a performé de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de **score F1**.
+Les résultats illustrent que le modèle a performé de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de _score F1_.
 
 
 
