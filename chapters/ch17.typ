@@ -43,15 +43,15 @@ The nodule detection algorithm construction was divided into several imperative 
 
 The designed model entailed:
 
-- An **Input Layer** to receive a 3D grayscale image.
+- An _Input Layer_ to receive a 3D grayscale image.
 - The first convolutional layer (Convolutional Layer 1) was encoded with 32 filters and a 3x3x3 kernel size. Padding was adjusted to 1 to preserve the image's spatial dimensions.
-- The output from Convolutional Layer 1 was directed through a **ReLU Activation Function (Activation Layer 1).**
+- The output from Convolutional Layer 1 was directed through a _ReLU Activation Function (Activation Layer 1)._
 - The framework further encapsulated a second convolutional layer (Convolutional Layer 2) with 32 filters and a 3x3x3 kernel size, with a padding of 1.
 - The output from Convolutional Layer 2 found itself in another ReLU activation function (Activation Layer 2).
 - 3D max pooling was executed in Max Pooling Layer 1 with a kernel dimension of 2x2x2 and a stride of 2, reducing spatial dimensions by half.
 - This structure was hence reiterated with Convolutional Layer 3 and 4, Activation Layer 3 and 4, and Max Pooling Layer 2, albeit the convolutional layers were outfitted with 64 filters.
 - The output from the final max pooling layer was compressed into a 1D tensor in the Flatten Layer before directing it to the fully connected layer using PyTorch's 'view' method.
-- The condensed tensor underwent a fully connected (dense) layer processing, called the **Fully Connected Layer**. This layer embodied two output neurons, corresponding to the presence or absence of nodules@lin2017focal.
+- The condensed tensor underwent a fully connected (dense) layer processing, called the _Fully Connected Layer_. This layer embodied two output neurons, corresponding to the presence or absence of nodules@lin2017focal.
 - Lastly, a softmax function was applied to the output generated from the fully connected layer in the Softmax Layer. This step is mandatory for binary classification tasks, offering a probability distribution over the two classes@lin2017feature.
 
 To train the model, the *Adam optimizer* was commissioned with a learning rate of 0.001, a batch size of 40, and the binary cross-entropy loss function. The model training spanned over 100 epochs@SetioTBBBC0DFGG16.
@@ -76,9 +76,9 @@ The model performance was additionally evaluated using metrics such as *precisio
 
 - *Recall*, synonymous with sensitivity or true positive rate, is the ratio of accurate positive predictions to all actual positives. A high *recall* indicates that the model correctly identified a majority of the actual positive cases. The model achieved a recall of 0.91 for class 0 and 0.86 for class 1 @lin2017focal.
 
-- *F1-score* is the harmonic mean of precision and recall, providing a single measure that balances between these metrics. The model scored an **F1-score** of 0.91 for class 0 and 0.86 for class 1 @lin2017focal.
+- *F1-score* is the harmonic mean of precision and recall, providing a single measure that balances between these metrics. The model scored an _F1-score_ of 0.91 for class 0 and 0.86 for class 1 @lin2017focal.
 
-The results illustrate that the model performed proficiently in identifying both classes, with a slight preference in identifying class 0 (no nodule) over class 1 (presence of nodule). In general, the model performed impressively in terms of precision, recall, and **F1 score**@SetioTBBBC0DFGG16.
+The results illustrate that the model performed proficiently in identifying both classes, with a slight preference in identifying class 0 (no nodule) over class 1 (presence of nodule). In general, the model performed impressively in terms of precision, recall, and _F1 score_@SetioTBBBC0DFGG16.
 
 == Discussion
 
