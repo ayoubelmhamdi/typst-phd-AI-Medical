@@ -15,10 +15,11 @@ Les nodules pulmonaires, de petites masses arrondies formées dans les poumons, 
   caption:[
           Nodule pulmonaire.
 	  ],
-  width: 40%
+  width: 40%,
+  //height: 14%
   // ref:
 )
-
+//#linebreak()
 
 === Types de nodules pulmonaire.
 
@@ -122,7 +123,8 @@ On distingue trois régions dans le thorax :
   caption:[
           La structure de poumon#footnote("https://cancer.ca/fr/cancer-information/cancer-types/lung/what-is-lung-cancer/the-lungs").
 	  ],
-  width: 100%
+  width: 100%,
+  height: 20%
   // ref:
 )
 
@@ -198,11 +200,12 @@ Il convient de noter que la classification et la stadification peuvent dépendre
 Un professionnel de santé, souvent un oncologue ou un pneumologue, à l'aide d'une série d'examens tels que biopsies, examens d'imagerie (comme le scanner thoracique et le PET scan), analyses de sang et tests de la fonction pulmonaire, peut déterminer le diagnostic précis, le type et le stade du cancer du poumon.
 
 #images(
-  filename:"images/youssef5.png",
+  filename:"images/stad_du_cancer.png",
   caption:[
           Stade du cancer du poumon.
 	  ],
-  width: 70%
+  width: 70%,
+  height:34%
   // ref:
 )
 
