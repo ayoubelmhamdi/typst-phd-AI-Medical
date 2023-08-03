@@ -46,7 +46,7 @@ Nodule classification is another important task that predicts the nodule maligna
 == Method
 === Datasets
 
-LUNA16 is a subset of LIDC-IDRI, the largest public dataset for pulmonary nodules @armato2011lung@setio2016pulmonary. Unlike LIDC-IDRI, LUNA16 only includes detection annotations and excludes CTs with slice thickness greater than 3mm, inconsistent slice spacing or missing slices. It also provides a patient-level 10-fold cross validation split of the data. LUNA16 contains **1,186 lung nodules** in **888 CT scans**. It does not include nodules smaller than 3mm.
+LUNA16 is a subset of LIDC-IDRI, the largest public dataset for pulmonary nodules @armato2011lung@setio2016pulmonary. Unlike LIDC-IDRI, LUNA16 only includes detection annotations and excludes CTs with slice thickness greater than 3mm, inconsistent slice spacing or missing slices. It also provides a patient-level 10-fold cross validation split of the data. LUNA16 contains _1,186 lung nodules_ in _888 CT scans_. It does not include nodules smaller than 3mm.
 
 We classify nodules based on different doctors' diagnoses. We remove nodules with an average score of 3 (uncertain malignancy) and label nodules with a score above 3 as positive (malignant) and below 3 as negative (benign). Since anonymous doctors annotated the CT slides, we cannot match their identities across scans. We call them 'simulated' doctors.
 
@@ -95,7 +95,7 @@ On the LUNA16 and LIDC-IDRI datasets, we compare DeepLung with other methods for
 === Interpretation of the results
 
 
-On both internal and external datasets, the proposed deep learning model for lung nodule detection on CT images performs well. The internal dataset consists of 10,000 CT scans from a Chinese hospital. The external dataset is the LUNA16 public dataset that contains 888 CT scans from different sources¹. The model achieves **0.912** FROC score on the internal dataset and **0.885** FROC score on the external dataset.
+On both internal and external datasets, the proposed deep learning model for lung nodule detection on CT images performs well. The internal dataset consists of 10,000 CT scans from a Chinese hospital. The external dataset is the LUNA16 public dataset that contains 888 CT scans from different sources¹. The model achieves _0.912_ FROC score on the internal dataset and _0.885_ FROC score on the external dataset.
 
 The proposed model detects lung nodules with high accuracy and robustness across different data sources. It outperforms several state-of-the-art methods for the LUNA16 dataset, such as 3D Faster R-CNN², 3D dual path network³, and multi-scale attention network. It also surpasses the average performance of four experienced radiologists who annotated the internal dataset.
 
