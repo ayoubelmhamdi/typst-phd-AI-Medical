@@ -19,12 +19,14 @@
 
 #let counter_image = counter(figure.where(kind: image))
 
-#let images(filename:"", caption:[], width:100%, ref:none) = {
+#let images(filename:"", caption:[], width:100%,  height: none, ref:none) = {
+  height =  if height !=  none { height } else{ auto }
   figure(
-    image(filename, width: width),
+    image(filename, width: width, height:height),
     caption: caption,
   )
 }
+
 
 #let italic(it) = [
     #set text(style: "italic")
