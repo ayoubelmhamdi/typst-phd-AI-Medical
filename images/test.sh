@@ -1,0 +1,33 @@
+#!/bin/bash
+
+mv LM1.png  png_errors
+mv cnn.png png_errors
+mv doc-softmax.png png_errors
+mv frameworkv1.png png_errors
+mv img2.png png_errors
+mv img3.png png_errors
+mv img4.png png_errors
+mv model.png png_errors
+mv model2.png png_errors
+mv nod2.png png_errors
+mv poum_str.png png_errors
+mv pre_recall2.png png_errors
+mv pred-01.png png_errors
+mv rem3.png png_errors
+mv rem4.png png_errors
+mv seg1.png png_errors
+mv seg2.png png_errors
+mv seg3.png png_errors
+mv seg4.png png_errors
+mv train2.png png_errors
+mv train3.png png_errors
+mv train4.png png_errors
+mv train5.png png_errors
+mv train6.png png_errors
+mv train7.png png_errors
+mv train_gpu2.png png_errors
+mv youssef1.png png_errors
+mv youssef2.png png_errors
+mv youssef3.png png_errors
+mv youssef4.png png_errors
+mv youssef5.png png_errors
