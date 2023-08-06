@@ -1,4 +1,4 @@
-typst=typst6 -v
+typst=typst -v
 
 # all: compile
 .PHONY: build
@@ -7,14 +7,10 @@ all: build/main.pdf
 DEPS != find . -type f -iname "*.typ"
 
 watch:
-	$(typst) --font-path ~/home/.fonts watch main.typ build/main.pdf
+	@$(typst) watch --font-path ~/home/.fonts main.typ build/main.pdf
 
 compile:
-	@clear && time $(typst)  --font-path ~/home/.fonts compile main.typ build/main.pdf
-
-test:
-	$(typst) --font-path ~/home/.fonts watch test.typ build/main.pdf
-
+	@$(typst) compile --font-path ~/home/.fonts main.typ build/main.pdf
 
 build/main.pdf: main.typ $(DEPS)
 	clear
