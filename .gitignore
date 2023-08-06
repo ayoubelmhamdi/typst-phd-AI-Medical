@@ -10,7 +10,7 @@ pfe.pdf
 .err.log
 sug.typ
 ltex.hiddenFalsePositives.en.txt
-python/CNN/
+python/CNN/venv/
 python/ppt/
 bin/reference/
 bin/williams/
