@@ -1,68 +1,14 @@
-# TODO
-
-PDF:
-  title: AI in MEDICINE
-  date: 2023
-  todo:
-    template: book template
-      cover: as Lisence PFE
-      outline: PLAN
-      bibleothique:
-        ref: refrence books, artickle, scripts
-        page: page refrence style
-      headlines: style of heading
-      equation: style of equation
-      figure: style of figure
-    outline: write outline into typst book
-  errors:
-    zathura: font/color segmentation fault
-
-
 PowerPoint:
   title: AI in MEDICINE
   date: 2023
 
-Github-seg:
-  brain-seg: https://github.com/sdsubhajitdas/Brain-Tumor-Segmentation
 
-Articls:
-  url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9688236/
-Theses:
-  lung16: https://arxiv.org/abs/1903.04711
+SEG:
+  pumon: https://www.kaggle.com/code/aryaaherrao/image-segmentation-for-lung-ct
+  visualisation with python: https://www.kaggle.com/code/kolawole13303/journal-data1-full-preprocessing-tutorial
+  brain : https://github.com/sdsubhajitdas/Brain-Tumor-Segmentation
+  nodules classification 89%: https://www.kaggle.com/code/vedant06/lung-cancer-cam-attempting-89-acc
 
-BIB:
-  source 1:
-    url: https://www.kaggle.com/code/moha5282/preprocessing-tutorial-lung-cancer
-    steps: init
-  source 2:
-    url: https://www.kaggle.com/code/daniel036/first-pass-through-data-w-3d-convnet-b8aad2
-    steps:
-      acc = 0.0069%
-  SEG:
-    info: visualisation with python.
-    url: https://www.kaggle.com/code/kolawole13303/journal-data1-full-preprocessing-tutorial
-  source 3:
-    url: https://www.kaggle.com/code/shivanir23/luna-pytorch-vs-cancer
-    steps:
-      acc = 99% error
-
-CH2:
-  # - title for youssef images.
-  # - ref
-  # - conc
-  # - continute de parragraphe
-
-CH2:
-  # - definitions.
-  # - image trwo cnn
-  # - conclusion
-  # - ref wikipedia as notes.
-CH3:
-  # - Model correction
-  # - CNN image
-  # - math recall presssion f1-score.
-  # -  #finchapiter att the end
-  # - dot at the end of titles.
 
 LEARN:
   - conv layer
