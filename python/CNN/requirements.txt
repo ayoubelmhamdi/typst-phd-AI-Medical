@@ -4,4 +4,9 @@ matplotlib
 numpy
 scikit-learn
 tensorflow
-torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+# --index-url https://download.pytorch.org/whl/cpu
+SimpleITK
+pandas
+numpy
