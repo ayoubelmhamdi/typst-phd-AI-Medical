@@ -1,0 +1,56 @@
+
+PFE:
+  cover.typ:
+  functions.typ:
+  ch1.bib:
+  LICENSE:
+  main.typ:
+  Makefile:
+  README.md:
+  tablex.typ:
+  template.typ:
+  TODO.yml:
+  bin/:
+    md-to-typst: shell
+    typst-to-md: shell
+    williamStyle: shell create dirs requests for style william
+    ref: shell create dirs requests for ref
+    ref.md: the prompte for ref shell
+    source.md: the target sources for ref or williamStyle or ...
+    wil.md: the prompte for ref shell
+    chapters/:
+      annexe.typ:
+      ch00-int.typ:
+      ch00-rem.typ:
+      ch01-ana.typ:
+      ch02-dep.typ:
+      ch20.typ:
+      resume.typ:
+  images/:
+    test.sh:
+  jupyter/:
+    ct_scan_arr.ipynb:
+    diameters.pkl:
+    extend-luna16.ipynb:
+    master-trpm-03.ipynb:
+    math_pix_nb.bac1.ipynb:
+    math_pix_nb.bac2.ipynb:
+    math_pix_nb.bac3.ipynb:
+    math_pix_nb.bac4.ipynb:
+    math_pix_nb.ipynb:
+    Untitled.ipynb:
+  python/:
+    linear_regresion.py:
+    res3.py:
+    res8.py:
+    res.py:
+    CNN/:
+    ppt/:
+  tex/:
+    1-nerons.tex:
+    nerons.tex:
+    Makefile:
+    one.tex:
+
+  TYP_PPT/:
+    main.typ:
