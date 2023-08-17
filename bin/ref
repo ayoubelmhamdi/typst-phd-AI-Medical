@@ -2,13 +2,15 @@
 # shellcheck disable=2001,2129
 
 FILE="${1:-}"
-TMP="$(mktemp /tmp/wil.XXXXX)"
 if [ -z "$FILE" ];then
   echo "Usage:"
-  echo "    create reference/{01..XX}.txt chunks"
+  echo "    create a directories called reference/{01..XX}.txt That represent"\
+       "the chunks of requeste to ask LLM for inject the refferencs from "\
+       " a target source.md"
   exit 1
 fi
 
+TMP="$(mktemp /tmp/wil.XXXXX)"
 cp "$FILE" "$TMP"
 
 sed -i 's@^# @<HASH> @' "$TMP"
