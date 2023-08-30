@@ -1,4 +1,5 @@
 # Import pylidc, os, cv2, and pandas
+#!pip install -U pylidc -qq
 import gc
 import random
 
@@ -33,9 +34,10 @@ class ScanData:
 
     def extract_data(self):
         self.data = []
-        for i, scan in tqdm(enumerate(self.scans), total=self.scans.count()):
-            if i == 4:
-                break
+        total_scans = len(self.scans)
+        for i, scan in tqdm(enumerate(self.scans), total=total_scans):
+#             if i == 3:
+#                 break
             nodules = scan.cluster_annotations()
             # for each scan.id we have many nodules, each nodules has many anns
             # we can use scan.visualize(annotation_groups=nodules)
@@ -45,9 +47,10 @@ class ScanData:
                     malignancies += ann.malignancy
                 avg_malignancy = malignancies / len(anns)
                 cancer = 1 if avg_malignancy >= 3 else 0
+                cancer_name = "cancer" if cancer else "normal"
 
                 ann = random.choice(anns)
-                roi_name = f"{scan.patient_id}_{scan.id}_{ann.id}.tiff"
+                roi_name = f"{cancer_name}_{scan.patient_id}_{scan.id}_{ann.id}.tiff"
 
                 row = {
                     "roi_name": roi_name,
@@ -77,12 +80,10 @@ class ScanData:
         padding = [(0, 0), (0, 0), (0, 0)]
         for i, row in tqdm(enumerate(self.data), total=len(self.data)):
             vol, roi, bbox, ann = None, None, None, None
-            j=0
-            if j == 4:
-                break
+#             if i == 4:
+#                 break
             ann = row["ann"]
             bbox = ann.bbox(pad=padding)
-            vol = None
             vol = ann.scan.to_volume()
             # print("vol.shape", vol.shape)
             # print("vol[bbox].shape", vol[bbox].shape)
@@ -101,11 +102,3 @@ class ScanData:
 
 
 # fin class
-paths = [
-    "/kaggle/input/lidcidri30/LIDC-IDRI-0001-0200",
-    #     "/kaggle/input/lidcidri30/LIDC-IDRI-0201-0400",
-    #     "/kaggle/input/lidcidri30/LIDC-IDRI-0401-0600",
-]
-scan_data = ScanData(paths)
-scan_data.write_to_csv("output01.csv")
-scan_data.save_roi_to_tiff("ROI3")
