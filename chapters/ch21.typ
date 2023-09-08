@@ -14,7 +14,7 @@
 Le cancer du poumon figure parmi les principales causes de mortalité liées au cancer dans le monde entier #cite("national2011reduced"). La reconnaissance et le diagnostic précoces des nodules pulmonaires, petites masses de tissu dans les poumons, peuvent considérablement augmenter les taux de survie et le succès du traitement pour les individus atteints de cancer du poumon. Cependant, la détection et la classification de ces nodules pulmonaires représentent un défi de taille en raison de leur taille, forme, emplacement et caractéristiques physiques variables #cite("SetioTBBBC0DFGG16"). De plus, la majorité des nodules pulmonaires sont bénins ou non cancéreux, avec seulement un faible pourcentage classé comme malin ou cancéreux #cite("dou2017automated"). Ces conditions créent des complications pour la détection et la classification automatisées des nodules pulmonaires par des modèles d'apprentissage automatique.
 
 
-Un des défis majeurs dans le dépistage du cancer du poumon est de distinguer les nodules pulmonaires _bénins_ et _malins_ à partir des images de scanner. Les systèmes de détection assistée par ordinateur (CAO) peuvent aider les radiologues à identifier et à caractériser les nodules en fonction de leur taille, leur forme, leur évolution et leur _*risque de malignité*_#cite("lee2017medical","Shen2015","Nasrullah2019"). Ces systèmes utilisent des techniques d'intelligence artificielle, notamment des réseaux de neurones profonds, pour analyser les images et fournir une classification automatique des nodules. Cette approche peut réduire le temps de lecture, augmenter le taux de détection, harmoniser les pratiques cliniques et éviter des examens inutiles ou invasifs.
+Un des défis majeurs dans le dépistage du cancer du poumon est de distinguer les nodules pulmonaires _bénins_ et _malins_ à partir des images de scanner. Les systèmes de détection assistée par ordinateur (CAO) peuvent aider les radiologues à identifier et à caractériser les nodules en fonction de leur taille, leur forme, leur évolution et leur _*risque de malignité*_#cite("Shen2015","Nasrullah2019"). Ces systèmes utilisent des techniques d'intelligence artificielle, notamment des réseaux de neurones profonds, pour analyser les images et fournir une classification automatique des nodules. Cette approche peut réduire le temps de lecture, augmenter le taux de détection, harmoniser les pratiques cliniques et éviter des examens inutiles ou invasifs.
 
 Dans cet étude, nous proposons d'utiliser le deep learning pour améliorer la prise en charge des nodules pulmonaires. Le deep learning permet d'apprendre à partir de grandes quantités de données et de réaliser des tâches complexes comme la classification ou la segmentation d'images. Nous utilisons le dataset *LIDC-IDRI*#footnote("sous licence «Creative Commons Attribution 3.0 Unported License».")@Clark2013, qui contient $1018$ scanners thoraciques annotés par *quatre radiologues experts*. Chaque nodule pulmonaire est décrit par un fichier _XML_ qui contient son _identifiant_, ses _caractéristiques_ et sa _région d'intérêt_. Par exemple, voici le fichier XML correspondant au nodule numéro 4 :
 
@@ -111,7 +111,7 @@ Le dataset  _LUNA16_ est un sous-ensemble du dataset _ LIDC-IDRI_, qui contient 
 )
 
 
-Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coordX, _coordY_, _coordZ_, et _diamètre\\_mm_, commandant l'identifiant unique du scanner, les coordonnées d'annotation spatiales en millimètres, et le diamètre de chaque annotation en millimètres, respectivement. Ces annotations ont été marquées manuellement en se basant sur l'identification des nodules de plus de 3 mm de diamètre par quatre radiologistes indépendants #cite("dou2017automated","ding2017accurate","armato2011lidc").
+Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coordX_, _coordY_, _coordZ_, et _diamètre_mm_, commandant l'identifiant unique du scanner, les coordonnées d'annotation spatiales en millimètres, et le diamètre de chaque annotation en millimètres, respectivement. Ces annotations ont été marquées manuellement en se basant sur l'identification des nodules de plus de 3 mm de diamètre par quatre radiologistes indépendants #cite("dou2017automated","ding2017accurate","armato2011lidc").
 
 #figure(
   tablex(
@@ -163,21 +163,77 @@ La construction de l'algorithme de détection des nodules a été divisée en pl
 )
 
 
-Nous avons utilisé les réseaux de neurones convolutifs (CNN), et nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
+Utilisant le dataset _LUNA16_, qui contient des images de nodules et de lésions pulmonaires, nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
 
-- Une _couche d'entrée_ pour recevoir une image $2D$ avec une seule couleur de canal.
-- Deux _couches convolutives_ (Couche convolutive 1 et 2) sont définies avec 32 filtres et une taille de noyau de 3x3. Les deux couches utilisent un padding 'same' pour préserver les dimensions spatiales de l'image.
-- Après chaque _couche convolutive_, une fonction _d'activation ReLU_ est appliquée.
-- Après ces deux _couches convolutives_, une opération de _MaxPooling2D_ est effectuée pour réduire les dimensions spatiales de moitié.
-- Un autre ensemble de deux _couches convolutives_, suivi d'une autre opération de MaxPooling2D.
-- Ensuite, un _GlobalAveragePooling2D_ est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
-- Ensuite, une opération _Flatten_ est effectuée pour convertir le tenseur multidimensionnel en un vecteur $1D$.
-- Ensuite, une _couche entièrement connectée_ (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
-- Enfin, une fonction _softmax_ est utilisée comme fonction d'activation de la dernière couche pour effectuer une classification binaire, fournissant une distribution de probabilité sur les deux classes.
+// - Une _couche d'entrée_ pour recevoir une image $2D$ avec une seule couleur de canal.
+// - Deux _couches convolutives_ (Couche convolutive 1 et 2) sont définies avec 32 filtres et une taille de noyau de 3x3. Les deux couches utilisent un padding 'same' pour préserver les dimensions spatiales de l'image.
+// - Après chaque _couche convolutive_, une fonction _d'activation ReLU_ est appliquée.
+// - Après ces deux _couches convolutives_, une opération de _MaxPooling2D_ est effectuée pour réduire les dimensions spatiales de moitié.
+// - Un autre ensemble de deux _couches convolutives_, suivi d'une autre opération de MaxPooling2D.
+// - Ensuite, un _GlobalAveragePooling2D_ est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
+// - Ensuite, une opération _Flatten_ est effectuée pour convertir le tenseur multidimensionnel en un vecteur $1D$.
+// - Ensuite, une _couche entièrement connectée_ (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
+// - Enfin, une fonction _softmax_ est utilisée comme fonction d'activation de la dernière couche pour effectuer une classification binaire, fournissant une distribution de probabilité sur les deux classes.
+
+
+#figure(
+  tablex(
+    columns: 3,
+    align: center + horizon,
+    auto-vlines: false,
+    repeat-header: false,
+
+    [*Stage*], [*Output*], [*Param*],
+    [Conv2D],                 [(None, 64, 64, 64)],        [4160],      
+    hlinex(stroke: 0.25pt),
+    [Conv2D],                 [(None, 64, 64, 64)],        [16448],     
+    hlinex(stroke: 0.25pt),
+    [MaxPooling2D],           [(None, 8, 8, 64)],          [0],         
+    
+    [Conv2D],                 [(None, 8, 8, 64)],          [16448],     
+    hlinex(stroke: 0.25pt),
+    [Conv2D],                 [(None, 8, 8, 64)],          [16448],     
+    hlinex(stroke: 0.25pt),
+    [MaxPooling2D],           [(None, 4, 4, 64)],          [0],         
+    
+    [Conv2D],                 [(None, 4, 4, 64)],          [16448],     
+    hlinex(stroke: 0.25pt),
+    [Conv2D],                 [(None, 4, 4, 64)],          [16448],     
+    hlinex(stroke: 0.25pt),
+    [Conv2D],                 [(None, 4, 4, 64)],          [262208],    
+    hlinex(stroke: 0.25pt),
+    [MaxPooling2D],           [(None, 2, 2, 64)],          [0],         
+    
+    [GlobalAveragePooling2],  [(None, 64)],                [0],         
+    hlinex(stroke: 0.25pt),
+    [Flatten],                [(None, 64)],                [0],         
+    hlinex(stroke: 0.25pt),
+    [Dense],                  [(None, 2)],                 [130],       
+    colspanx(3)[*Total params: 348,738*]
+  ),
+  caption: [Cartes des caractéristiques de sortie à différentes étapes de notre architecture CNN.],
+  kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+)
 
 Pour entraîner le modèle, l'optimiseur Adam#cite("kingma2014adam") a été utilisé avec un taux d'apprentissage de $0,001$, et la fonction de perte d'entropie croisée binaire. Cette fonction de perte mesure la divergence entre la probabilité prédite par le modèle et la vérité terrain pour chaque image. Elle est adaptée aux problèmes de classification binaire, comme celui de détecter la présence ou l'absence de nodules. L'entropie croisée binaire pénalise les prédictions erronées plus fortement que les prédictions correctes, ce qui encourage le modèle à apprendre à distinguer les nodules des non-nodules avec une grande confiance. L'entraînement du modèle s'est étendu sur 100 époques.
 
 
 ==== Model 2: Détection de nodule à risque de cancer.
 
-Nous développons un modèle pour approximer la probabilité de risque de malignité des nodules pulmonaires à partir d’images 2D, en nous basant sur les annotations de quatre radiologues experts.
+Nous développons un modèle pour _*approximer la probabilité de risque de malignité des nodules pulmonaires*_ à partir d'images CT scan, basé sur l'ensemble de données qui a été créé en se basant sur le dataset original *LIDC-IDRI* et en nous appuyant sur les annotations de quatre radiologues experts. Nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
+
+
+== RES
+
+1568 nodules
+(1568, 801, 767)
+
+
+Les performances de classification des nodules du système conçu ont été évaluées sur TRPMLN. Pour la formation à la classification, 3 250 nodules ont été utilisés, contenant un nombre égal de nodules positifs et négatifs. Les nodules recadrés détectés sont de taille 64 × 64 × 1. En raison de la différence infime entre les nodules bénins et malins, 1 000 époques ont été utilisées avec un taux d'apprentissage de 0,001. Les performances de classification des nodules sont décrites dans le tableau 5
+
+
+
+== DIS
+
+Les résultats montrent (dans le tableau 5) que le modèle proposé a atteint une précision inférieure à celle des modèles existants. On remarque que l’utilisation des biomarqueurs cliniques en combinaison avec les techniques automatisées de détection et de classification des nodules pulmonaires permet de réduire les erreurs de diagnostic et d’augmenter la fiabilité de l’analyse CT.
