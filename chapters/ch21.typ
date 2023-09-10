@@ -63,7 +63,29 @@ Notre étude comprenait trois étapes principales : le prétraitement des donné
 
 === Ressources
 
-Les ressources de notre étude étaient des scans CT et des annotations provenant du dataset _ LIDC-IDRI_, du dataset  _LUNA16_ et  _TRPMLN_. Le dataset _ LIDC-IDRI_ est une base de données publique qui contient 1018 scans thoraciques annotés par quatre radiologues experts. Chaque nodule pulmonaire est décrit par un fichier XML qui contient son identifiant, ses caractéristiques et sa région d'intérêt.
+Les ressources de notre étude étaient des scans CT et des annotations provenant du dataset _ LIDC-IDRI_, du dataset  _LUNA16_ et  _TRPMLN_. Le dataset _ LIDC-IDRI_ est une base de données publique qui contient 1018 scans thoraciques annotés par quatre radiologues experts. Chaque nodule pulmonaire est décrit par un fichier XML qui contient son identifiant, ses caractéristiques et sa région d'intérêt#footnote("Dataset Wiki: https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=1966254").
+
+
+Voici un tableau des points clés du résumé :
+
+#figure(
+  tablex(
+    columns: 2,
+    align: horizon,
+    auto-vlines: false,
+    repeat-header: false,
+    [ *Pointer* ],[ *Résumé* ],
+    [ Origine ],[ Partenariat public-privé] + footnote("L'origine de l'ensemble de données LIDC-IDRI est un partenariat public-privé car il a été financé à la fois par le secteur public (le National Cancer Institute) et le secteur privé (la Fondation pour les National Institutes of Health et les sociétés d'imagerie médicale qui ont participé à le projet)."), hlinex(stroke: 0.25pt),
+    [ Taille ],[ 1018 CT scans ], hlinex(stroke: 0.25pt),
+    [ Nodules ],[ Annoté par 4 radiologues ], hlinex(stroke: 0.25pt),
+    [ Annotations ],[ Deux phases ], hlinex(stroke: 0.25pt),
+    [ Disponibilité ],[ Disponible publiquement ], hlinex(stroke: 0.25pt),
+    [ Utiliser ],[ Développement et évaluation CAO ],
+  ),
+  // caption: [Coordonnées des candidats détectés dans le dataset Luna16 avec diamètres],
+  // kind: "tabl",
+  supplement: [#text(weight: "bold","Table")],
+)
 
 
 === Scans CT avec Nodules Pulmonaires.
@@ -88,7 +110,7 @@ La @Fig1 offre un exemple d'une tranche de scan CT, où le nodule est mis en év
 
 ==== Dataset LUNA16.
 
-Le dataset  _LUNA16_ est un sous-ensemble du dataset _ LIDC-IDRI_, qui contient 1186 nodules annotés dans $888$ scans thoraciques. Ce dataset fournit également deux fichiers CSV distincts contenant les détails des candidats et des annotations. Dans le fichier candidates.csv, quatre colonnes sont illustrées : _seriesuid_, _coordX_, _coordY_, _coordZ_, et _classe_. Ici, le _seriesuid_ fonctionne comme un identifiant unique pour chaque scan ; _coordX_, _coordY_, et _coordZ_ représentent les coordonnées spatiales pour chaque candidat en millimètres, et 'classe' fournit une catégorisation binaire, dépeignant si le candidat est un nodule (1) ou non (0).
+Le dataset  _LUNA16_ est un sous-ensemble du dataset _ LIDC-IDRI_, qui contient 1186 nodules annotés dans $888$ scans thoraciques. Ce dataset fournit également deux fichiers CSV distincts contenant les détails des candidats et des annotations. Dans le fichier candidates.csv, quatre colonnes sont illustrées : _seriesuid_, _coordX_, _coordY_, _coordZ_, et _classe_. Ici, le _seriesuid_ fonctionne comme un identifiant unique pour chaque scan ; _coordX_, _coordY_, et _coordZ_ représentent les coordonnées spatiales pour chaque candidat en millimètres, et _classe_ fournit une catégorisation binaire, dépeignant si le candidat est un nodule (1) ou non (0).
 
 
 #figure(
@@ -140,18 +162,16 @@ Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coord
 
 
 === Développement des l'algorithmes de détection des nodules.
+// nombres de nodules de enteaitenment de test?
+//TODO accurence
 
 Après avoir préparé les images de scans CT, l'ensemble de données (_LUNA16_ ou _TRPMLN_) a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données, tandis que l'ensemble de test comprenait les 33% restants. 
 
-// nombres de nodules de enteaitenment de test?
+Deux modèles ont été entraînés sur l'ensemble d'entraînement et évalués sur l'ensemble de test : un modèle CNN et un modèle ResNet50. Les performances des modèles ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
 
-//TODO accurence
-Le modèle a été entraîné sur l'ensemble d'entraînement et évalué sur l'ensemble de test. Les performances du modèle ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
-
-La construction de l'algorithme de détection des nodules a été divisée en plusieurs étapes impératives. À sa base, l'algorithme reposait sur un modèle de réseau neuronal convolutif (CNN), chargé d'identifier les nodules à partir d'images de scans CT #cite("lin2017feature").
+La construction des algorithmes de détection des nodules a été divisée en plusieurs étapes impératives. À leur base, les algorithmes reposaient sur un modèle de réseau neuronal convolutif (_CNN_) et un modèle ResNet50, chargés d'identifier les nodules à partir d'images de scans CT #cite("lin2017feature"). Le modèle _CNN_ était utilisé pour détecter la présence de nodules pulmonaires ou de lésions pulmonaires, tandis que le modèle _ResNet50_ était utilisé pour classification des nodules selon l'approximation du risque de cancer, malin ou non malin.
 
 ==== Model 1: Detection de type de Nodule.
-
 
 #images(
     filename:"images/model2.png",
@@ -162,18 +182,8 @@ La construction de l'algorithme de détection des nodules a été divisée en pl
     // ref:
 )
 
-
 Utilisant le dataset _LUNA16_, qui contient des images de nodules et de lésions pulmonaires, nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
 
-// - Une _couche d'entrée_ pour recevoir une image $2D$ avec une seule couleur de canal.
-// - Deux _couches convolutives_ (Couche convolutive 1 et 2) sont définies avec 32 filtres et une taille de noyau de 3x3. Les deux couches utilisent un padding 'same' pour préserver les dimensions spatiales de l'image.
-// - Après chaque _couche convolutive_, une fonction _d'activation ReLU_ est appliquée.
-// - Après ces deux _couches convolutives_, une opération de _MaxPooling2D_ est effectuée pour réduire les dimensions spatiales de moitié.
-// - Un autre ensemble de deux _couches convolutives_, suivi d'une autre opération de MaxPooling2D.
-// - Ensuite, un _GlobalAveragePooling2D_ est appliqué, agrégeant globalement par moyenne, permettant de réduire considérablement le nombre de paramètres du modèle.
-// - Ensuite, une opération _Flatten_ est effectuée pour convertir le tenseur multidimensionnel en un vecteur $1D$.
-// - Ensuite, une _couche entièrement connectée_ (ou Dense) est appliquée avec deux neurones de sortie, correspondant aux deux classes cibles : la présence ou l'absence de nodules pulmonaires.
-// - Enfin, une fonction _softmax_ est utilisée comme fonction d'activation de la dernière couche pour effectuer une classification binaire, fournissant une distribution de probabilité sur les deux classes.
 
 
 #figure(
@@ -216,21 +226,137 @@ Utilisant le dataset _LUNA16_, qui contient des images de nodules et de lésions
   supplement: [#text(weight: "bold","Table")],
 )
 
-Pour entraîner le modèle, l'optimiseur Adam#cite("kingma2014adam") a été utilisé avec un taux d'apprentissage de $0,001$, et la fonction de perte d'entropie croisée binaire. Cette fonction de perte mesure la divergence entre la probabilité prédite par le modèle et la vérité terrain pour chaque image. Elle est adaptée aux problèmes de classification binaire, comme celui de détecter la présence ou l'absence de nodules. L'entropie croisée binaire pénalise les prédictions erronées plus fortement que les prédictions correctes, ce qui encourage le modèle à apprendre à distinguer les nodules des non-nodules avec une grande confiance. L'entraînement du modèle s'est étendu sur 100 époques.
+// TODO: check rate epoches
+Pour entraîner le modèle, l'optimiseur _Adam_#cite("kingma2014adam") a été utilisé avec un taux d'apprentissage de $0,001$, et la fonction de perte _d'entropie croisée binaire_. Cette fonction de perte mesure la divergence entre la probabilité prédite par le modèle et la vérité terrain pour chaque image. Elle est adaptée aux problèmes de classification binaire, comme celui de détecter la présence ou l'absence de nodules. L'entropie croisée binaire pénalise les prédictions erronées plus fortement que les prédictions correctes, ce qui encourage le modèle à apprendre à distinguer les nodules des non-nodules avec une grande confiance. L'entraînement du modèle s'est étendu sur 100 époques.
 
 
 ==== Model 2: Détection de nodule à risque de cancer.
 
-Nous développons un modèle pour _*approximer la probabilité de risque de malignité des nodules pulmonaires*_ à partir d'images CT scan, basé sur l'ensemble de données qui a été créé en se basant sur le dataset original *LIDC-IDRI* et en nous appuyant sur les annotations de quatre radiologues experts. Nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
+Nous développons aussi un modèle pour _*approximer la probabilité de risque de malignité des nodules pulmonaires*_ à partir d'images CT scan, basé sur l'ensemble de données qui a été créé en se basant sur le dataset original *LIDC-IDRI* et en nous appuyant sur les annotations de quatre radiologues experts. Nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
 
-
-== RES
 
 1568 nodules
 (1568, 801, 767)
 
 
 Les performances de classification des nodules du système conçu ont été évaluées sur TRPMLN. Pour la formation à la classification, 3 250 nodules ont été utilisés, contenant un nombre égal de nodules positifs et négatifs. Les nodules recadrés détectés sont de taille 64 × 64 × 1. En raison de la différence infime entre les nodules bénins et malins, 1 000 époques ont été utilisées avec un taux d'apprentissage de 0,001. Les performances de classification des nodules sont décrites dans le tableau 5
+
+== RES
+
+
+
+=== Évaluation des performances du modèle.
+
+Nous avons évalué le succès du modèles à travers son *exactitude* sur les ensembles de données d'entraînement et de validation. L'*exactitude* du modèle sur les données d'entraînement et de validation a été documentée à chaque étape du processus d'apprentissage #cite("SetioTBBBC0DFGG16").
+
+Le terme *exactitude* fait référence à la capacité du modèle à prévoir correctement les résultats sur les données d'entraînement, tandis que l'*exactitude de validation* signifie la capacité du modèle à généraliser ses prédictions à de nouvelles données inédites, c'est-à-dire les données de validation.
+
+
+#images(
+  filename:"images/class2.svg",
+  caption:[
+            Évolution des précisions d’entraînement et de validation au cours de l’apprentissage.
+	  ],
+  width: 100%
+  // ref:
+)
+
+
+En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au long des étapes d'apprentissage, il est indiqué que le modèle acquiert des connaissances, comme on peut le voir à travers l'amélioration progressive des exactitudes d'entraînement et de validation. Le modèle commence avec des exactitudes relativement plus faibles, autour de $64%$, avant d'augmenter à plus de 89% et de terminer avec un score de 87% à la fin de l'entraînement. Cela démontre la capacité raffinée du modèle à catégoriser correctement un ratio considérable de cas.
+
+=== Métriques d'évaluation : Précision, Rappel et Score F1.
+
+#block()[
+#set text(9pt, style: "italic")
+#grid(
+  columns: (1fr, 2fr),
+  rows: (auto),
+  gutter: 3pt,
+    figure(
+      tablex(
+        columns: 3,
+        align: center + horizon,
+        auto-vlines: false,
+        repeat-header: false,
+
+        [],         [*Positive*], [ *Négative*],
+
+
+        [*Vrai*], [$652$], [$1286$], hlinex(stroke: 0.25pt),
+        [*Faux*], [$90$], [$199$],
+      )+text(size: 2pt," "),
+      caption: [La matrice de confusion.],
+      kind: "tabl",
+      supplement: [#text(weight: "bold","Table")],
+
+    ),
+    /* -------------------------*/
+    figure(
+      tablex(
+        columns: 4,
+        align: center + horizon,
+        auto-vlines: false,
+        repeat-header: false,
+
+        [],         [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
+
+
+        // [*Class 0*], [$86%$],      [$93%$], [$90%$], hlinex(stroke: 0.25pt),
+        // [*Class 1*], [$88%$],      [$77%$], [$82%$], hlinex(stroke: 0.25pt),
+        [*Total*],   [$87.8%$],    [$76.6%$], [$81.8%$],
+      )+text(size: 8pt," "),
+      caption: [Précision, rappel et F1-score du modèle pour les classes 0 et 1],
+      kind: "tabl",
+      supplement: [#text(weight: "bold","Table")],
+    ),
+
+  )
+]
+
+
+La performance du modèle a aussi été évaluée à partir de _la matrice de confusion_, qui permet de calculer des métriques comme la *précision*, le *rappel (sensibilité)* et le *score F1*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes #cite("lin2017focal").
+
+// #linebreak()
+
+
+#let VP="VP"
+#let FP="FP"
+#let FN="FN"
+
+
+- La *précision* représente la fraction des prédictions positives correctes (plus précisément, lorsque le modèle identifie correctement un nodule) sur toutes les prévisions positives faites par le modèle. Une précision élevée indique un faible taux de faux positifs du modèle. Le modèle a atteint une précision de $87.8%$.
+
+$ "précision" &= (VP) / (VP + FP) \
+              &= 652/(652+90) \
+              &= 87.8%
+$
+
+// #images(
+//     filename:"images/pre_recall2.png",
+//     caption:[
+//     Précision et rappel (« recall »). La précision compte la proportion d'items pertinents parmi les items sélectionnés alors que le rappel compte la proportion d'items pertinents sélectionnés parmi tous les items pertinents sélectionnables.
+//     ],
+//     width: 60%
+//     // ref:
+// )
+
+
+- Le *Rappel (Sensibilité)*, synonyme de sensibilité ou de taux de vrais positifs, est le rapport des prédictions positives correctes à tous les positifs réels. Un rappel élevé indique que le modèle a correctement identifié la majorité des cas positifs réels. Le modèle a atteint un rappel de $76.6%$.
+
+$ "rappel" &= (VP) / (VP + FN)    \
+           &= 652/(652+199) \
+           &= 76.6%
+$
+
+- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques. Le modèle a obtenu un _score F1_ de $81.8%$.
+-
+$ F_1 &= (2 VP)/(2VP + FP + FN)   \
+      &= (2 times 252)/(2 times 256 + 90 + 199) \
+      &= 81.8%
+$
+
+
+
 
 
 
