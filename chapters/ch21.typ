@@ -163,7 +163,7 @@ Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coord
 
 === Développement des l'algorithmes de détection des nodules.
 // nombres de nodules de enteaitenment de test?
-//TODO accurence
+// TODO accurence
 
 Après avoir préparé les images de scans CT, l'ensemble de données (_LUNA16_ ou _TRPMLN_) a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données, tandis que l'ensemble de test comprenait les 33% restants. 
 
@@ -221,6 +221,15 @@ Pour entraîner le modèle, l'optimiseur _Adam_#cite("kingma2014adam") a été u
 
 
 ==== Model 2: Détection de nodule à risque de cancer.
+
+#images(
+    filename:"images/structure_resnet.png",
+    caption:[
+   Un aperçu de ResNET. Notre approche extrait d’abord plusieurs patchs de nodules pour capturer le large éventail de variabilité des nodules à partir des images CT d’entrée. Enfin, notre approche applique un classificateur pour étiqueter la malignité du nodule d’entrée.
+    ],
+    width: 90%
+    // ref:
+)
 
 Nous développons aussi un modèle pour _*approximer la probabilité de risque de malignité des nodules pulmonaires*_ à partir d'images CT scan, basé sur l'ensemble de données qui a été créé(_TRPMLN_) en se basant sur le dataset original *LIDC-IDRI* et en nous appuyant sur les annotations de quatre radiologues experts. Nous avons expérimenté différentes combinaisons de couches et de filtres pour trouver la meilleure architecture pour notre problème. Nous avons trouvé que le meilleur modèle pour nous était conçu comme suit :
 
@@ -351,9 +360,10 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
         align: center + horizon,
         auto-vlines: false,
         repeat-header: false,
+        // MODEL 1
         // TODO: check by calculatrice
-        [],         [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
-        [*Model\ ResNET*],   [$87.8%$],    [$76.6%$], [$81.8%$],
+        [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
+        [*Model\ ResNET*],   [$87.8%$],     [$76.6%$],                   [$81.8%$],
       )+text(size: 12pt," "),
       caption: [Précision, rappel et F1-score du modèle 1],
       kind: "tabl",
@@ -420,9 +430,10 @@ Cela suggère que le modèle a très bien appris les données d'entraînement, m
         auto-vlines: false,
         repeat-header: false,
         
+        // MODEL 2
         // TODO: check by calculatrice
-        [],         [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
-        [*Model\ ResNET*],   [$87.8%$],    [$76.6%$], [$81.8%$],
+        [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
+        [*Model\ ResNET*],   [$87.8%$],     [$76.6%$],                   [$81.8%$],
       )+text(size: 12pt," "),
       caption: [Précision, rappel et F1-score du modèle 2],
       kind: "tabl",
@@ -464,7 +475,6 @@ Dans les deux modèles, nous avons un overfitting et des fluctuations de précis
 
 Comparaison avec nos résultats, notre modèle de classification de nodule ou lésion est performant de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de score F1.
 
-// TODO: relever les relusltat
 #figure(
   tablex(
     columns: 3,
@@ -472,13 +482,24 @@ Comparaison avec nos résultats, notre modèle de classification de nodule ou l�
     auto-vlines: false,
     repeat-header: false,
 
-    [],                [*Précision*], [ *Rappel (sensibilité)*],
-    [*Song et al.*],   [$82%$],       [$83%$], hlinex(stroke: 0.25pt),
-    [*Nibali et al.*], [$89%$],       [$91%$], hlinex(stroke: 0.25pt),
-    [*Zhao et al.*],   [$82%$],       [$$], hlinex(stroke: 0.25pt),
-    [*Nos modèles*],   [$87%$],       [$90%$],
+    [*Models*],                [*Accuracy (%)*], [ *Year*],
+
+    [*Multi-scale CNN* #cite("Shen2015")],     [86.84], [2015], hlinex(stroke: 0.25pt),
+    [*Nodule level 2D CNN* #cite("Lai2016")], [87.30], [2016], hlinex(stroke: 0.25pt),
+    [*Slice level 2D CNN* #cite("Lai2016")],  [86.70], [2016], hlinex(stroke: 0.25pt),
+    [*Multi-crop CNN* #cite("Shen2017")],      [87.14], [2017], hlinex(stroke: 0.25pt),
+    [*Vanilla 3D CNN* #cite("Lai2016")],      [87.40], [2016], hlinex(stroke: 0.25pt),
+    [*Deep 3D DPN* #cite("Zhu2016")],         [88.74], [2017], hlinex(stroke: 0.25pt),
+    [*Deep 3D DPN + GBM* #cite("Zhu2016")],   [90.44], [2017], hlinex(stroke: 0.25pt),
+    [*3D MixNet* #cite("Nasrullah2019I")],           [88.83], [2019], hlinex(stroke: 0.25pt),
+    [*3D MixNet + GBM* #cite("Nasrullah2019I")],     [90.57], [2019], hlinex(stroke: 0.25pt),
+    [*3D CMixNet + GBM* #cite("Nasrullah2019")],     [91.13], [2019], hlinex(stroke: 0.25pt),
+    [*3D CMixNet + GBM + Biomarkers* #cite("Nasrullah2019")],[94.17], [2019], hlinex(stroke: 0.25pt),
+    [*Our Model ResNET*],                       [69,43], [2023]
+
 
   ),
+      // Accuracy comparison of nodule classification on public dataset.
   caption: [Comparaison avec d'autres études dans le cadre de la classification des nodules malins ou bénins #cite("Song2017", "Nibali2017", "Zhao2018").],
 
   kind: "tabl",
