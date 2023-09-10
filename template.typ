@@ -6,6 +6,8 @@
   // "CONCLUSION.",
   "CONCLUSION GÉNÉRALE.",
   "ANNEXE.",
+  "ANNEXE 1.",
+  "ANNEXE 2.",
 )
 
 #let execption_outline=(
@@ -31,13 +33,13 @@
 
   set page(
     paper: "a4",
-    // height :21cm ,
-    // width:14cm,
+    // height: 15cm ,
+    // width: 14cm,
     numbering: "1",
     number-align: center
   )
 
-  set text(lang:"fr", size: 14pt)
+  set text(lang:"fr", size: 12pt)
   set document(author: authors, title: title)
 
 
