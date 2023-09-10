@@ -120,7 +120,7 @@ La @Fig1 offre un exemple d'une tranche de scan CT, où le nodule est mis en év
 
 ==== Prétraitement des données.
 
-Dans la phase de prétraitement des données, les scans CT ont été transformés du format DICOM en tableaux (tenseurs). Cela a été suivi par le rééchantillonnage des images pour obtenir des dimensions de voxel uniformes de 1 mm x 1 mm x 1 mm, la normalisation des valeurs de pixel pour répondre à une plage de -1000 à 320 unités Hounsfield (HU), et enfin l'utilisation d'un algorithme de segmentation pulmonaire pour extraire les régions pulmonaires des images. Cet algorithme de segmentation a été conçu sur le seuillage composite, les opérations morphologiques et l'analyse des composantes connectées, fournissant un ensemble de masques pulmonaires pour chaque scan #cite("dou2017automated","ding2017accurate","armato2011lidc").
+Dans la phase de prétraitement des données, les scans CT ont été transformés du format DICOM en tableaux (tenseurs). Cela a été suivi par le rééchantillonnage des images pour obtenir des dimensions de voxel uniformes de 1 mm x 1 mm x 1 mm, la normalisation des valeurs de pixel pour répondre à une plage de -1000 à 320 unités Hounsfield (HU), et enfin l'utilisation d'un algorithme de segmentation pulmonaire pour extraire les régions pulmonaires des images. #cite("dou2017automated","ding2017accurate","armato2011lidc").
 
 
 #figure(
@@ -143,7 +143,7 @@ Dans la phase de prétraitement des données, les scans CT ont été transformé
 
 )
 
-Après avoir préparé les images de scans CT et les masques pulmonaires, l'ensemble de données a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données(4483 nodules), tandis que l'ensemble de test comprenait les 33% restants(2209 nodules). La division a été effectuée en utilisant la fonction train_test_split de la bibliothèque sklearn, avec un paramètre random_state fixé à 42 pour assurer la reproductibilité. Le modèle a été entraîné sur l'ensemble d'entraînement et évalué sur l'ensemble de test. Les performances du modèle ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
+Après avoir préparé les images de scans CT, l'ensemble de données a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données(4483 nodules), tandis que l'ensemble de test comprenait les 33% restants(2209 nodules). La division a été effectuée en utilisant la fonction train_test_split de la bibliothèque sklearn, avec un paramètre random_state fixé à 42 pour assurer la reproductibilité. Le modèle a été entraîné sur l'ensemble d'entraînement et évalué sur l'ensemble de test. Les performances du modèle ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
 
 
 ==== Développement de l'algorithme de détection des nodules.
@@ -295,13 +295,11 @@ Les résultats illustrent que le modèle a performé de manière compétente dan
 
 
 
-L'ensemble de données présente une disparité modérée entre les classes bénignes et malignes, la classe bénigne étant environ deux fois plus prévalente que la classe maligne. Cette disproportion peut affecter le processus d'apprentissage du modèle pour distinguer entre les classes, et il pourrait avoir tendance à prédire la classe la plus fréquente #cite("lin2017focal").
-De plus, en raison du déséquilibre de notre ensemble de données, l'exactitude ne sert pas de mesure de performance suffisante car elle ne reflète pas la capacité du modèle à prédire correctement la classe minoritaire #cite("lin2017focal").
 
 
 Un certain nombre de facteurs peuvent expliquer pourquoi le modèle montre une préférence pour identifier la classe 0 (pas de nodule) par rapport à la classe 1 (présence de nodule). L'une des principales explications pourrait résider dans la composition de l'ensemble de données. Si l'ensemble de données comprend un plus grand nombre d'exemples de la classe 0 que de la classe 1, le modèle pourrait devenir plus apte à identifier la classe dominante, entraînant une performance légèrement supérieure pour cette classe.
 
-Une autre explication possible pourrait être que la détection des nodules est une tâche plus difficile que la détection des non-nodules, car les nodules sont souvent petits, flous ou cachés par d’autres structures pulmonaires. Pour réduire le biais du modèle en faveur de la classe 0, il serait possible d’utiliser des techniques de rééquilibrage des classes, comme le suréchantillonnage ou le sous-échantillonnage, ou d’appliquer une focal loss, qui pénalise davantage les erreurs sur la classe minoritaire #cite("lin2017focal").
+Une autre explication possible pourrait être que la détection des nodules est une tâche plus difficile que la détection des non-nodules, car les nodules sont souvent petits, flous ou cachés par d’autres structures pulmonaires. Pour réduire le biais du modèle en faveur de la classe 0, il serait possible d’utiliser des techniques de rééquilibrage des classes, comme le suréchantillonnage ou le sous-échantillonnage, ou d’appliquer une focal loss, qui pénalise davantage les erreurs sur la classe minoritaire.
 
 De plus, des caractéristiques différentes entre les classes peuvent également conduire à des taux de détection différents. Des analyses ultérieures, telles que des examens approfondis des caractéristiques des données d’entrée, pourraient aider à clarifier exactement pourquoi ces différences de performances sont observées. Les solutions pourraient impliquer l'utilisation de techniques de prétraitement des images, comme la normalisation ou l’augmentation des données, pour améliorer la qualité et la diversité des données d’entrée.
 
