@@ -121,10 +121,8 @@ Le dataset  _LUNA16_ est un sous-ensemble du dataset _ LIDC-IDRI_, qui contient 
     repeat-header: false,
 
     [*seriesuid*], [*coordX*], [*coordY*], [*coordZ*], [*class*],
-    [1.3.6...666836860], [68.42], [-74.48], [-288.7], [0],
-    hlinex(stroke: 0.25pt),
-    [1.3.6...666836860], [68.42], [-74.48], [-288.7], [0],
-    hlinex(stroke: 0.25pt),
+    [1.3.6...666836860], [68.42], [-74.48], [-288.7], [0], hlinex(stroke: 0.25pt),
+    [1.3.6...666836860], [68.42], [-74.48], [-288.7], [0], hlinex(stroke: 0.25pt),
     [1.3.6...666836860], [-95.20936148], [-91.80940617], [-377.4263503], [0],
   ),
   caption: [Coordonnées des candidats détectés dans le dataset Luna16 avec diamètres],
@@ -160,6 +158,19 @@ Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coord
 
 ==== Dataset TRPMLN.
 
+// TODO: TRPMLN
+
+La création du jeu de données _*TRPMLN*_ implique plusieurs étapes. Initialement, un environnement virtuel Python est établi et activé, suivi par l'installation des packages Python nécessaires à partir d'un fichier `requirements.txt`. Un fichier de configuration pour `pylidc` est ensuite généré, qui spécifie le chemin vers le jeu de données LIDC-IDRI.
+
+Le jeu de données LIDC-IDRI est par la suite interrogé en utilisant `pylidc`, en filtrant les scans avec une épaisseur de tranche supérieure à 3 mm et un espacement de pixels supérieur à 1 mm. Pour chaque scan dans le jeu de données filtré, les annotations sont regroupées en nodules. Un score moyen de malignité est calculé pour chaque nodule sur la base des scores fournis par différents experts. Si ce score moyen est de 3 ou plus, le nodule est classé comme cancéreux ; sinon, il est considéré comme normal.
+
+Les données pour chaque nodule sont enregistrées, y compris le nom du nodule (qui indique s'il est cancéreux ou non) et l'objet d'annotation. Ces données sont utilisées pour créer un fichier CSV avec deux colonnes : "roi_name" (le nom du nodule) et "cancer" (indiquant s'il est cancéreux ou non).
+
+Pour chaque ligne de données, une région d'intérêt (ROI) est extraite du volume du scan en fonction de la boîte englobante de l'annotation. La ROI est normalisée à une plage de 0 à 255 pour les images en 8 bits et sauvegardée en tant qu'image TIFF dans un répertoire spécifié. Pour gérer l'utilisation de la mémoire, le _garbage collector_ de Python est invoqué toutes les 10 itérations pour nettoyer la mémoire inutilisée.
+
+Le jeu de données _TRPMLN_ final comprend des images TIFF de nodules et un fichier CSV contenant des informations sur ces nodules. Ce jeu de données peut être utilisé pour entraîner des modèles d'apprentissage profond pour classer les nodules malins.
+
+Ces étapes sont démontrées dans l'ANNEXE 2.
 
 === Développement des l'algorithmes de détection des nodules.
 // nombres de nodules de enteaitenment de test?
@@ -341,11 +352,11 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
         auto-vlines: false,
         repeat-header: false,
 
-        [],         [*Prédiction\ positive*], [*Prédiction\ négative*],
+        [],            [*Prédiction\ négative*], [*Prédiction\ positive*], 
 
-
-        [*Réel\ Positif*], [$771$], [$51$], hlinex(stroke: 0.25pt),
-        [*Réel\ Négatif*], [$113$], [$404$],
+        // Model 1
+        [*Réel\ Négatif*], [$771$ VN],              [ $51$ FP], hlinex(stroke: 0.25pt),
+        [*Réel\ Positif*], [$113$ FN],              [$404$ VP],
       )+text(size: 2pt," "),
       caption: [La matrice de confusion.],
       kind: "tabl",
@@ -363,7 +374,7 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
         // MODEL 1
         // TODO: check by calculatrice
         [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
-        [*Model\ ResNET*],   [$87.8%$],     [$76.6%$],                   [$81.8%$],
+        [*Model\ CNN*],   [$88.79%$],     [$75.23%$],                   [$81.14%$],
       )+text(size: 12pt," "),
       caption: [Précision, rappel et F1-score du modèle 1],
       kind: "tabl",
@@ -409,12 +420,11 @@ Cela suggère que le modèle a très bien appris les données d'entraînement, m
         auto-vlines: false,
         repeat-header: false,
 
-        [],         [*Prédiction\ positive*], [*Prédiction\ négative*],
+        [],            [*Prédiction\ négative*], [*Prédiction\ positive*], 
 
-
-        // TODO: check again
-        [*Réel\ Positif*], [$118$], [$41$], hlinex(stroke: 0.25pt),
-        [*Réel\ Négatif*], [$69$], [$86$],
+        // Model 2
+        [*Réel\ Négatif*], [$119$ VN],              [ $40$ FP], hlinex(stroke: 0.25pt),
+        [*Réel\ Positif*], [$70$ FN],              [$85$ VP],
       )+text(size: 2pt," "),
       caption: [La matrice de confusion.],
       kind: "tabl",
@@ -433,7 +443,7 @@ Cela suggère que le modèle a très bien appris les données d'entraînement, m
         // MODEL 2
         // TODO: check by calculatrice
         [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
-        [*Model\ ResNET*],   [$87.8%$],     [$76.6%$],                   [$81.8%$],
+        [*Model\ ResNET*],   [68.00$%$],     [$54.83%$],                   [$60.71%$],
       )+text(size: 12pt," "),
       caption: [Précision, rappel et F1-score du modèle 2],
       kind: "tabl",
@@ -460,14 +470,14 @@ Dans les deux modèles, nous avons un overfitting et des fluctuations de précis
     auto-vlines: false,
     repeat-header: false,
 
-    [],                [*Précision*], [ *Rappel (sensibilité)*],
-    [*Song et al.*],   [$82%$],       [$83%$], hlinex(stroke: 0.25pt),
-    [*Nibali et al.*], [$89%$],       [$91%$], hlinex(stroke: 0.25pt),
-    [*Zhao et al.*],   [$82%$],       [$$], hlinex(stroke: 0.25pt),
-    [*Nos modèles*],   [$87%$],       [$90%$],
+    [],                [*Précision*],     [ *Rappel (sensibilité)*],
+    [*Song et al.* #cite("Song2017")],    [$82%$],       [$83%$], hlinex(stroke: 0.25pt),
+    [*Nibali et al.* #cite("Nibali2017")],[$89%$],       [$91%$], hlinex(stroke: 0.25pt),
+    [*Zhao et al.* #cite("Zhao2018")],    [$82%$],       [$$], hlinex(stroke: 0.25pt),
+    [*Nos modèles*],                      [$88.79%$],    [$75.25%$],
 
   ),
-  caption: [Comparaison avec d'autres études dans la tâche de classification des nodules ou des lésions#cite("Song2017", "Nibali2017", "Zhao2018").],
+  caption: [Comparaison avec d'autres études dans la tâche de classification des nodules ou des lésions.],
 
   kind: "tabl",
   supplement: [#text(weight: "bold","Table")],
