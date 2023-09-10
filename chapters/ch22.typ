@@ -117,7 +117,7 @@ Pour lire, traiter et représenter visuellement les scans CT montrant des nodule
 
 Avec SimpleITK, nous avons lu les fichiers de scan CT du dataset LUNA16, convertissant ces images de leur format DICOM ou NIfTI en tableaux numériques multidimensionnels manipulables, appelés tableaux numpy. De plus, SimpleITK a été utilisé pour obtenir l'origine et l'espacement des images, qui sont des informations nécessaires pour convertir les coordonnées des annotations en indices de tableau numpy. Avec matplotlib, nous avons affiché les images CT avec les annotations superposées, en utilisant des cercles rouges pour indiquer les nodules.
 
-### Prétraitement des Données
+=== Prétraitement des Données
 
 Avant d'entraîner nos modèles de deep learning, nous avons effectué quelques étapes de prétraitement sur les données. Tout d'abord, nous avons normalisé les valeurs de pixels des images CT en utilisant la formule suivante :
 
