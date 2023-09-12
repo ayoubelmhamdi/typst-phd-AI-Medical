@@ -54,7 +54,7 @@ Nous commençons par développer un modèle de classification qui peut identifie
 
 Ensuite, nous créons un nouveau dataset appelé *TRPMLN*, qui extrait *les nodules qui ont une moyenne de malignité égale à 3 ou plus dans les annotations des quatre experts*. Nous avons inclus une annexe qui présente l'implémentation du code _PYTHON_ pour créer cet ensemble de données. Nous développons un autre modèle de classification qui peut *classer les nodules en fonction de leur risque de malignité* à partir des images CT scan. Nous comparons les performances de notre modèle avec celles des radiologues et avec d'autres études dans le même tâche.
 
-Le plan de l'étude est le suivant : dans la section Méthode, nous présentons le dataset _LIDC-IDRI_, le dataset _LUNA16_, le dataset _TRPMLN_, les modèles de deep learning et les critères d'évaluation. Dans la section Résultats, nous montrons les résultats obtenus par nos modèles sur les datasets _LUNA16_ et _TRPMLN_. Dans la section Discussion, nous analysons les forces et les limites de notre approche, ainsi que les implications cliniques. Dans la section Conclusion, nous résumons nos contributions et proposons des perspectives futures. #finchapiter
+Le plan de l'étude est le suivant : dans la section Méthode, nous présentons le dataset _LIDC-IDRI_, le dataset _LUNA16_, le dataset _TRPMLN_, les modèles de deep learning et les critères d'évaluation. Dans la section Résultats, nous montrons les résultats obtenus par nos modèles sur les datasets _LUNA16_ et _TRPMLN_. Dans la section Discussion, nous analysons les forces et les limites de notre approche. Dans la section Conclusion, nous résumons nos contributions et proposons des perspectives futures. #finchapiter
 
 
 == Méthode.
@@ -531,7 +531,9 @@ Dans notre travail ultérieur, nous visons à incorporer certaines de ces soluti
 
 == Conclusion.
 
-Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données _LUNA16_ et _TRPMLN_. Les modèles ont affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, ils ont performé de manière satisfaisante, produisant des scores élevés, un bon rappel et un F1 score convaincant pour les nodules, qu'ils soient nodule ou lesion. Ils ont également performé de manière passable, produisant des scores passables pour le rappel et un _F1 score_ convaincant pour les nodules, qu'ils soient bénins ou malins.
+Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données _LUNA16_ et _TRPMLN_. Les modèles ont affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, ils ont performé de manière satisfaisante, produisant des scores élevés, un bon rappel et un _F1 score_ convaincant pour les nodules, qu'ils soient nodule ou lesion. Ils ont également performé de manière passable, produisant des scores passables pour le rappel et un _F1 score_ convaincant pour les nodules, qu'ils soient bénins ou malins.
+
+En plus de cela, nous avons également formé un modèle pour classer les nodules comme probablement normaux ou anormaux. Ce modèle a également été confronté à des défis similaires en termes de diversité des nodules et de distribution inégale dans l'ensemble de données.
 
 Les modèles ont montré un léger avantage dans l'identification des non-nodules, probablement en raison de la limitation du nombre de classe 1 dans l'ensemble de données.
 
