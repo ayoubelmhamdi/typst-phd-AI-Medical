@@ -99,9 +99,10 @@ Pour lire, traiter et représenter visuellement les scans CT montrant des nodule
 La @Fig1 offre un exemple d'une tranche de scan CT, où le nodule est mis en évidence par des lignes blanches.
 
 #images(
-    filename:"images/seg4.png",
+    filename:"images/3_nodules.png",
     caption:[
-    Exemples d'une tranche de scan CT avec un nodule mis en évidence par des lignes blanches.
+    // Exemples d'une tranche de scan CT avec un nodule mis en évidence par des lignes blanches.
+    Catégories de nodules pulmonaires dans un scanner CT; bénigne, maligne primaire, et maligne métastatique (de gauche à droite)#cite("Nasrullah2019").
     ],
     width: 90%
     // ref:
@@ -158,27 +159,24 @@ Le fichier _annotations.csv_ est composé de cinq colonnes : _seriesuid_, _coord
 
 ==== Dataset TRPMLN.
 
-// TODO: TRPMLN
+La création du jeu de données _*TRPMLN*_ implique plusieurs étapes. Initialement, un environnement virtuel Python est établi et activé, suivi par l'installation des packages Python nécessaires à partir d'un fichier _requirements.txt_. Un fichier de configuration pour _pylidc_ est ensuite généré, qui spécifie le chemin vers le jeu de données LIDC-IDRI.
 
-La création du jeu de données _*TRPMLN*_ implique plusieurs étapes. Initialement, un environnement virtuel Python est établi et activé, suivi par l'installation des packages Python nécessaires à partir d'un fichier `requirements.txt`. Un fichier de configuration pour `pylidc` est ensuite généré, qui spécifie le chemin vers le jeu de données LIDC-IDRI.
-
-Le jeu de données LIDC-IDRI est par la suite interrogé en utilisant `pylidc`, en filtrant les scans avec une épaisseur de tranche supérieure à 3 mm et un espacement de pixels supérieur à 1 mm. Pour chaque scan dans le jeu de données filtré, les annotations sont regroupées en nodules. Un score moyen de malignité est calculé pour chaque nodule sur la base des scores fournis par différents experts. Si ce score moyen est de 3 ou plus, le nodule est classé comme cancéreux ; sinon, il est considéré comme normal.
+Le jeu de données _LIDC-IDRI_ est par la suite interrogé en utilisant _pylidc_, en filtrant les scans avec une épaisseur de tranche supérieure à 3 mm et un espacement de pixels supérieur à 1 mm. Pour chaque scan dans le jeu de données filtré, les annotations sont regroupées en nodules. Un score moyen de malignité est calculé pour chaque nodule sur la base des scores fournis par différents experts. Si ce score moyen est de 3 ou plus, le nodule est classé comme cancéreux ; sinon, il est considéré comme normal.
 
 Les données pour chaque nodule sont enregistrées, y compris le nom du nodule (qui indique s'il est cancéreux ou non) et l'objet d'annotation. Ces données sont utilisées pour créer un fichier CSV avec deux colonnes : "roi_name" (le nom du nodule) et "cancer" (indiquant s'il est cancéreux ou non).
 
-Pour chaque ligne de données, une région d'intérêt (ROI) est extraite du volume du scan en fonction de la boîte englobante de l'annotation. La ROI est normalisée à une plage de 0 à 255 pour les images en 8 bits et sauvegardée en tant qu'image TIFF dans un répertoire spécifié. Pour gérer l'utilisation de la mémoire, le _garbage collector_ de Python est invoqué toutes les 10 itérations pour nettoyer la mémoire inutilisée.
+Pour chaque ligne de données, une région d'intérêt (ROI) est extraite du volume du scan en fonction de la boîte englobante de l'annotation. La ROI est normalisée à une plage de 0 à 255 pour les images en 8 bits et sauvegardée en tant qu'image _TIFF_ dans un répertoire spécifié. Pour gérer l'utilisation de la mémoire, le _garbage collector_ de Python est invoqué toutes les 10 itérations pour nettoyer la mémoire inutilisée.
 
-Le jeu de données _TRPMLN_ final comprend des images TIFF de nodules et un fichier CSV contenant des informations sur ces nodules. Ce jeu de données peut être utilisé pour entraîner des modèles d'apprentissage profond pour classer les nodules malins.
+Le jeu de données _TRPMLN_ final comprend des images _TIFF_ de nodules et un fichier CSV contenant des informations sur ces nodules. Ce jeu de données peut être utilisé pour entraîner des modèles d'apprentissage profond pour classer les nodules malins.
 
 Ces étapes sont démontrées dans l'ANNEXE 2.
 
 === Développement des l'algorithmes de détection des nodules.
 // nombres de nodules de enteaitenment de test?
-// TODO accurence
 
 Après avoir préparé les images de scans CT, l'ensemble de données (_LUNA16_ ou _TRPMLN_) a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données, tandis que l'ensemble de test comprenait les 33% restants. 
 
-Deux modèles ont été entraînés sur l'ensemble d'entraînement et évalués sur l'ensemble de test : un modèle _CNN_ et un modèle _ResNet50_. Les performances des modèles ont été mesurées en utilisant l'exactitude, le rappel et le score F1.
+Deux modèles ont été entraînés sur l'ensemble d'entraînement et évalués sur l'ensemble de test : un modèle _CNN_ et un modèle _ResNet50_. Les performances des modèles ont été mesurées en utilisant l'exactitude, la précision, le rappel et le score F1.
 
 La construction des algorithmes de détection des nodules a été divisée en plusieurs étapes impératives. À leur base, les algorithmes reposaient sur un modèle de réseau neuronal convolutif (_CNN_) et un modèle _ResNet50_, chargés d'identifier les nodules à partir d'images de scans CT #cite("lin2017feature"). Le modèle _CNN_ était utilisé pour détecter la présence de nodules pulmonaires ou de lésions pulmonaires, tandis que le modèle _ResNet50_ était utilisé pour classification des nodules selon l'approximation du risque de cancer, malin ou non malin.
 
@@ -372,7 +370,6 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
         auto-vlines: false,
         repeat-header: false,
         // MODEL 1
-        // TODO: check by calculatrice
         [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
         [*Model\ CNN*],   [$88.79%$],     [$75.23%$],                   [$81.14%$],
       )+text(size: 12pt," "),
@@ -441,7 +438,6 @@ Cela suggère que le modèle a très bien appris les données d'entraînement, m
         repeat-header: false,
         
         // MODEL 2
-        // TODO: check by calculatrice
         [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
         [*Model\ ResNET*],   [68.00$%$],     [$54.83%$],                   [$60.71%$],
       )+text(size: 12pt," "),
