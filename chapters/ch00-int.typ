@@ -13,7 +13,7 @@ Les algorithmes de détection des nodules se composent généralement de deux pa
 - La première étape recherche une grande variété de nodules possibles avec une grande sensibilité; cependant, elle génère de nombreux faux positifs.
 - L'étape suivante atténue ces faux positifs en utilisant des caractéristiques et des classificateurs améliorés, une tâche difficile en raison des variables englobant les formes, les tailles, les types de nodules et leur ressemblance potentielle avec d'autres composants thoraciques comme les vaisseaux sanguins ou les ganglions lymphatiques #cite("Gould2007EvaluationEdition","Roth2016ImprovingAggregation").
 
-Dans nos recherches, nous avons appliqué un réseau neuronal convolutionnel sur l’ensemble de données public LUNA16, composé de scanners thoraciques de 888 patients évalués par quatre experts médicaux #cite("Setio2016PulmonaryNetworks").
+Dans nos recherches, nous avons appliqué un réseau neuronal convolutionnel sur l’ensemble de données public LUNA16, composé de scanners thoraciques de 888 patients évalués par quatre experts médicaux #cite("Setio2016PulmonaryNetworks"). De plus, nous avons également utilisé un autre modèle pour classer les nodules comme probablement normaux ou anormaux à l'aide du _LIDC-IDRI_/_TRPMLN_ dataset.
 
 Finalement, la résultat a montré une performance de classification de nodule. Cela signifie qu’elle peut identifier de manière un peu précise plus de nodules cancéreux et moins de nodules non cancéreux #cite("Lin2016FeatureDetection","Kamnitsas2017EfficientSegmentation").
 
