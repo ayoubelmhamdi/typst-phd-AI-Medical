@@ -582,11 +582,12 @@ Nos réseaux neuronaux nécessitent des vecteurs en entrée et en sortie - des m
 Représenter les images en tant que matrice, opérer sur elles grâce à ces caractéristiques matricielles et les transformer en vecteurs pour les intégrer à notre réseau neuronal, sont des étapes cruciales dans l'exploitation du Deep Learning pour la détection de nodules pulmonaires avec l'ensemble de données Luna16.
 
 == Conclusion.
-
 Après avoir exploré les principes fondamentaux du deep learning, la façon dont les réseaux neuronaux artificiels fonctionnent et le rôle des matrices dans cet apprentissage profond, nous avons pu comprendre l'importance de transformer les données d'images en vecteurs pour leur analyse par les réseaux de neurones. Ce processus s'avère d'une grande importance pour la détection des nodules pulmonaires sur l'ensemble de données Luna16.
 
-Nous avons discuté en profondeur du fonctionnement des réseaux de neurones artificiels, moteurs du Deep Learning, capables d'extracter et d'interpréter des motifs complexes dans les données. Les matrices jouent un rôle central, stockant et mettant à jour les paramètres dans les réseaux neuronaux.
+Nous avons discuté en profondeur du fonctionnement des réseaux de neuronaux artificiels, moteurs du Deep Learning, capables d'extraire et d'interpréter des motifs complexes dans les données. Les matrices jouent un rôle central, stockant et mettant à jour les paramètres dans les réseaux neuronaux.
 
 Le processus de transformation des images en vecteurs, pour leur analyse par les réseaux neuronaux, a également été souligné. Cette transformation facilite l'intégration des images dans le réseau et optimise son efficacité.
 
-En résumé, le Deep Learning, grâce à sa capacité à traiter et analyser des images et sa grande adaptabilité, s'impose comme un outil essentiel dans la détection des nodules pulmonaires. L'utilisation de l'ensemble de données Luna16 présente un potentiel énorme pour améliorer la précision et la rapidité des diagnostics, contribuant de manière significative à la lutte contre le cancer du poumon. #finchapiter
+En plus de cela, nous avons également utilisé un autre modèle pour classer les nodules comme probablement normaux ou anormaux. Ce modèle a également été confronté à des défis similaires en termes de diversité des nodules et de distribution inégale dans l'ensemble de données.
+
+En résumé, le Deep Learning, grâce à sa capacité à traiter et analyser des images et sa grande adaptabilité, s'impose comme un outil essentiel dans la détection des nodules pulmonaires. L'utilisation de l'ensemble de données _LIDC-IDRI_ présente un potentiel énorme pour améliorer la précision et la rapidité des diagnostics, contribuant de manière significative à la lutte contre le cancer du poumon. #finchapiter
