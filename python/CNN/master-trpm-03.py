@@ -7,24 +7,15 @@ import h5py
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-from keras.layers import Conv2D
-from keras.layers import Dense
-from keras.layers import Flatten
-from keras.layers import GlobalAveragePooling2D
-from keras.layers import MaxPooling2D
-from keras.layers import RandomFlip
-from keras.layers import RandomRotation
-from keras.models import load_model
-from keras.models import Sequential
+
+from keras.layers import (Conv2D, Dense, Flatten, GlobalAveragePooling2D,
+                          MaxPooling2D, RandomFlip, RandomRotation)
+from keras.models import Sequential, load_model
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import KFold
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, train_test_split
 from tensorflow import keras
-from tensorflow.keras import datasets
-from tensorflow.keras import layers
-from tensorflow.keras import models
-
+from tensorflow.keras import datasets, layers, models
 
 # FOLD
 
@@ -83,7 +74,7 @@ def concatenate_histories(*histories):
     return hist
 
 
-f = h5py.File("../input/lungnodemalignancy/all_patches.hdf5", "r")
+f = h5py.File("/app/lungnodemalignancy/all_patches.hdf5", "r")
 
 ct_slices = f["ct_slices"]
 slice_class = f["slice_class"]
@@ -95,6 +86,7 @@ print(ct_slices.shape)
 print(slice_class.shape)
 print(ct_slices[1].min())
 
+exit(0)
 ct_slices = ct_slices.reshape(6691, 64, 64, 1)
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -207,8 +199,6 @@ history_6 = model_6.fit(
 )
 model_6.load_weights("/kaggle/working/save5/model5_weights.h5", by_name=True)
 model_6.summary()
-
-
 
 
 combined_history = concatenate_histories(
