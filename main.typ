@@ -73,3 +73,4 @@
 
 
 #bibliography("ch1.bib", title: "RÉFÉRENCES BIBLIOGRAPHIQUES.", style: "ieee")
+#finchapiter
