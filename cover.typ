@@ -12,7 +12,7 @@
     // box(
     //   stroke:0pt,
       figure(
-        image("images/fsm01.jpg", width: 40%, height:15%,fit: "contain"),
+        image("images/fsm02.jpg", width: 70%, height:15%,fit: "contain"),
       )
     // )
   )
@@ -81,7 +81,7 @@
       text(
         fill: rgb("#1E045B"),
         weight: "bold",
-        size:22pt,
+        size:24pt,
         title
       )
     )
