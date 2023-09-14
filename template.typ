@@ -33,12 +33,14 @@
 
   set page(
     paper: "a4",
-    // height: 15cm ,
-    // width: 14cm,
+    // height: 8cm ,
+    // width: 18cm,
+    // fill: rgb("71757a"),
     numbering: "1",
     number-align: center
   )
 
+  // set text(lang:"fr", size: 11pt) // landspace
   set text(lang:"fr", size: 12pt)
   set document(author: authors, title: title)
 
