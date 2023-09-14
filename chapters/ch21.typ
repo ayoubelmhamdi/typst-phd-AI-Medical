@@ -7,8 +7,7 @@
 // #linebreak()
 // #counter("tabl").update(n=>n+20)
 
-= DÉTECTION DES NODULES PULMONAIRES DU CANCER.
-
+= DETECTION ET CLASSIFICATION DES NODULES PULMONAIRES À L’AIDE DU DEEP LEARNING
 == Introduction
 
 Le cancer du poumon figure parmi les principales causes de mortalité liées au cancer dans le monde entier #cite("national2011reduced"). La reconnaissance et le diagnostic précoces des nodules pulmonaires, petites masses de tissu dans les poumons, peuvent considérablement augmenter les taux de survie et le succès du traitement pour les individus atteints de cancer du poumon. Cependant, la détection et la classification de ces nodules pulmonaires représentent un défi de taille en raison de leur taille, forme, emplacement et caractéristiques physiques variables #cite("SetioTBBBC0DFGG16"). De plus, la majorité des nodules pulmonaires sont bénins ou non cancéreux, avec seulement un faible pourcentage classé comme malin ou cancéreux #cite("dou2017automated"). Ces conditions créent des complications pour la détection et la classification automatisées des nodules pulmonaires par des modèles d'apprentissage automatique.
@@ -176,7 +175,7 @@ Ces étapes sont démontrées dans l'ANNEXE 2.
 
 Après avoir préparé les images de scans CT, l'ensemble de données (_LUNA16_ ou _TRPMLN_) a été divisé en ensembles d'entraînement et de test. L'ensemble d'entraînement comprenait 67% des données, tandis que l'ensemble de test comprenait les 33% restants. 
 
-Deux modèles ont été entraînés sur l'ensemble d'entraînement et évalués sur l'ensemble de test : un modèle _CNN_ et un modèle _ResNet50_. Les performances des modèles ont été mesurées en utilisant l'exactitude, la précision, le rappel et le score F1.
+Deux modèles ont été entraînés sur l'ensemble d'entraînement et évalués sur l'ensemble de test : un modèle _CNN_ et un modèle _ResNet50_. Les performances des modèles ont été mesurées en utilisant l'exactitude, la précision, la sensibilité et le "F1-score".
 
 La construction des algorithmes de détection des nodules a été divisée en plusieurs étapes impératives. À leur base, les algorithmes reposaient sur un modèle de réseau neuronal convolutif (_CNN_) et un modèle _ResNet50_, chargés d'identifier les nodules à partir d'images de scans CT #cite("lin2017feature"). Le modèle _CNN_ était utilisé pour détecter la présence de nodules pulmonaires ou de lésions pulmonaires, tandis que le modèle _ResNet50_ était utilisé pour classification des nodules selon l'approximation du risque de cancer, malin ou non malin.
 
@@ -276,9 +275,9 @@ Le terme *exactitude* fait référence à la capacité du modèle à prévoir co
 
 
 
-=== Métriques d'évaluation : Précision, Rappel et Score F1.
+=== Métriques d'évaluation : Précision, Sensibilité et "F1-Score".
 
-La performance du modèle peut a été évaluée à partir de _la matrice de confusion_, qui permet de calculer des métriques comme la *précision*, le *rappel (sensibilité)* et le *score F1*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes.
+La performance du modèle peut a été évaluée à partir de _la matrice de confusion_, qui permet de calculer des métriques comme la *précision*, la *sensibilité (recall)* et le *F1-Score*, en plus de l’*exactitude*. Ces mesures fournissent un aperçu plus large des performances du modèle, notamment quand il y a un déséquilibre des classes.
 
 // #linebreak()
 
@@ -298,22 +297,22 @@ $ "précision" = (VP) / (VP + FP) $
 // #images(
 //     filename:"images/pre_recall2.png",
 //     caption:[
-//     Précision et rappel (« recall »). La précision compte la proportion d'items pertinents parmi les items sélectionnés alors que le rappel compte la proportion d'items pertinents sélectionnés parmi tous les items pertinents sélectionnables.
+//     Précision et sensibilité (« recall »). La précision compte la proportion d'items pertinents parmi les items sélectionnés alors que la sensibilité compte la proportion d'items pertinents sélectionnés parmi tous les items pertinents sélectionnables.
 //     ],
 //     width: 60%
 //     // ref:
 // )
 
 
-- Le *Rappel (Sensibilité)*, synonyme de sensibilité ou de taux de vrais positifs, est le rapport des prédictions positives correctes à tous les positifs réels. Un rappel élevé indique que le modèle a correctement identifié la majorité des cas positifs réels.
+- La *Sensibilité (Recall)*, synonyme de sensibilité ou de taux de vrais positifs, est le rapport des prédictions positives correctes à tous les positifs réels. Une sensibilité élevée indique que le modèle a correctement identifié la majorité des cas positifs réels.
 
-$ "rappel" = (VP) / (VP + FN) $
+$ "sensibilité" = (VP) / (VP + FN) $
 // $ \
 //            &= 652/(652+199) \
 //            &= 76.6%
 // $
 
-- Le *F1-score* est la moyenne harmonique de la précision et du rappel, fournissant une seule mesure qui équilibre ces métriques.
+- Le *F1-score* est la moyenne harmonique de la précision et de la sensibilité, fournissant une seule mesure qui équilibre ces métriques.
 -
 $ F_1 &= (2 VP)/(2VP + FP + FN) $
 // $ \
@@ -370,10 +369,10 @@ En examinant les valeurs d'*exactitude* et d'*exactitude de validation* tout au 
         auto-vlines: false,
         repeat-header: false,
         // MODEL 1
-        [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
+        [],                  [*Précision*], [ *Sensibilité \ (Recall)*], [*F1-score*],
         [*Model\ CNN*],   [$88.79%$],     [$75.23%$],                   [$81.14%$],
       )+text(size: 12pt," "),
-      caption: [Précision, rappel et F1-score du modèle 1],
+      caption: [Précision, sensibilité et "F1-score" du modèle 1],
       kind: "tabl",
       supplement: [#text(weight: "bold","Table")],
     ),
@@ -438,10 +437,10 @@ Cela suggère que le modèle a très bien appris les données d'entraînement, m
         repeat-header: false,
         
         // MODEL 2
-        [],                  [*Précision*], [ *Rappel \ (sensibilité)*], [*F1-score*],
+        [],                  [*Précision*], [ *Sensibilité \ (Recall)*], [*F1-score*],
         [*Model\ ResNET*],   [68.00$%$],     [$54.83%$],                   [$60.71%$],
       )+text(size: 12pt," "),
-      caption: [Précision, rappel et F1-score du modèle 2],
+      caption: [Précision, sensibilité et "F1-score" du modèle 2],
       kind: "tabl",
       supplement: [#text(weight: "bold","Table")],
     ),
@@ -466,7 +465,7 @@ Dans les deux modèles, nous avons un overfitting et des fluctuations de précis
     auto-vlines: false,
     repeat-header: false,
 
-    [],                [*Précision*],     [ *Rappel (sensibilité)*],
+    [],                [*Précision*],     [ *Sensibilité (Recall)*],
     [*Song et al.* #cite("Song2017")],    [$82%$],       [$83%$], hlinex(stroke: 0.25pt),
     [*Nibali et al.* #cite("Nibali2017")],[$89%$],       [$91%$], hlinex(stroke: 0.25pt),
     [*Zhao et al.* #cite("Zhao2018")],    [$82%$],       [$$], hlinex(stroke: 0.25pt),
@@ -479,7 +478,7 @@ Dans les deux modèles, nous avons un overfitting et des fluctuations de précis
   supplement: [#text(weight: "bold","Table")],
 )
 
-Comparaison avec nos résultats, notre modèle de classification de nodule ou lésion est performant de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de rappel et de score F1.
+Comparaison avec nos résultats, notre modèle de classification de nodule ou lésion est performant de manière compétente dans l'identification des deux classes. En général, le modèle a performé de manière impressionnante en termes de précision, de sensibilité et de "F1-score".
 
 #figure(
   tablex(
@@ -531,7 +530,7 @@ Dans notre travail ultérieur, nous visons à incorporer certaines de ces soluti
 
 == Conclusion.
 
-Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données _LUNA16_ et _TRPMLN_. Les modèles ont affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, ils ont performé de manière satisfaisante, produisant des scores élevés, un bon rappel et un _F1 score_ convaincant pour les nodules, qu'ils soient nodule ou lesion. Ils ont également performé de manière passable, produisant des scores passables pour le rappel et un _F1 score_ convaincant pour les nodules, qu'ils soient bénins ou malins.
+Nous avons utilisé le Deep-Learning pour détecter et classifier les nodules pulmonaires dans l'ensemble de données _LUNA16_ et _TRPMLN_. Les modèles ont affronté des défis liés à la diversité des nodules en termes de taille, de forme et d'emplacement, ainsi qu'à une distribution inégale dans l'ensemble de données. Malgré ces difficultés, ils ont performé de manière satisfaisante, produisant des scores élevés, un bon sensibilité et un _F1-score_ convaincant pour les nodules, qu'ils soient nodule ou lesion. Ils ont également performé de manière passable, produisant des scores passables pour la sensibilité et un _F1-score_ convaincant pour les nodules, qu'ils soient bénins ou malins.
 
 En plus de cela, nous avons également formé un modèle pour classer les nodules comme probablement normaux ou anormaux. Ce modèle a également été confronté à des défis similaires en termes de diversité des nodules et de distribution inégale dans l'ensemble de données.
 
