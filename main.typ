@@ -5,7 +5,8 @@
 #let finchapiter = text(size: 24pt, fill:rgb("#1E045B"),[■])
 
 #let book_info = (
-  title: "DÉTECTION DES NODULES PULMONAIRES CANCÉREUX SUR LES IMAGES DE TDM",
+  title: "DETECTION ET CLASSIFICATION DES NODULES PULMONAIRES À L’AIDE DU DEEP LEARNING",
+  // title: "DÉTECTION DES NODULES PULMONAIRES CANCÉREUX SUR LES IMAGES DE TDM",
   // title: "DÉTECTION DES NODULES PULMONAIRES CANCÉREUX PAR DES RÉSEAUX DE
   // NEURONES PROFONDS À PARTIR D'IMAGES DE TOMODENSITOMÉTRIE.",
   // title: "VISION PAR ORDINATEUR POUR LE DÉPISTAGE DES NODULES PULMONAIRES
@@ -20,10 +21,16 @@
   encaders: (
     // "Pr BENHAMOU Mabrouk",
     // "Examinateur",
-    // "Pr HACHEM El-Kaber",
-    // "Examinateur",
+    "Pr MOHAMED Khalis",
+    "Examinateur",
     "Pr RAJAE Sebihi",
     "Encadrant",
+    "Pr Morad EL KAFHALI",
+    "Co-Encadrant",
+    box(width: 200pt,repeat[.]),
+    box(width: 1fr,repeat[.]),
+    box(width: 200pt,repeat[.]),
+    box(width: 1fr,repeat[.]),
   )
 )
 
