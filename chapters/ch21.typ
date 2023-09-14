@@ -538,4 +538,4 @@ Les modèles ont montré un léger avantage dans l'identification des non-nodule
 
 Les résultats de notre étude soulignent que le Deep-Learning est efficace pour la détection et la classification des nodules pulmonaires. Il a le potentiel pour faciliter le diagnostic précoce du cancer du poumon, ce qui peut améliorer les chances de survie et l'efficacité du traitement.
 
-Nous cherchons à améliorer nos modèles pour perfectionner leur performance, en particulier dans la détection des malignités des nodules pulmonaires. Pour cela, des recherches supplémentaires sont nécessaires.
+Nous cherchons à améliorer nos modèles pour perfectionner leur performance, en particulier dans la détection des malignités des nodules pulmonaires. Pour cela, des recherches supplémentaires sont nécessaires. #finchapiter
