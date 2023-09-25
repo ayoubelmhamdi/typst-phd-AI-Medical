@@ -16,21 +16,20 @@
   // title: "SEGMENTATION DES IMAGE MEDICAL PAR INTELLIGENT ARTIFICIAL",
   authors: (
     "Ayoub EL MHAMDI",
-    "youssef MADANE",
+    "Youssef MADANE",
   ),
   encaders: (
     // "Pr BENHAMOU Mabrouk",
     // "Examinateur",
-    "Pr MOHAMED Khalis",
-    "Examinateur",
-    "Pr RAJAE Sebihi",
-    "Encadrant",
-    "Pr Morad EL KAFHALI",
-    "Co-Encadrant",
-    box(width: 200pt,repeat[.]),
-    box(width: 1fr,repeat[.]),
-    box(width: 200pt,repeat[.]),
-    box(width: 1fr,repeat[.]),
+    "Pr. MOHAMED Khalis",   "Examinateur",  "FS Meknes",
+    "Pr. Zouhir El Amraoui","Examinateur",  "FS Meknes",
+    "Pr. RAJAE Sebihi",     "Encadrant",    "FS Rabat",
+    "Pr. MORAD EL Kafhali", "Co-Encadrant", "",
+    ""
+    // box(width: 200pt,repeat[.]),
+    // box(width: 1fr,repeat[.]),
+    // box(width: 200pt,repeat[.]),
+    // box(width: 1fr,repeat[.]),
   )
 )
 
