@@ -1,7 +1,7 @@
 // #import "../functions.typ": heading_center, images, italic
 #let finchapiter = text(fill:rgb("#1E045B"),[■])
 = ANNEXE 1.
-#text(weight: "bold" ,size: 18pt ,"CODE SOURCE EN C")
+#text(weight: "bold" ,size: 18pt ,"CODE EN LANGAGE C POUR CONVERTIR LES CELSIUS EN FAHRENHEIT")
 
 ```c
 #include <math.h>
