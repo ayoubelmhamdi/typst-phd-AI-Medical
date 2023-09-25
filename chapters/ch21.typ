@@ -56,7 +56,7 @@ Ensuite, nous créons un nouveau dataset appelé *TRPMLN*, qui extrait *les nodu
 Le plan de l'étude est le suivant : dans la section Méthode, nous présentons le dataset _LIDC-IDRI_, le dataset _LUNA16_, le dataset _TRPMLN_, les modèles de deep learning et les critères d'évaluation. Dans la section Résultats, nous montrons les résultats obtenus par nos modèles sur les datasets _LUNA16_ et _TRPMLN_. Dans la section Discussion, nous analysons les forces et les limites de notre approche. Dans la section Conclusion, nous résumons nos contributions et proposons des perspectives futures. #finchapiter
 
 
-== Méthode.
+== Matériel et Méthode.
 
 Notre étude comprenait trois étapes principales : le prétraitement des données, le développement de l'algorithme de détection des nodules et l'évaluation des performances #cite("dou2017automated","ding2017accurate","armato2011lidc").
 
