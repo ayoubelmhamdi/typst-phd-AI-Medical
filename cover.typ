@@ -19,19 +19,20 @@
   divider()
   align(center,
     block(
-      text(
-        weight: "bold",
-        size: 22pt,
-        v(0.5em) +
-        [Master Spécialise en Physique Médicale] +
-        v(0.25em)
-      ) +
-      text(
+      []
+      +v(0.5em)
+      +text(
         weight: "bold",
         size: 18pt,
         [Mémoire de Projet de Fin d Études]
-      )
-
+        )
+      +v(0.25em)
+      +text(
+        // weight: "bold",
+        size: 12pt,
+        [*Master Spécialise:* Techniques de Rayonnements\ en Physique Médicale (TRPM)]
+      ) 
+      +v(0.25em)
     )
   )
   v(1.5em)
@@ -40,9 +41,7 @@
     center,
     text(
       size:18pt,
-        [Présenté] +
-        v(0.25em) +
-        [ Par:]
+        [Réalisé par:]
       )
   )
   // pad(
@@ -110,7 +109,7 @@
       weight: "bold",
       size:16pt,
       table(
-        columns: (2fr,1fr),
+        columns: (2fr,1fr,1fr),
         align: left,
         stroke: none,
         row-gutter: 0.5em,
